@@ -1,7 +1,7 @@
 body {
     display: grid;
-    grid-template-columns: 200px 4fr;
-    grid-template-rows: 75px 4fr 50px;
+    grid-template-columns: auto 4fr;
+    grid-template-rows: auto 4fr auto;
     height: 100vh;
     background-color: rgb(236, 236, 236);
 }
@@ -22,8 +22,7 @@ header {
 }
 
 .logo {
-    position: absolute;
-    top: 10px;
+    align-self: start;
 }
 
 main {
@@ -39,30 +38,23 @@ footer {
 @media (max-width: 414px) {
     body {
         grid-template-columns: 1fr;
-        grid-template-rows: 50px 50px 4fr 50px;
+        grid-template-rows: auto auto 4fr auto;
     }
 
     header {
         grid-column: 1;
-        align-self: center;
     }
 
     .navbar {
         grid-row: 2;
         justify-content: left;
-        align-content: center;
     }
 
     .logo {
-        position: static;
         margin-right: 20px;
     }
 
     main {
         grid-column: 1;
-    }
-
-    footer {
-        align-self: center;
     }
 }
