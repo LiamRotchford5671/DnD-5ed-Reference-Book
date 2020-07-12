@@ -7,9 +7,12 @@ DnD Homepage
 2. [Inner Grid, Classes Section] 
 3. [Inner Grid, Races Section]
 4. [Inner Grid, Monsters Section]
-5. [Mobile Screen Size Query]
-6. [Class Icon Button Images]
-7. [Races Icon Images]
+5. [Inner Grid, Equipment Section]
+6. [Inner Grid, Spells Section]
+7. [Inner Grid Div, Searchbars]
+8. [Mobile Screen Size Query]
+9. [Class Icon Button Images]
+10. [Races Icon Images]
 
 =================================================================================
 ====================================================================================
@@ -106,6 +109,7 @@ body > footer {
 
 .monster-title {
   font-size: 2em;
+  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
   color: #fff;
 }
 
@@ -116,8 +120,52 @@ body > footer {
   background-size: cover;
   background-position: 50% 48%;
   height: 10em;
-  margin: 4em auto 0 auto;
+  margin: 2em auto 0 auto;
 }
+
+/* =================================================================================
+====================================================================================
+[Inner Grid, Equipment Section] */
+
+.item-title {
+  font-size: 2em;
+  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+  color: #fff;
+}
+
+.items-banner {
+  border: 4px solid #000;
+  background-image: url("/images/Banners/items\ banner.jpg");
+  overflow: hidden;
+  background-size: cover;
+  background-position: 50% 48%;
+  height: 10em;
+  margin: 2em auto 0 auto;
+}
+
+/* =================================================================================
+====================================================================================
+[Inner Grid, Spells Section] */
+
+.spell-title {
+  font-size: 2em;
+  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+  color: #fff;
+}
+
+.spells-banner {
+  border: 4px solid #000;
+  background-image: url("/images/Banners/SpellBanner.jpg");
+  overflow: hidden;
+  background-size: cover;
+  background-position: 50% 35%;
+  height: 10em;
+  margin: 2em auto 2em auto;
+}
+
+/* =================================================================================
+====================================================================================
+[Inner Grid Div, Searchbars] */
 
 .search {
   width: 30%;
