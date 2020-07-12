@@ -2,6 +2,15 @@
 Liam Rotchford 
 DnD Homepage
 
+[Table of Contents]
+1. [General Body of Homepage] 
+2. [Inner Grid, Classes Section] 
+3. [Inner Grid, Races Section]
+4. [Inner Grid, Monsters Section]
+5. [Mobile Screen Size Query]
+6. [Class Icon Button Images]
+7. [Races Icon Images]
+
 =================================================================================
 ====================================================================================
 [General Body of Homepage] */
@@ -89,6 +98,56 @@ body > footer {
   border: 4px solid #000;
   height: 8em;
   width: 6em;
+}
+
+/* =================================================================================
+====================================================================================
+[Inner Grid, Monster Section] */
+
+.monster-title {
+  font-size: 2em;
+  color: #fff;
+}
+
+.monster-banner {
+  border: 4px solid #000;
+  background-image: url("/images/Banners/Monster-banner.jpg");
+  overflow: hidden;
+  background-size: cover;
+  background-position: 50% 48%;
+  height: 10em;
+  margin: 4em auto 0 auto;
+}
+
+.search {
+  width: 30%;
+  height: 20%;
+
+  display: flex;
+}
+
+.searchbar {
+  border: 2px solid #f33201;
+  border-radius: 5px 0 0 5px;
+  padding: 5px;
+  outline: none;
+  color: #000;
+}
+
+.search-btn:hover,
+.search-btn:active {
+  background-color: #ff4617;
+}
+
+.search-btn {
+  width: 30%;
+  height: 100%;
+  background-image: url(images/Icons/search-icon.png);
+  overflow: hidden;
+  background-size: 100% 100%;
+  border: 1px solid #f33201;
+  background-color: #f33201;
+  border-radius: 0 5px 5px 0;
 }
 
 /* =================================================================================
