@@ -3,6 +3,12 @@
   font-family: sans-serif;
 }
 
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
 body {
   display: grid;
   grid-template-areas:
@@ -10,13 +16,13 @@ body {
     "main"
     "foot";
   background-color: rgb(236, 236, 236);
+  grid-template-rows: 8em 1fr 5em;
 }
 
 body > header {
   grid-area: head;
   background-color: darkgray;
   color: white;
-  height: 8em;
 }
 
 body > main {
@@ -33,7 +39,6 @@ body > footer {
   grid-area: head;
   align-self: start;
   background-color: darkgray;
-  height: 8em;
   width: 8em;
 }
 
@@ -43,8 +48,7 @@ body > footer {
 
 .row > div[class^="col"] {
   height: 6em;
-  padding-top: 10px;
-
+  padding: 10px;
   border: 1px solid #000;
   color: #000;
   text-align: center;
