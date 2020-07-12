@@ -122,14 +122,14 @@ body > footer {
 .search {
   width: 30%;
   height: 20%;
-
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .searchbar {
   border: 2px solid #f33201;
   border-radius: 5px 0 0 5px;
-  padding: 5px;
   outline: none;
   color: #000;
 }
@@ -140,11 +140,11 @@ body > footer {
 }
 
 .search-btn {
-  width: 30%;
+  width: 100%;
   height: 100%;
   background-image: url(images/Icons/search-icon.png);
   overflow: hidden;
-  background-size: 100% 100%;
+  background-size: 90% 90%;
   border: 1px solid #f33201;
   background-color: #f33201;
   border-radius: 0 5px 5px 0;
@@ -179,8 +179,17 @@ body > footer {
 
   .race-btns {
     border: 4px solid #000;
-    height: 6em;
-    width: 5em;
+    height: 5em;
+    width: 4em;
+  }
+
+  .col-spacing {
+    margin: 0 0.8em 0 0.8em;
+  }
+
+  .monster-title {
+    font-size: 1.5em;
+    color: #fff;
   }
 }
 
