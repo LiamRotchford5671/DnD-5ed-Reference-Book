@@ -1,3 +1,10 @@
+/* 
+Liam Rotchford 
+DnD Homepage
+
+=================================================================================
+====================================================================================
+[General Body of Homepage] */
 * {
   box-sizing: border-box;
   font-family: sans-serif;
@@ -16,7 +23,7 @@ body {
     "main"
     "foot";
   background-color: rgb(236, 236, 236);
-  grid-template-rows: 8em 1fr 5em;
+  grid-template-rows: 8em 1fr 3em;
 }
 
 body > header {
@@ -31,7 +38,7 @@ body > main {
 
 body > footer {
   grid-area: foot;
-  height: 5em;
+  height: 3em;
   background-color: rgb(63, 63, 63);
 }
 
@@ -42,8 +49,12 @@ body > footer {
   width: 8em;
 }
 
-.class-title {
-  margin-top: 1em;
+/* =================================================================================
+====================================================================================
+[Inner Grid, Classes Section] */
+
+.titles {
+  margin-top: 2em;
   font-size: 2.5em;
   font-weight: bold;
 }
@@ -66,8 +77,26 @@ body > footer {
   border-radius: 50%;
 }
 
+/* =================================================================================
+====================================================================================
+[Inner Grid, Races Section] */
+
+.col-spacing {
+  margin: 0 1em 0 1.2em;
+}
+
+.race-btns {
+  border: 4px solid #000;
+  height: 8em;
+  width: 6em;
+}
+
+/* =================================================================================
+==================================================================================== 
+[Mobile Screen Size Query] */
+
 @media (max-width: 414px) {
-  .class-title {
+  .titles {
     font-size: 1.5em;
     font-weight: bold;
   }
@@ -81,14 +110,24 @@ body > footer {
     font-weight: bold;
     font-size: 1em;
   }
+
   .class-btns {
     border: 1.5px solid #000;
     height: 3em;
     width: 3em;
     border-radius: 50%;
   }
+
+  .race-btns {
+    border: 4px solid #000;
+    height: 6em;
+    width: 5em;
+  }
 }
 
+/* =================================================================================
+==================================================================================== 
+[Class Icon Button Images] */
 .barbarian-icon {
   background-image: url("/images/Class\ Icons/barbarian-icon.jpeg");
   background-size: 100% 100%;
@@ -146,5 +185,53 @@ body > footer {
 
 .wizard-icon {
   background-image: url("/images/Class\ Icons/wizard-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+/* =================================================================================
+====================================================================================
+[Races Icon Images] */
+.dragonborn-icon {
+  background-image: url("/images/Race\ Images/dragonborn.png");
+  background-size: 100% 100%;
+}
+
+.dwarf-icon {
+  background-image: url("/images/Race\ Images/dwarf.png");
+  background-size: 100% 100%;
+}
+
+.elf-icon {
+  background-image: url("/images/Race\ Images/elf.png");
+  background-size: 100% 100%;
+}
+
+.gnome-icon {
+  background-image: url("/images/Race\ Images/gnome.png");
+  background-size: 100% 100%;
+}
+
+.half-elf-icon {
+  background-image: url("/images/Race\ Images/half-elf.png");
+  background-size: 100% 100%;
+}
+
+.half-orc-icon {
+  background-image: url("/images/Race\ Images/half-orc.png");
+  background-size: 100% 100%;
+}
+
+.halfling-icon {
+  background-image: url("/images/Race\ Images/halfling.png");
+  background-size: 100% 100%;
+}
+
+.human-icon {
+  background-image: url("/images/Race\ Images/human.png");
+  background-size: 100% 100%;
+}
+
+.tiefling-icon {
+  background-image: url("/images/Race\ Images/tiefling.png");
   background-size: 100% 100%;
 }
