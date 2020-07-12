@@ -21,7 +21,7 @@ body {
 
 body > header {
   grid-area: head;
-  background-color: darkgray;
+  background-color: rgb(63, 63, 63);
   color: white;
 }
 
@@ -32,13 +32,13 @@ body > main {
 body > footer {
   grid-area: foot;
   height: 5em;
-  background-color: rgb(228, 228, 228);
+  background-color: rgb(63, 63, 63);
 }
 
 .logo {
   grid-area: head;
   align-self: start;
-  background-color: darkgray;
+  background-color: rgb(63, 63, 63);
   width: 8em;
 }
 
@@ -46,12 +46,54 @@ body > footer {
   margin: 2em auto 2em auto;
 }
 
+.class-title {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
 .row > div[class^="col"] {
-  height: 8em;
-  padding: 10px;
-  border: 1px solid #000;
-  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.class-btns {
+  border: 3px solid #000;
+  height: 6em;
+  width: 6em;
   text-align: center;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.class-btn-labels {
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+@media (max-width: 414px) {
+  .class-title {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  .class-btns {
+    border: 1.5px solid #000;
+    height: 3em;
+    width: 3em;
+    text-align: center;
+    border-radius: 50%;
+    text-decoration: none;
+  }
+
+  .class-btn-labels {
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+    font-size: 0.7em;
+  }
 }
 
 .barbarian-icon {
