@@ -152,7 +152,7 @@ body > footer {
 
 .monster-banner {
   border: 4px solid #000;
-  background-image: url("/images/Banners/Monster-banner.jpg");
+  background-image: url("./images/Banners/Monster-banner.jpg");
   overflow: hidden;
   background-size: cover;
   background-position: 50% 48%;
@@ -172,7 +172,7 @@ body > footer {
 
 .items-banner {
   border: 4px solid #000;
-  background-image: url("/images/Banners/items\ banner.jpg");
+  background-image: url("./images/Banners/items\ banner.jpg");
   overflow: hidden;
   background-size: cover;
   background-position: 50% 48%;
@@ -192,7 +192,7 @@ body > footer {
 
 .spells-banner {
   border: 4px solid #000;
-  background-image: url("/images/Banners/SpellBanner.jpg");
+  background-image: url("./images/Banners/SpellBanner.jpg");
   overflow: hidden;
   background-size: cover;
   background-position: 50% 35%;
@@ -300,62 +300,62 @@ body > footer {
 ==================================================================================== 
 [Class Icon Button Images] */
 .barbarian-icon {
-  background-image: url("/images/Class\ Icons/barbarian-icon.jpeg");
+  background-image: url("./images/Class\ Icons/barbarian-icon.jpeg");
   background-size: 100% 100%;
 }
 
 .bard-icon {
-  background-image: url("/images/Class\ Icons/bard-icon.jpeg");
+  background-image: url("./images/Class\ Icons/bard-icon.jpeg");
   background-size: 100% 100%;
 }
 
 .cleric-icon {
-  background-image: url("/images/Class\ Icons/cleric-icon.jpeg");
+  background-image: url("./images/Class\ Icons/cleric-icon.jpeg");
   background-size: 100% 100%;
 }
 
 .druid-icon {
-  background-image: url("/images/Class\ Icons/druid-icon.jpeg");
+  background-image: url("./images/Class\ Icons/druid-icon.jpeg");
   background-size: 100% 100%;
 }
 
 .fighter-icon {
-  background-image: url("/images/Class\ Icons/fighter-icon.jpeg");
+  background-image: url("./images/Class\ Icons/fighter-icon.jpeg");
   background-size: 100% 100%;
 }
 
 .monk-icon {
-  background-image: url("/images/Class\ Icons/monk-icon.jpeg");
+  background-image: url("./images/Class\ Icons/monk-icon.jpeg");
   background-size: 100% 100%;
 }
 
 .paladin-icon {
-  background-image: url("/images/Class\ Icons/paladin-icon.jpeg");
+  background-image: url("./images/Class\ Icons/paladin-icon.jpeg");
   background-size: 100% 100%;
 }
 
 .ranger-icon {
-  background-image: url("/images/Class\ Icons/ranger-icon.jpeg");
+  background-image: url("./images/Class\ Icons/ranger-icon.jpeg");
   background-size: 100% 100%;
 }
 
 .rouge-icon {
-  background-image: url("/images/Class\ Icons/rogue-icon.jpeg");
+  background-image: url("./images/Class\ Icons/rogue-icon.jpeg");
   background-size: 100% 100%;
 }
 
 .sorcerer-icon {
-  background-image: url("/images/Class\ Icons/sorcerer-icon.jpeg");
+  background-image: url("./images/Class\ Icons/sorcerer-icon.jpeg");
   background-size: 100% 100%;
 }
 
 .warlock-icon {
-  background-image: url("/images/Class\ Icons/warlock-icon.jpeg");
+  background-image: url("./images/Class\ Icons/warlock-icon.jpeg");
   background-size: 100% 100%;
 }
 
 .wizard-icon {
-  background-image: url("/images/Class\ Icons/wizard-icon.jpeg");
+  background-image: url("./images/Class\ Icons/wizard-icon.jpeg");
   background-size: 100% 100%;
 }
 
@@ -363,46 +363,46 @@ body > footer {
 ====================================================================================
 [Races Icon Images] */
 .dragonborn-icon {
-  background-image: url("/images/Race\ Images/dragonborn.png");
+  background-image: url("./images/Race\ Images/dragonborn.png");
   background-size: 100% 100%;
 }
 
 .dwarf-icon {
-  background-image: url("/images/Race\ Images/dwarf.png");
+  background-image: url("./images/Race\ Images/dwarf.png");
   background-size: 100% 100%;
 }
 
 .elf-icon {
-  background-image: url("/images/Race\ Images/elf.png");
+  background-image: url("./images/Race\ Images/elf.png");
   background-size: 100% 100%;
 }
 
 .gnome-icon {
-  background-image: url("/images/Race\ Images/gnome.png");
+  background-image: url("./images/Race\ Images/gnome.png");
   background-size: 100% 100%;
 }
 
 .half-elf-icon {
-  background-image: url("/images/Race\ Images/half-elf.png");
+  background-image: url("./images/Race\ Images/half-elf.png");
   background-size: 100% 100%;
 }
 
 .half-orc-icon {
-  background-image: url("/images/Race\ Images/half-orc.png");
+  background-image: url("./images/Race\ Images/half-orc.png");
   background-size: 100% 100%;
 }
 
 .halfling-icon {
-  background-image: url("/images/Race\ Images/halfling.png");
+  background-image: url("./images/Race\ Images/halfling.png");
   background-size: 100% 100%;
 }
 
 .human-icon {
-  background-image: url("/images/Race\ Images/human.png");
+  background-image: url("./images/Race\ Images/human.png");
   background-size: 100% 100%;
 }
 
 .tiefling-icon {
-  background-image: url("/images/Race\ Images/tiefling.png");
+  background-image: url("./images/Race\ Images/tiefling.png");
   background-size: 100% 100%;
 }
