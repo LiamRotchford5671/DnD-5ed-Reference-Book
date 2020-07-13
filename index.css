@@ -7,18 +7,23 @@ body {
 }
 
 header {
-    grid-column: 2;
-    grid-row: 1;
+    grid-column: span 2;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
     padding: 20px;
     background-color: darkgray;
     color: white;
 }
 
-.navbar {
-    grid-row: span 2;
+#headbar a {
+    margin-left: 50px;
+}
+
+#navbar {
     padding: 20px;
     background-color: lightslategray;
-    color: white;
+    color: white; 
 }
 
 .logo {
@@ -45,7 +50,7 @@ footer {
         grid-column: 1;
     }
 
-    .navbar {
+    #navbar {
         grid-row: 2;
         justify-content: left;
     }
