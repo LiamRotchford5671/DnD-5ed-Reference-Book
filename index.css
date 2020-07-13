@@ -4,15 +4,16 @@ DnD Homepage
 
 [Table of Contents]
 1. [General Body of Homepage] 
-2. [Inner Grid, Classes Section] 
-3. [Inner Grid, Races Section]
-4. [Inner Grid, Monsters Section]
-5. [Inner Grid, Equipment Section]
-6. [Inner Grid, Spells Section]
-7. [Inner Grid Div, Searchbars]
-8. [Mobile Screen Size Query]
-9. [Class Icon Button Images]
-10. [Races Icon Images]
+2. [Inner Grid]
+3. [Inner Grid, Classes Section] 
+4. [Inner Grid, Races Section]
+5. [Inner Grid, Monsters Section]
+6. [Inner Grid, Equipment Section]
+7. [Inner Grid, Spells Section]
+8. [Inner Grid Div, Searchbars]
+9. [Mobile Screen Size Query]
+10. [Class Icon Button Images]
+11. [Races Icon Images]
 
 =================================================================================
 ====================================================================================
@@ -63,7 +64,7 @@ body > footer {
 
 /* =================================================================================
 ====================================================================================
-[Inner Grid, Classes Section] */
+[Inner Grid] */
 
 .titles {
   margin-top: 2em;
@@ -82,6 +83,14 @@ body > footer {
   padding: 5px;
 }
 
+.col-spacing {
+  margin: 0 auto 0 auto;
+}
+
+/* =================================================================================
+====================================================================================
+[Inner Grid, Classes Section] */
+
 .class-btns {
   border: 4px solid #000;
   height: 5em;
@@ -92,10 +101,6 @@ body > footer {
 /* =================================================================================
 ====================================================================================
 [Inner Grid, Races Section] */
-
-.col-spacing {
-  margin: 0 1em 0 1.2em;
-}
 
 .race-btns {
   border: 4px solid #000;
@@ -238,10 +243,6 @@ body > footer {
     border: 4px solid #000;
     height: 5em;
     width: 4em;
-  }
-
-  .col-spacing {
-    margin: 0 0.8em 0 0.8em;
   }
 
   .monster-title {
