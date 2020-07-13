@@ -1,65 +1,376 @@
+/* 
+Liam Rotchford ~ Sarah Kim
+DnD Homepage
+
+[Table of Contents]
+1. [General Body of Homepage] 
+2. [Inner Grid]
+3. [Inner Grid, Classes Section] 
+4. [Inner Grid, Races Section]
+5. [Inner Grid, Monsters Section]
+6. [Inner Grid, Equipment Section]
+7. [Inner Grid, Spells Section]
+8. [Inner Grid Div, Searchbars]
+9. [Mobile Screen Size Query]
+10. [Class Icon Button Images]
+11. [Races Icon Images]
+
+=================================================================================
+====================================================================================
+[General Body of Homepage] */
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+html,
 body {
-    display: grid;
-    grid-template-columns: auto 4fr;
-    grid-template-rows: auto 4fr auto;
-    height: 100vh;
-    background-color: rgb(236, 236, 236);
+  margin: 0;
+  height: 100%;
 }
 
-header {
-    grid-column: span 2;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: darkgray;
-    color: white;
+body {
+  display: grid;
+  grid-template-areas:
+    "head"
+    "main"
+    "foot";
+  background-color: rgb(236, 236, 236);
+  grid-template-rows: 8em 1fr 3em;
 }
 
-#headbar a {
-    margin-left: 50px;
+body > header {
+  grid-area: head;
+  background-color: rgb(63, 63, 63);
+  color: white;
 }
 
-#navbar {
-    padding: 20px;
-    background-color: lightslategray;
-    color: white; 
+body > main {
+  grid: main;
+}
+
+body > footer {
+  grid-area: foot;
+  height: 3em;
+  background-color: rgb(63, 63, 63);
 }
 
 .logo {
-    align-self: start;
+  grid-area: head;
+  align-self: start;
+  background-color: rgb(63, 63, 63);
+  width: 8em;
 }
 
-main {
-    padding: 20px;
+/* =================================================================================
+====================================================================================
+[Inner Grid] */
+
+.titles {
+  margin-top: 2em;
+  font-size: 2.5em;
+  font-weight: bold;
 }
 
-footer {
-    grid-column: span 2;
-    padding: 10px 20px;
-    background-color: rgb(228, 228, 228);
+.row > div[class^="col"] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 5px;
 }
+
+.col-spacing {
+  margin: 0 auto 0 auto;
+}
+
+/* =================================================================================
+====================================================================================
+[Inner Grid, Classes Section] */
+
+.class-btns {
+  border: 4px solid #000;
+  height: 5em;
+  width: 5em;
+  border-radius: 50%;
+}
+
+/* =================================================================================
+====================================================================================
+[Inner Grid, Races Section] */
+
+.race-btns {
+  border: 4px solid #000;
+  height: 8em;
+  width: 6em;
+}
+
+/* =================================================================================
+====================================================================================
+[Inner Grid, Monster Section] */
+
+.monster-title {
+  font-size: 2em;
+  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+  color: #fff;
+}
+
+.monster-banner {
+  border: 4px solid #000;
+  background-image: url("/images/Banners/Monster-banner.jpg");
+  overflow: hidden;
+  background-size: cover;
+  background-position: 50% 48%;
+  height: 12em;
+  margin: 2em auto 0 auto;
+}
+
+/* =================================================================================
+====================================================================================
+[Inner Grid, Equipment Section] */
+
+.item-title {
+  font-size: 2em;
+  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+  color: #fff;
+}
+
+.items-banner {
+  border: 4px solid #000;
+  background-image: url("/images/Banners/items\ banner.jpg");
+  overflow: hidden;
+  background-size: cover;
+  background-position: 50% 48%;
+  height: 12em;
+  margin: 2em auto 0 auto;
+}
+
+/* =================================================================================
+====================================================================================
+[Inner Grid, Spells Section] */
+
+.spell-title {
+  font-size: 2em;
+  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+  color: #fff;
+}
+
+.spells-banner {
+  border: 4px solid #000;
+  background-image: url("/images/Banners/SpellBanner.jpg");
+  overflow: hidden;
+  background-size: cover;
+  background-position: 50% 35%;
+  height: 12em;
+  margin: 2em auto 2em auto;
+}
+
+/* =================================================================================
+====================================================================================
+[Inner Grid Div, Searchbars] */
+
+.search {
+  width: 30%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchbar {
+  border: 2px solid #f33201;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #000;
+}
+
+.search-btn:hover,
+.search-btn:active {
+  background-color: #ff4617;
+}
+
+.search-btn {
+  width: 100%;
+  height: 85%;
+  background-image: url(images/Icons/search-icon.png);
+  overflow: hidden;
+  background-size: 90% 90%;
+  border: 1px solid #f33201;
+  background-color: #f33201;
+  border-radius: 0 5px 5px 0;
+}
+
+.list-btn {
+  border-radius: 5px;
+  background-color: #f33201;
+  border: 1px solid #f33201;
+  font-size: 1em;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* =================================================================================
+==================================================================================== 
+[Mobile Screen Size Query] */
 
 @media (max-width: 414px) {
-    body {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto 4fr auto;
-    }
+  .titles {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
 
-    header {
-        grid-column: 1;
-    }
+  .row > div[class^="col"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-weight: bold;
+    font-size: 1em;
+  }
 
-    #navbar {
-        grid-row: 2;
-        justify-content: left;
-    }
+  .class-btns {
+    border: 1.5px solid #000;
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+  }
 
-    .logo {
-        margin-right: 20px;
-    }
+  .race-btns {
+    border: 4px solid #000;
+    height: 5em;
+    width: 4em;
+  }
 
-    main {
-        grid-column: 1;
-    }
+  .monster-title {
+    font-size: 1.5em;
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+    color: #fff;
+  }
+
+  .item-title {
+    font-size: 1.4em;
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+    color: #fff;
+  }
+
+  .spell-title {
+    font-size: 1.5em;
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+    color: #fff;
+  }
+}
+
+/* =================================================================================
+==================================================================================== 
+[Class Icon Button Images] */
+.barbarian-icon {
+  background-image: url("/images/Class\ Icons/barbarian-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+.bard-icon {
+  background-image: url("/images/Class\ Icons/bard-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+.cleric-icon {
+  background-image: url("/images/Class\ Icons/cleric-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+.druid-icon {
+  background-image: url("/images/Class\ Icons/druid-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+.fighter-icon {
+  background-image: url("/images/Class\ Icons/fighter-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+.monk-icon {
+  background-image: url("/images/Class\ Icons/monk-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+.paladin-icon {
+  background-image: url("/images/Class\ Icons/paladin-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+.ranger-icon {
+  background-image: url("/images/Class\ Icons/ranger-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+.rouge-icon {
+  background-image: url("/images/Class\ Icons/rogue-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+.sorcerer-icon {
+  background-image: url("/images/Class\ Icons/sorcerer-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+.warlock-icon {
+  background-image: url("/images/Class\ Icons/warlock-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+.wizard-icon {
+  background-image: url("/images/Class\ Icons/wizard-icon.jpeg");
+  background-size: 100% 100%;
+}
+
+/* =================================================================================
+====================================================================================
+[Races Icon Images] */
+.dragonborn-icon {
+  background-image: url("/images/Race\ Images/dragonborn.png");
+  background-size: 100% 100%;
+}
+
+.dwarf-icon {
+  background-image: url("/images/Race\ Images/dwarf.png");
+  background-size: 100% 100%;
+}
+
+.elf-icon {
+  background-image: url("/images/Race\ Images/elf.png");
+  background-size: 100% 100%;
+}
+
+.gnome-icon {
+  background-image: url("/images/Race\ Images/gnome.png");
+  background-size: 100% 100%;
+}
+
+.half-elf-icon {
+  background-image: url("/images/Race\ Images/half-elf.png");
+  background-size: 100% 100%;
+}
+
+.half-orc-icon {
+  background-image: url("/images/Race\ Images/half-orc.png");
+  background-size: 100% 100%;
+}
+
+.halfling-icon {
+  background-image: url("/images/Race\ Images/halfling.png");
+  background-size: 100% 100%;
+}
+
+.human-icon {
+  background-image: url("/images/Race\ Images/human.png");
+  background-size: 100% 100%;
+}
+
+.tiefling-icon {
+  background-image: url("/images/Race\ Images/tiefling.png");
+  background-size: 100% 100%;
 }

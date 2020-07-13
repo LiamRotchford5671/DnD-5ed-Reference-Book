@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link 
+        rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+        integrity="sha384-9aIt1nRpC11Uk9gS9baDl411NQApFmC16EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+        crossorigin="anonymous">
+   
     <link
       rel="stylesheet"
       type="text/css"
@@ -19,21 +25,141 @@
 
 <body>
     <header>
+        <img src="/images/dnd red logo.png" class="logo header" alt="DnD Logo img Art"></img>
         Header
-        <div id="headbar">
-            <a class="headbutton" id="navbarbutton">Navbar</a>
-            <a class="headbutton" href="">About</a>
-            <a class="headbutton" href="">Resources</a>
-        </div>    
     </header>
+    <main>
+        
+        <div class="container-fluid">
 
+            <h3 class="titles">Classes</h3>
+            <div id="class-grid" class="row">
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns barbarian-icon"></button> 
+                    Barbarian
+                </div>
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns bard-icon"></button>
+                    Bard
+                </div>
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns cleric-icon"></button>
+                    Cleric
+                </div>
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns druid-icon"></button>
+                    Druid
+                </div>
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns fighter-icon"></button>
+                    Fighter
+                </div>
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns monk-icon"></button>
+                    Monk
+                </div>
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns paladin-icon"></button>
+                    Paladin
+                </div>
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns ranger-icon"></button>
+                    Ranger
+                </div>
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns rouge-icon"></button>
+                    Rogue
+                </div>
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns sorcerer-icon"></button>
+                    Sorcerer
+                </div>
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns warlock-icon"></button>
+                    Warlock
+                </div>
+                <div class="col-3 col-md-2 col-lg-1 col-spacing">
+                    <button class="class-btns wizard-icon"></button>
+                    Wizard
+                </div>
+            </div>
 
-    <div id="navbar" role="navigation">
-        <nav>Navbar</nav>
-    </div>
+            <h3 class="titles">Races</h3>
+            <div id="races-grid" class="row">
+                <div class="col-4 col-md-4 col-lg-1 col-spacing">
+                    <button class="race-btns dragonborn-icon"></button> 
+                    Dragonborn
+                </div>
+                <div class="col-4 col-md-4 col-lg-1 col-spacing">
+                    <button class="race-btns dwarf-icon"></button>
+                    Dwarf
+                </div>
+                <div class="col-4 col-md-4 col-lg-1 col-spacing">
+                    <button class="race-btns elf-icon"></button>
+                    Elf
+                </div>
+                <div class="col-4 col-md-4 col-lg-1 col-spacing">
+                    <button class="race-btns gnome-icon"></button>
+                    Gnome
+                </div>
+                <div class="col-4 col-md-4 col-lg-1 col-spacing">
+                    <button class="race-btns half-elf-icon"></button>
+                    Half-Elf
+                </div>
+                <div class="col-4 col-md-4 col-lg-1 col-spacing">
+                    <button class="race-btns half-orc-icon"></button>
+                    Half-Orc
+                </div>
+                <div class="col-4 col-md-4 col-lg-1 col-spacing">
+                    <button class="race-btns halfling-icon"></button>
+                    Halfling
+                </div>
+                <div class="col-4 col-md-4 col-lg-1 col-spacing">
+                    <button class="race-btns human-icon"></button>
+                    Human
+                </div>
+                <div class="col-4 col-md-4 col-lg-1 col-spacing">
+                    <button class="race-btns tiefling-icon"></button>
+                    Tiefling
+                </div>
+            </div>
 
+            <div id="Monsters-grid" class="row">
+                <div class="col-9 monster-banner">
+                    <div class="monster-title">Monster Catalog</div> 
+                    <div class="search">      
+                        <input type="text" class="searchbar" placeholder="Search...">
+                        <button type="submit" class="search-btn"></button>
+                    </div>
+                    <button type="submit" class="list-btn">Monsters List</button>
+                </div>
+            </div>
 
-    <main>Main</main>
+            <div id="Equipment-grid" class="row">
+                <div class="col-9 items-banner">
+                    <div class="item-title">Equipment Catalog</div> 
+                    <div class="search">      
+                        <input type="text" class="searchbar" placeholder="Search...">
+                        <button type="submit" class="search-btn"></button>
+                    </div>
+                    <button type="submit" class="list-btn">Equipment List</button>
+
+                </div>
+            </div>
+
+            <div id="Spells-grid" class="row">
+                <div class="col-9 spells-banner">
+                    <div class="spell-title">Spells Catalog</div> 
+                    <div class="search">      
+                        <input type="text" class="searchbar" placeholder="Search...">
+                        <button type="submit" class="search-btn"></button>
+                    </div>
+                    <button type="submit" class="list-btn">Spells List</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
     <footer>Footer</footer>
 
     <script 
