@@ -3,17 +3,18 @@ Liam Rotchford ~ Sarah Kim
 DnD Homepage
 
 [Table of Contents]
-1. [General Body of Homepage] 
-2. [Inner Grid]
-3. [Inner Grid, Classes Section] 
-4. [Inner Grid, Races Section]
-5. [Inner Grid, Monsters Section]
-6. [Inner Grid, Equipment Section]
-7. [Inner Grid, Spells Section]
-8. [Inner Grid Div, Searchbars]
-9. [Mobile Screen Size Query]
-10. [Class Icon Button Images]
-11. [Races Icon Images]
+1. [General Body of Homepage]
+2. [Header, Navbar, Buttons]
+3. [Inner Grid]
+4. [Inner Grid, Classes Section]
+5. [Inner Grid, Races Section]
+6. [Inner Grid, Monsters Section]
+7. [Inner Grid, Equipment Section]
+8. [Inner Grid, Spells Section]
+9. [Inner Grid Div, Searchbars]
+10. [Mobile Screen Size Query]
+11. [Class Icon Button Images]
+12. [Races Icon Images]
 
 =================================================================================
 ====================================================================================
@@ -47,23 +48,6 @@ body > header {
   background-color: rgb(63, 63, 63);
 }
 
-body > header > #logo {
-    display: flex;
-    filter: saturate(.85);
-}
-
-h1 {
-    align-self: flex-end;
-    margin: 5px;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: red;
-}
-
-body > header > nav {
-    align-self: flex-end;
-}
-
 body > main {
   grid-area: main;
 }
@@ -78,12 +62,49 @@ body > footer {
   background-color: rgb(63, 63, 63);
 }
 
+
+/* =================================================================================
+====================================================================================
+[Header, Navbar, Buttons] */
+
+body > header > #logo {
+  display: flex;
+  filter: saturate(.85);
+}
+
+#logo:hover {
+  text-decoration: none;
+}
+
+h1 {
+  align-self: flex-end;
+  margin: 5px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: red;
+}
+
+body > header > nav {
+  align-self: flex-end;
+}
+
 .nav-btns {
   border: none;
   background-color: transparent;
   color: white;
 }
 
+.nav-btns:hover {
+  color: red;
+}
+
+.nav-btns:active {
+  color: black;
+}
+
+button:focus {
+  outline: 0;
+}
 
 /* =================================================================================
 ====================================================================================
@@ -102,8 +123,8 @@ body > footer {
   align-items: center;
   color: #000;
   font-weight: bold;
-  font-size: 1.2em;
-  padding: 5px;
+  font-size: 1em;
+  padding: 10px;
 }
 
 .col-spacing {
@@ -117,10 +138,11 @@ body > footer {
 .class-btns {
   border: 5px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  height: 5em;
-  width: 5em;
+  height: 7em;
+  width: 7em;
+  margin: 10px;
   filter: saturate(1);
-  transition: border .3s, filter .3s, transform .3s;
+  transition: border .2s, filter .2s, transform .2s;
   transition-timing-function: ease;
 }
 
@@ -130,14 +152,32 @@ body > footer {
   transform: scale(1.05, 1.05);
 }
 
+.class-btns:active {
+  border: 5px solid rgb(63, 63, 63);
+}
+
 /* =================================================================================
 ====================================================================================
 [Inner Grid, Races Section] */
 
 .race-btns {
-  border: 4px solid #000;
-  height: 8em;
-  width: 6em;
+  border: 8px solid rgba(255, 255, 255, 0.5);
+  height: 13em;
+  width: 10em;
+  margin: 10px;
+  background-color: transparent;
+  transition: border .2s, filter .2s, transform .2s;
+  transition-timing-function: ease;
+}
+
+.race-btns:hover {
+  border: 5px solid transparent;
+  filter: saturate(1.3);
+  transform: scale(1.05, 1.05);
+}
+
+.race-btns:active {
+  border: 5px solid rgb(63, 63, 63);
 }
 
 /* =================================================================================
@@ -365,44 +405,53 @@ body > footer {
 .dragonborn-icon {
   background-image: url("./images/Race-Images/dragonborn.png");
   background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .dwarf-icon {
   background-image: url("./images/Race-Images/dwarf.png");
   background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .elf-icon {
   background-image: url("./images/Race-Images/elf.png");
   background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .gnome-icon {
   background-image: url("./images/Race-Images/gnome.png");
   background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .half-elf-icon {
   background-image: url("./images/Race-Images/half-elf.png");
   background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .half-orc-icon {
   background-image: url("./images/Race-Images/half-orc.png");
   background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .halfling-icon {
   background-image: url("./images/Race-Images/halfling.png");
   background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .human-icon {
   background-image: url("./images/Race-Images/human.png");
   background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .tiefling-icon {
   background-image: url("./images/Race-Images/tiefling.png");
   background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
