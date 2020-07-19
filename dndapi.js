@@ -1,18 +1,16 @@
+var apiDataList = [];
+
 class ApiFetchData extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             url: 'https://www.dnd5eapi.co/api/classes',
-            dataNameList: ['Testing class array'],
-            dataUrlList: []
+            dataName: []
         }
-        this.apiResultData = [];
     }
 
-    // apiResultData;
-
     fetchFunction() {
-        var localVariable = []
+        console.log("Fetching");
         fetch('https://www.dnd5eapi.co/api/classes')
             .then(response => {
                 console.log('Request successful');
@@ -20,9 +18,8 @@ class ApiFetchData extends React.Component {
             })
             .then(data => {
                 console.log('Inside fetch then');
-
                 data.results.forEach(result => {
-                    localVariable.push(result.name);
+                    this.state.dataName.push(result.name);
                 });
             })
             .catch(error => {
@@ -31,29 +28,37 @@ class ApiFetchData extends React.Component {
     }
 
     render() {
-            // return [
-            //     <h4>{this.state.dataNameList[1]}</h4>,
-            //     <p>Input text here: {this.state.dataUrlList[1]}</p>,
-            //     <div className="description">
-            //         <p>Description text here.</p>
-            //     </div>
-            // ]
+        console.log("Rendering");
+        console.log(this.state.dataName);
+            return (
+                <p>Data name here: {this.state.dataName[0]}</p>
+                // <h4>Test</h4>,
+                // <p>Input text here: Text here</p>,
+                // <div className="description">
+                //     <p>Description text here.</p>
+                // </div>
+            )
     }
 }
 
-function ProcessApiData () {
-    var apiData = new ApiFetchData();
+function testFunction() {
+    return 100;
+}
 
-    new Promise(apiData.fetchFunction)
-        .then(() => {
-            console.log('globalVariable');
-        })
-        //     console.log("in filter api data by class: ")
-        //     console.log(apiData.apiResultData)
-        // })
-        .catch(error => {
-            console.log('Processing failed', error)
-        });
+function ProcessApiData() {
+    var apiData = new ApiFetchData();
+    apiData.fetchFunction();
+    console.log("testing" + apiData.dataName);
+    // new Promise(apiData.fetchFunction)
+    //     .then(response => {
+    //         console.log('Fetch successful' + response);
+    //     })
+    //     //     console.log("in filter api data by class: ")
+    //     //     console.log(apiData.apiResultData)
+    //     // })
+    //     .catch(error => {
+    //         console.log('Processing failed', error)
+    //     });
 
     return (
         'testing '

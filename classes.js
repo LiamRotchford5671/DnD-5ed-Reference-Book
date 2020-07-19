@@ -82,7 +82,7 @@ class ClassPage extends React.Component {
             )
         } else if (!this.state.toggle) {
             return (
-                <div id="classInfo">
+                <div className="section-info">
                     <ProcessApiData />
                     <p>Button name: </p>
                     <button onClick={this.toggleSwitch}>Back to grid</button>
