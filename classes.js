@@ -7,6 +7,10 @@ class Classes extends React.Component {
             name: 'Blank Name'
         };
         this.toggleSwitch = this.toggleSwitch.bind(this);
+
+        // How can I wait for this to finish before proceeding?
+        // because constructors cant be "async".
+        this.storedAPIData = await doAPIrequest('classes/');
     }
 
     toggleSwitch() {
@@ -26,7 +30,6 @@ class Classes extends React.Component {
             //     <h3 className="titles" onClick={this.toggleSwitch}>OFF!</h3>
             // )
             return this.renderDefault();
-
         }
     }
 

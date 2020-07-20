@@ -1,17 +1,11 @@
 start();
 
-
 async function start() {
     let classesFromAPI = await doAPIrequest('classes/');
     console.log(classesFromAPI);
 
-
-
     let arrayOfNames = classesFromAPI.results.map(current => current.index);
     console.log(arrayOfNames);
-
-
-
 
     let allMyPromises = arrayOfNames.map(current => doAPIrequest(`classes/${current}`));
 
@@ -32,12 +26,3 @@ async function doAPIrequest(endpoint) {
     const json = await response.json();
     return json;
 }
-
-
-
-// async function makeAnArray(inputJSON) {
-//     return inputJSON.results.map(current => current.index)
-// }
-
-
-
