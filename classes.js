@@ -4,35 +4,32 @@ class Classes extends React.Component {
         super(props);
         this.state = {
             toggle: false,
-            name: 'Blank Name'
+            classUrl: ''
         };
         this.toggleSwitch = this.toggleSwitch.bind(this);
     }
 
-    toggleSwitch() {
+    toggleSwitch(name) {
         this.setState(state => ({
-            toggle: !state.toggle
+            toggle: !state.toggle,
+            classUrl: name
         }));
     }
 
-
     render() {
         if (this.state.toggle) {
-            return this.renderInfoAboutClass();
+            return this.renderClassInfo();
         } else if (!this.state.toggle) {
-            // return (
-            //     <h3 className="titles" onClick={this.toggleSwitch}>OFF!</h3>
-            // )
-            return this.renderMenuWithButtons();
+            return this.renderClassMenu();
         }
     }
 
-    renderMenuWithButtons() {
+    renderClassMenu() {
         return (
             <div id="class-grid" className="row">
-                {this.props.injectedArray.map(current => (
-                    <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                        <button className={'class-btns ' + `${current}` + '-icon'} onClick={this.toggleSwitch}></button>
+                {this.props.classesArray.map((current, i) => (
+                    <div className="col-3 col-md-2 col-lg-1 col-spacing" key={i}>
+                        <button className={'class-btns ' + `${current}` + '-icon'} onClick={() => this.toggleSwitch(current)}></button>
                         {current.charAt(0).toUpperCase() + current.slice(1)}
                     </div>
                 ))}
@@ -40,33 +37,16 @@ class Classes extends React.Component {
         )
     }
 
-    renderInfoAboutClass() {
+    renderClassInfo() {
         return (
-            // TODO:  Figure out which button "onClicked" you, display info as necessary.
-            <h3 className="titles" onClick={this.toggleSwitch}>ON!</h3>
+            <div>
+                <button onClick={this.toggleSwitch}>Back to grid.</button>
+                <div>
+                    {CheckName(this.state.classUrl)}
+                </div>
+            </div>
         )
     }
 
 }
 
-
-
-start();
-
-async function start() {
-    let classesFromAPI = await doAPIrequest('classes/');
-    console.log(classesFromAPI);
-
-    let arrayOfNames = classesFromAPI.results.map(current => current.index);
-    console.log(arrayOfNames);
-
-
-    // let allMyPromises = arrayOfNames.map(current => doAPIrequest(`classes/${current}`));
-    //
-    // const classDetails = await Promise.all(allMyPromises);
-    // console.log(classDetails);
-
-
-    ReactDOM.render(<Classes injectedArray={arrayOfNames}/>, document.querySelector('#classes'));
-
-}

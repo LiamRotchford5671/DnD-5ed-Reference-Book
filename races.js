@@ -1,12 +1,12 @@
-class RacesPage extends React.Component {
+class Races extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            toggle: true,
-            name: 'Blank Name'
+            toggle: false,
+            classUrl: ''
         };
         this.toggleSwitch = this.toggleSwitch.bind(this);
-        this.InputText = this.InputText.bind(this);
     }
 
     toggleSwitch() {
@@ -15,66 +15,32 @@ class RacesPage extends React.Component {
         }));
     }
 
-    InputText() {
-        if (this.state.toggle) {
-            return ('On')
-        } else if(!this.state.toggle) {
-            return ('Off')
-        }
-    }
-
     render() {
         if (this.state.toggle) {
-            return (
-                <div id="races-grid" className="row">
-                    <div className="col-4 col-md-4 col-lg-1 col-spacing">
-                        <button className="race-btns dragonborn-icon" onClick={this.toggleSwitch}></button>
-                        Dragonborn
-                    </div>
-                    <div className="col-4 col-md-4 col-lg-1 col-spacing">
-                        <button className="race-btns dwarf-icon" onClick={this.toggleSwitch}></button>
-                        Dwarf
-                    </div>
-                    <div className="col-4 col-md-4 col-lg-1 col-spacing">
-                        <button className="race-btns elf-icon" onClick={this.toggleSwitch}></button>
-                        Elf
-                    </div>
-                    <div className="col-4 col-md-4 col-lg-1 col-spacing">
-                        <button className="race-btns gnome-icon" onClick={this.toggleSwitch}></button>
-                        Gnome
-                    </div>
-                    <div className="col-4 col-md-4 col-lg-1 col-spacing">
-                        <button className="race-btns half-elf-icon" onClick={this.toggleSwitch}></button>
-                        Half-Elf
-                    </div>
-                    <div className="col-4 col-md-4 col-lg-1 col-spacing">
-                        <button className="race-btns half-orc-icon" onClick={this.toggleSwitch}></button>
-                        Half-Orc
-                    </div>
-                    <div className="col-4 col-md-4 col-lg-1 col-spacing">
-                        <button className="race-btns halfling-icon" onClick={this.toggleSwitch}></button>
-                        Halfling
-                    </div>
-                    <div className="col-4 col-md-4 col-lg-1 col-spacing">
-                        <button className="race-btns human-icon" onClick={this.toggleSwitch}></button>
-                        Human
-                    </div>
-                    <div className="col-4 col-md-4 col-lg-1 col-spacing">
-                        <button className="race-btns tiefling-icon" onClick={this.toggleSwitch}></button>
-                        Tiefling
-                    </div>
-                </div>
-            )
+            return this.renderRaceInfo();
         } else if (!this.state.toggle) {
-            return (
-                <div id="classInfo">
-                    <ProcessApiData />
-                    <p>Button name: </p>
-                    <button onClick={this.toggleSwitch}>Back to grid</button>
-                </div>
-            )
+            return this.renderRaceMenu();
         }
     }
-}
 
-ReactDOM.render(<RacesPage />, document.querySelector('#races'));
+    renderRaceMenu() {
+        return (
+            <div id="races-grid" className="row">
+                {this.props.racesArray.map((current, i) => (
+                    <div className="col-3 col-md-2 col-lg-1 col-spacing" key={i}>
+                        <button className={'race-btns ' + `${current}` + '-icon'} onClick={this.toggleSwitch}></button>
+                        {current.charAt(0).toUpperCase() + current.slice(1)}
+                    </div>
+                ))}
+            </div>
+        )
+    }
+
+    renderRaceInfo() {
+        return (
+            // TODO:  Figure out which button "onClicked" you, display info as necessary.
+            <button onClick={this.toggleSwitch}>Back to grid.</button>
+        )
+    }
+
+}
