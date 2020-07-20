@@ -1,49 +1,21 @@
-// start();
-//
-// async function start() {
-//     let classesFromAPI = await doAPIrequest('classes/');
-//     console.log(classesFromAPI);
-//
-//     let arrayOfNames = classesFromAPI.results.map(current => current.index);
-//     console.log(arrayOfNames);
-//
-//     let allMyPromises = arrayOfNames.map(current => doAPIrequest(`classes/${current}`));
-//
-//     const classDetails = await Promise.all(allMyPromises);
-//     console.log(classDetails);
-// }
-//
-//
-
-async function doAPIrequest(endpoint) {
-    let requestUrl = 'https://www.dnd5eapi.co/api/' + endpoint;
-    console.log('Fetching: ' + requestUrl);
-
-
-    let response = await fetch(requestUrl)
-
-    // Get the API response as a JSON.
-    const json = await response.json();
-    return json;
-}
-
+//Run asynchronous function that renders dynamic class and race sections.
 start();
 
 
-async function start(props) {
+async function start() {
     //Api request for classes.
     let classesFromAPI = await doAPIrequest('classes/');
-    console.log(classesFromAPI);
+    // console.log(classesFromAPI);
 
     let arrayOfClassNames = classesFromAPI.results.map(current => current.index);
-    console.log(arrayOfClassNames);
+    // console.log(arrayOfClassNames);
 
     //Api request for races.
     let racesFromAPI = await doAPIrequest('races/');
-    console.log(racesFromAPI);
+    // console.log(racesFromAPI);
 
     let arrayOfRaceNames = racesFromAPI.results.map(current => current.index);
-    console.log(arrayOfRaceNames);
+    // console.log(arrayOfRaceNames);
 
 
     // let allMyPromises = arrayOfClassNames.map(current => doAPIrequest(`classes/${current}`));
@@ -51,18 +23,20 @@ async function start(props) {
     // const classDetails = await Promise.all(allMyPromises);
     // console.log(classDetails);
 
+
+    //Renders class of Classes and Races to the DOM.
     ReactDOM.render(<Classes classesArray={arrayOfClassNames}/>, document.querySelector('#classes'));
     ReactDOM.render(<Races racesArray={arrayOfRaceNames}/>, document.querySelector('#races'));
 }
 
+//Run asynchronous api request and return in json format.
+async function doAPIrequest(endpoint) {
+    let requestUrl = 'https://www.dnd5eapi.co/api/' + endpoint;
+    console.log('Fetching: ' + requestUrl);
 
+    let response = await fetch(requestUrl);
 
-function CheckName(urlname) {
-    // let classInfoFromApi = await doAPIrequest(`classes/${urlname}`)
-    // console.log(classInfoFromApi.hit_die);
-    //
-    // return classInfoFromApi.hit_die;
-
-    return urlname;
-
+    // Get the API response as a JSON.
+    const json = await response.json();
+    return json;
 }
