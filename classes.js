@@ -60,10 +60,12 @@ async function start() {
     let arrayOfNames = classesFromAPI.results.map(current => current.index);
     console.log(arrayOfNames);
 
-    let allMyPromises = arrayOfNames.map(current => doAPIrequest(`classes/${current}`));
 
-    const classDetails = await Promise.all(allMyPromises);
-    console.log(classDetails);
+    // let allMyPromises = arrayOfNames.map(current => doAPIrequest(`classes/${current}`));
+    //
+    // const classDetails = await Promise.all(allMyPromises);
+    // console.log(classDetails);
+
 
     ReactDOM.render(<Classes injectedArray={arrayOfNames}/>, document.querySelector('#classes'));
 
