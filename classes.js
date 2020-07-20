@@ -31,56 +31,19 @@ class Classes extends React.Component {
     }
 
     renderDefault() {
+
+        const myArray = ["barbarian",
+                         "bard",
+                         "cleric"];
+
         return (
             <div id="class-grid" className="row">
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns barbarian-icon" onClick={this.toggleSwitch}></button>
-                    Barbarian
-                </div>
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns bard-icon" onClick={this.toggleSwitch}></button>
-                    Bard
-                </div>
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns cleric-icon" onClick={this.toggleSwitch}></button>
-                    Cleric
-                </div>
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns druid-icon" onClick={this.toggleSwitch}></button>
-                    Druid
-                </div>
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns fighter-icon" onClick={this.toggleSwitch}></button>
-                    Fighter
-                </div>
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns monk-icon" onClick={this.toggleSwitch}></button>
-                    Monk
-                </div>
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns paladin-icon" onClick={this.toggleSwitch}></button>
-                    Paladin
-                </div>
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns ranger-icon" onClick={this.toggleSwitch}></button>
-                    Ranger
-                </div>
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns rouge-icon" onClick={this.toggleSwitch}></button>
-                    Rogue
-                </div>
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns sorcerer-icon" onClick={this.toggleSwitch}></button>
-                    Sorcerer
-                </div>
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns warlock-icon" onClick={this.toggleSwitch}></button>
-                    Warlock
-                </div>
-                <div className="col-3 col-md-2 col-lg-1 col-spacing">
-                    <button className="class-btns wizard-icon" onClick={this.toggleSwitch}></button>
-                    Wizard
-                </div>
+                {myArray.map(current => (
+                    <div className="col-3 col-md-2 col-lg-1 col-spacing">
+                        <button className={'class-btns ' + `${current}` + '-icon'} onClick={this.toggleSwitch}></button>
+                        {current.charAt(0).toUpperCase() + current.slice(1)}
+                    </div>
+                ))}
             </div>
         )
     }
