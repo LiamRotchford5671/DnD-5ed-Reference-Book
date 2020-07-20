@@ -1,7 +1,6 @@
 //Run asynchronous function that renders dynamic class and race sections.
 start();
 
-
 async function start() {
     //Api request for classes.
     let classesFromAPI = await doAPIrequest('classes/');

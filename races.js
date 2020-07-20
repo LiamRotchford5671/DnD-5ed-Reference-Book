@@ -3,7 +3,7 @@ class Races extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            toggle: false,
+            toggle: true,
             raceUrl: '',
             name: '',
             data: []
@@ -18,20 +18,23 @@ class Races extends React.Component {
             toggle: !state.toggle
         }));
 
-        if (this.state.toggle === false) {
+        if (this.state.toggle === true) {
             const raceInfoRequest = async () => {
                 await this.setState({
                     raceUrl: name
                 })
                 const results = await doAPIrequest(`races/` + this.state.raceUrl + '/');
                 console.log(results);
+
                 this.setState({
-                    name: name,
+                    name: results.name,
                     data: results.alignment
                 });
             };
             raceInfoRequest();
         } else {
+
+            //Clear previous info.
             this.setState({
                 name: '',
                 data: []
@@ -39,15 +42,16 @@ class Races extends React.Component {
         }
     }
 
-    //Structure for rendered DOM elements.
+    //Render elements to DOM.
     render() {
         if (this.state.toggle) {
-            return this.renderRaceInfo();
-        } else if (!this.state.toggle) {
             return this.renderRaceNav();
+        } else if (!this.state.toggle) {
+            return this.renderRaceInfo();
         }
     }
 
+    //Structure for rendered DOM elements.
     renderRaceNav() {
         return (
             <div id="race-grid" className="row">
@@ -66,7 +70,8 @@ class Races extends React.Component {
             <div>
                 <div>
                     <h4>{this.state.name}</h4>
-                    {this.state.data}
+                    <img src={'./images/Race-Images/' + `${this.state.raceUrl}` + '.png'} alt={this.state.raceUrl} />
+                    <p>{this.state.data}</p>
                 </div>
                 <button onClick={this.buttonClickEvent}>Back to grid</button>
             </div>

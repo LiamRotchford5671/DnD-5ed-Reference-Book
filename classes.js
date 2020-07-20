@@ -3,7 +3,7 @@ class Classes extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            toggle: false,
+            toggle: true,
             classUrl: '',
             name: '',
             data: []
@@ -18,7 +18,7 @@ class Classes extends React.Component {
             toggle: !state.toggle
         }));
 
-        if (this.state.toggle === false) {
+        if (this.state.toggle === true) {
             const classInfoRequest = async () => {
                 await this.setState({
                     classUrl: name
@@ -33,6 +33,8 @@ class Classes extends React.Component {
             };
             classInfoRequest();
         } else {
+
+            //Clear previous info.
             this.setState({
                 name: '',
                 data: []
@@ -40,15 +42,16 @@ class Classes extends React.Component {
         }
     }
 
-    //Structure for rendered DOM elements.
+    //Render elements to DOM.
     render() {
         if (this.state.toggle) {
-            return this.renderClassInfo();
-        } else if (!this.state.toggle) {
             return this.renderClassNav();
+        } else if (!this.state.toggle) {
+            return this.renderClassInfo();
         }
     }
 
+    //Structure for rendered DOM elements.
     renderClassNav() {
         return (
             <div id="class-grid" className="row">
