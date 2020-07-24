@@ -11,10 +11,9 @@ DnD Homepage
 6. [Inner Grid, Monsters Section]
 7. [Inner Grid, Equipment Section]
 8. [Inner Grid, Spells Section]
-9. [Inner Grid Div, Searchbars]
-10. [Mobile Screen Size Query]
-11. [Class Icon Button Images]
-12. [Races Icon Images]
+9. [Mobile Screen Size Query]
+10. [Class Icon Button Images]
+11. [Races Icon Images]
 
 =================================================================================
 ====================================================================================
@@ -53,7 +52,7 @@ body > main {
 }
 
 body > main > .container-fluid {
-    padding: 0px 50px 0px 50px;
+  padding: 0px 50px 0px 50px;
 }
 
 body > footer {
@@ -62,14 +61,13 @@ body > footer {
   background-color: rgb(63, 63, 63);
 }
 
-
 /* =================================================================================
 ====================================================================================
 [Header, Navbar, Buttons] */
 
 body > header > #logo {
   display: flex;
-  filter: saturate(.85);
+  filter: saturate(0.85);
 }
 
 #logo:hover {
@@ -142,7 +140,7 @@ button:focus {
   width: 7em;
   margin: 10px;
   filter: saturate(1);
-  transition: border .2s, filter .2s, transform .2s;
+  transition: border 0.2s, filter 0.2s, transform 0.2s;
   transition-timing-function: ease;
 }
 
@@ -161,12 +159,12 @@ button:focus {
 [Inner Grid, Races Section] */
 
 .race-btns {
-  border: 8px solid rgba(255, 255, 255, 0.5);
+  border: 5px solid rgba(255, 255, 255, 0.5);
   height: 13em;
   width: 10em;
   margin: 10px;
   background-color: transparent;
-  transition: border .2s, filter .2s, transform .2s;
+  transition: border 0.2s, filter 0.2s, transform 0.2s;
   transition-timing-function: ease;
 }
 
@@ -191,13 +189,25 @@ button:focus {
 }
 
 .monster-banner {
-  border: 4px solid #000;
+  border: 5px solid rgba(255, 255, 255, 0.5);
   background-image: url("./images/Banners/Monster-banner.jpg");
   overflow: hidden;
   background-size: cover;
   background-position: 50% 48%;
   height: 12em;
   margin: 2em auto 0 auto;
+  transition: border 0.2s, filter 0.2s, transform 0.2s;
+  transition-timing-function: ease;
+}
+
+.monster-banner:hover {
+  border: 5px solid transparent;
+  filter: saturate(1.3);
+  transform: scale(1.05, 1.05);
+}
+
+.monster-banner:active {
+  border: 5px solid rgb(63, 63, 63);
 }
 
 /* =================================================================================
@@ -211,13 +221,25 @@ button:focus {
 }
 
 .items-banner {
-  border: 4px solid #000;
+  border: 5px solid rgba(255, 255, 255, 0.5);
   background-image: url("./images/Banners/items-banner.jpg");
   overflow: hidden;
   background-size: cover;
   background-position: 50% 48%;
   height: 12em;
   margin: 2em auto 0 auto;
+  transition: border 0.2s, filter 0.2s, transform 0.2s;
+  transition-timing-function: ease;
+}
+
+.items-banner:hover {
+  border: 5px solid transparent;
+  filter: saturate(1.3);
+  transform: scale(1.05, 1.05);
+}
+
+.items-banner:active {
+  border: 5px solid rgb(63, 63, 63);
 }
 
 /* =================================================================================
@@ -231,57 +253,25 @@ button:focus {
 }
 
 .spells-banner {
-  border: 4px solid #000;
+  border: 5px solid rgba(255, 255, 255, 0.5);
   background-image: url("./images/Banners/SpellBanner.jpg");
   overflow: hidden;
   background-size: cover;
   background-position: 50% 35%;
   height: 12em;
   margin: 2em auto 2em auto;
+  transition: border 0.2s, filter 0.2s, transform 0.2s;
+  transition-timing-function: ease;
 }
 
-/* =================================================================================
-====================================================================================
-[Inner Grid Div, Searchbars] */
-
-.search {
-  width: 30%;
-  height: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.spells-banner:hover {
+  border: 5px solid transparent;
+  filter: saturate(1.3);
+  transform: scale(1.05, 1.05);
 }
 
-.searchbar {
-  border: 2px solid #f33201;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #000;
-}
-
-.search-btn:hover,
-.search-btn:active {
-  background-color: #ff4617;
-}
-
-.search-btn {
-  width: 100%;
-  height: 85%;
-  background-image: url(images/Icons/search-icon.png);
-  overflow: hidden;
-  background-size: 90% 90%;
-  border: 1px solid #f33201;
-  background-color: #f33201;
-  border-radius: 0 5px 5px 0;
-}
-
-.list-btn {
-  border-radius: 5px;
-  background-color: #f33201;
-  border: 1px solid #f33201;
-  font-size: 1em;
-  color: #fff;
-  font-weight: bold;
+.spells-banner:active {
+  border: 5px solid rgb(63, 63, 63);
 }
 
 /* =================================================================================
@@ -301,38 +291,274 @@ button:focus {
     align-items: center;
     color: #000;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 0.9em;
   }
 
   .class-btns {
-    border: 1.5px solid #000;
-    height: 3em;
-    width: 3em;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    height: 4em;
+    width: 4em;
     border-radius: 50%;
+    filter: saturate(1);
+    transition: border 0.2s, filter 0.2s, transform 0.2s;
+    transition-timing-function: ease;
+  }
+
+  .class-btns:hover {
+    border: 3px solid transparent;
+    filter: saturate(1.5);
+    transform: scale(1.05, 1.05);
+  }
+
+  .class-btns:active {
+    border: 3px solid rgb(63, 63, 63);
   }
 
   .race-btns {
-    border: 4px solid #000;
-    height: 5em;
-    width: 4em;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    height: 6em;
+    width: 5em;
+    background-color: transparent;
+    transition: border 0.2s, filter 0.2s, transform 0.2s;
+    transition-timing-function: ease;
+  }
+
+  .race-btns:hover {
+    border: 3px solid transparent;
+    filter: saturate(1.3);
+    transform: scale(1.05, 1.05);
+  }
+
+  .race-btns:active {
+    border: 3px solid rgb(63, 63, 63);
   }
 
   .monster-title {
     font-size: 1.5em;
-    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     color: #fff;
+  }
+
+  .monster-banner {
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    background-image: url("./images/Banners/Monster-banner.jpg");
+    overflow: hidden;
+    background-size: cover;
+    background-position: 50% 48%;
+    height: 12em;
+    margin: 2em auto 0 auto;
+    transition: border 0.2s, filter 0.2s, transform 0.2s;
+    transition-timing-function: ease;
+  }
+
+  .monster-banner:hover {
+    border: 3px solid transparent;
+    filter: saturate(1.3);
+    transform: scale(1.05, 1.05);
+  }
+
+  .monster-banner:active {
+    border: 3px solid rgb(63, 63, 63);
   }
 
   .item-title {
     font-size: 1.4em;
-    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     color: #fff;
+  }
+
+  .items-banner {
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    background-image: url("./images/Banners/items-banner.jpg");
+    overflow: hidden;
+    background-size: cover;
+    background-position: 50% 48%;
+    height: 12em;
+    margin: 2em auto 0 auto;
+    transition: border 0.2s, filter 0.2s, transform 0.2s;
+    transition-timing-function: ease;
+  }
+
+  .items-banner:hover {
+    border: 3px solid transparent;
+    filter: saturate(1.3);
+    transform: scale(1.05, 1.05);
+  }
+
+  .items-banner:active {
+    border: 3px solid rgb(63, 63, 63);
   }
 
   .spell-title {
     font-size: 1.5em;
-    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     color: #fff;
+  }
+
+  .spells-banner {
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    background-image: url("./images/Banners/SpellBanner.jpg");
+    overflow: hidden;
+    background-size: cover;
+    background-position: 50% 35%;
+    height: 12em;
+    margin: 2em auto 2em auto;
+    transition: border 0.2s, filter 0.2s, transform 0.2s;
+    transition-timing-function: ease;
+  }
+
+  .spells-banner:hover {
+    border: 3px solid transparent;
+    filter: saturate(1.3);
+    transform: scale(1.05, 1.05);
+  }
+
+  .spells-banner:active {
+    border: 3px solid rgb(63, 63, 63);
+  }
+}
+
+/* =================================================================================
+==================================================================================== 
+[Tablet Screen Size Query] */
+
+@media (min-width: 415px) and (max-width: 768px) {
+  .titles {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  .row > div[class^="col"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-weight: bold;
+    font-size: 1em;
+  }
+
+  .class-btns {
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    height: 6em;
+    width: 6em;
+    border-radius: 50%;
+    filter: saturate(1);
+    transition: border 0.2s, filter 0.2s, transform 0.2s;
+    transition-timing-function: ease;
+  }
+
+  .class-btns:hover {
+    border: 3px solid transparent;
+    filter: saturate(1.5);
+    transform: scale(1.05, 1.05);
+  }
+
+  .class-btns:active {
+    border: 3px solid rgb(63, 63, 63);
+  }
+
+  .race-btns {
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    height: 11em;
+    width: 10em;
+    background-color: transparent;
+    transition: border 0.2s, filter 0.2s, transform 0.2s;
+    transition-timing-function: ease;
+  }
+
+  .race-btns:hover {
+    border: 3px solid transparent;
+    filter: saturate(1.3);
+    transform: scale(1.05, 1.05);
+  }
+
+  .race-btns:active {
+    border: 3px solid rgb(63, 63, 63);
+  }
+
+  .monster-title {
+    font-size: 1.5em;
+    text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -2px black;
+    color: #fff;
+  }
+
+  .monster-banner {
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    background-image: url("./images/Banners/Monster-banner.jpg");
+    overflow: hidden;
+    background-size: cover;
+    background-position: 50% 48%;
+    height: 12em;
+    margin: 2em auto 0 auto;
+    transition: border 0.2s, filter 0.2s, transform 0.2s;
+    transition-timing-function: ease;
+  }
+
+  .monster-banner:hover {
+    border: 3px solid transparent;
+    filter: saturate(1.3);
+    transform: scale(1.05, 1.05);
+  }
+
+  .monster-banner:active {
+    border: 3px solid rgb(63, 63, 63);
+  }
+
+  .item-title {
+    font-size: 1.4em;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    color: #fff;
+  }
+
+  .items-banner {
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    background-image: url("./images/Banners/items-banner.jpg");
+    overflow: hidden;
+    background-size: cover;
+    background-position: 50% 48%;
+    height: 12em;
+    margin: 2em auto 0 auto;
+    transition: border 0.2s, filter 0.2s, transform 0.2s;
+    transition-timing-function: ease;
+  }
+
+  .items-banner:hover {
+    border: 3px solid transparent;
+    filter: saturate(1.3);
+    transform: scale(1.05, 1.05);
+  }
+
+  .items-banner:active {
+    border: 3px solid rgb(63, 63, 63);
+  }
+
+  .spell-title {
+    font-size: 1.5em;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    color: #fff;
+  }
+
+  .spells-banner {
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    background-image: url("./images/Banners/SpellBanner.jpg");
+    overflow: hidden;
+    background-size: cover;
+    background-position: 50% 35%;
+    height: 12em;
+    margin: 2em auto 2em auto;
+    transition: border 0.2s, filter 0.2s, transform 0.2s;
+    transition-timing-function: ease;
+  }
+
+  .spells-banner:hover {
+    border: 3px solid transparent;
+    filter: saturate(1.3);
+    transform: scale(1.05, 1.05);
+  }
+
+  .spells-banner:active {
+    border: 3px solid rgb(63, 63, 63);
   }
 }
 
