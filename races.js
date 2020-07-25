@@ -6,7 +6,13 @@ class Races extends React.Component {
             toggle: true,
             raceUrl: '',
             name: '',
-            data: []
+            age: '',
+            alignment: '',
+            language: '',
+            languages: [],
+            size: '',
+            size_desc: '',
+            speed: ''
         };
         this.buttonClickEvent = this.buttonClickEvent.bind(this);
     }
@@ -28,7 +34,15 @@ class Races extends React.Component {
 
                 this.setState({
                     name: results.name,
-                    data: results.alignment
+                    age: results.age,
+                    alignment: results.alignment,
+                    language: results.language_desc,
+                    languages: results.languages.map((current, i) => <p key={i}>{current.name}</p>),
+                    size: results.size,
+                    size_desc: results.size_description,
+                    speed: results.speed
+                    // trait_options: results.trait_options.from.map((current, i) => <p key={i}>{current.name}</p>),
+                    // traits: results.traits.map((current, i) => <p key={i}>{current.name}</p>)
                 });
             };
             raceInfoRequest();
@@ -37,7 +51,13 @@ class Races extends React.Component {
             //Clear previous info.
             this.setState({
                 name: '',
-                data: []
+                age: '',
+                alignment: '',
+                language: '',
+                languages: [],
+                size: '',
+                size_desc: '',
+                speed: ''
             })
         }
     }
@@ -67,13 +87,32 @@ class Races extends React.Component {
 
     renderRaceInfo() {
         return (
-            <div>
-                <div>
+            <div className="race-row">
+                <div className="race-img">
                     <h4>{this.state.name}</h4>
                     <img src={'./images/Race-Images/' + `${this.state.raceUrl}` + '.png'} alt={this.state.raceUrl} />
-                    <p>{this.state.data}</p>
+                    <button onClick={this.buttonClickEvent}>Back to grid</button>
                 </div>
-                <button onClick={this.buttonClickEvent}>Back to grid</button>
+
+                <div className="race-info">
+                    <h5>Age</h5>
+                    <p>{this.state.age}</p>
+                    <h5>Ability Bonuses</h5>
+                    <p>{this.state.alignment}</p>
+                    <h5>Language</h5>
+                    <p>{this.state.language}</p>
+                    <h5>Languages</h5>
+                    {this.state.languages}
+                    <h5>Size</h5>
+                    <p>{this.state.size}</p>
+                    <p>{this.state.size_desc}</p>
+                    <h5>Speed</h5>
+                    <p>{this.state.speed}</p>
+                    <h5>Traits Options</h5>
+                    {this.state.trait_options}
+                    <h5>Traits</h5>
+                    {this.state.traits}
+                </div>
             </div>
         )
     }

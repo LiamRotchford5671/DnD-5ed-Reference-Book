@@ -156,6 +156,62 @@ button:focus {
   border: 5px solid rgb(63, 63, 63);
 }
 
+.class-row {
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+}
+
+.class-info {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.class-info img {
+  width: 100%;
+}
+
+.class-stats {
+  padding: 50px 100px;
+}
+
+.class-stats h5 {
+  color: red;
+}
+
+/*.class-transition {*/
+/*  animation: fadeIn ease 2s;*/
+/*}*/
+
+/*@keyframes fadeIn {*/
+/*  0% {*/
+/*    opacity:0;*/
+/*  }*/
+/*  100% {*/
+/*    opacity:1;*/
+/*  }*/
+/*}*/
+
+.trans-enter {
+  opacity: 0;
+}
+
+.trans-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.trans-exit {
+  opacity: 1;
+}
+
+.trans-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+
 /* =================================================================================
 ====================================================================================
 [Inner Grid, Races Section] */
@@ -178,6 +234,36 @@ button:focus {
 
 .race-btns:active {
   border: 5px solid rgb(63, 63, 63);
+}
+
+.race-row {
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+}
+
+.race-img {
+  width: 33%;
+}
+
+.race-img img {
+  width: 100%;
+}
+
+.race-img, .rage-info {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.race-info {
+  width: 100%;
+  padding: 20px 100px;
+}
+
+.race-info h5 {
+  color: red;
 }
 
 /* =================================================================================
