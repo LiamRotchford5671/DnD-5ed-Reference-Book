@@ -180,35 +180,25 @@ button:focus {
   color: red;
 }
 
-/*.class-transition {*/
-/*  animation: fadeIn ease 2s;*/
-/*}*/
-
-/*@keyframes fadeIn {*/
-/*  0% {*/
-/*    opacity:0;*/
-/*  }*/
-/*  100% {*/
-/*    opacity:1;*/
-/*  }*/
-/*}*/
-
-.trans-enter {
+.cTrans-enter {
   opacity: 0;
+  transform: scale(0.9);
 }
 
-.trans-enter-active {
+.cTrans-enter-active {
   opacity: 1;
-  transition: opacity 300ms;
+  transform: translateX(0);
+  transition: opacity 500ms, transform 500ms;
 }
 
-.trans-exit {
+.cTrans-exit {
   opacity: 1;
 }
 
-.trans-exit-active {
+.cTrans-exit-active {
   opacity: 0;
-  transition: opacity 300ms;
+  transform: scale(0.9);
+  transition: opacity 500ms, transform 500ms;
 }
 
 

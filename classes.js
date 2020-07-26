@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="index.css" />
-
 class Classes extends React.Component {
 
     constructor(props) {
@@ -12,7 +10,8 @@ class Classes extends React.Component {
             profs: [],
             saveThrows: [],
             startEquips: [],
-            subclasses: []
+            subclasses: [],
+            visible: false
         };
 
         this.buttonClickEvent = this.buttonClickEvent.bind(this);
@@ -59,58 +58,46 @@ class Classes extends React.Component {
 
     //Render elements to DOM.
     render() {
-        if (this.state.toggle) {
-            return this.renderClassNav();
-        } else if (!this.state.toggle) {
-            return this.renderClassInfo();
-        }
-    }
-
-    //Structure for rendered DOM elements.
-    renderClassNav() {
         return (
-            <div id="class-grid" className="row">
-                {this.props.classesArray.map((current, i) => (
-                    <div className="col-3 col-md-2 col-lg-1 col-spacing" key={i}>
-                        <button className={'class-btns ' + `${current}` + '-icon'} onClick={() => this.buttonClickEvent(current)}></button>
-                        {current.charAt(0).toUpperCase() + current.slice(1)}
+            <div id="class-grid">
+                {this.state.toggle && (<div className="row">
+                    {this.props.classesArray.map((current, i) => (
+                        <div className="col-3 col-md-2 col-lg-1 col-spacing" key={i}>
+                            <button className={'class-btns ' + `${current}` + '-icon'}
+                                    onClick={() => this.buttonClickEvent(current)}></button>
+                            {current.charAt(0).toUpperCase() + current.slice(1)}
+                        </div>
+                    ))}
+                </div>)}
+
+                <ReactTransitionGroup.CSSTransition
+                    in={!this.state.toggle}
+                    timeout={500}
+                    classNames="cTrans"
+                    unmountOnExit
+                >
+                    <div className="class-row">
+                        <div className="class-info">
+                            <h4>{this.state.name}</h4>
+                            <p>Hit die: {this.state.data}</p>
+                            <img src={'./images/Class-Images/' + `${this.state.classUrl}` + '.png'}
+                                 alt={this.state.name}/>
+                            <button onClick={this.buttonClickEvent}>Back to grid</button>
+                        </div>
+                        <div className="class-stats">
+                            <h5>Proficiencies</h5>
+                            {this.state.profs}
+                            <h5>Saving Throws</h5>
+                            {this.state.saveThrows}
+                            <h5>Starting Equipment</h5>
+                            {this.state.startEquips}
+                            <h5>Subclasses</h5>
+                            {this.state.subclasses}
+                        </div>
                     </div>
-                ))}
+                </ReactTransitionGroup.CSSTransition>
             </div>
+
         )
     }
-
-    renderClassInfo() {
-        return (
-            <ReactTransitionGroup.CSSTransition
-                in={!this.state.toggle}
-                timeout={300}
-                classNames="trans"
-                unmountOnExit
-                // onEnter={() => setShowButton(false)}
-                // onExited={() => setShowButton(true)}
-            >
-            <div className="class-row">
-                <div className="class-info">
-                    <h4>{this.state.name}</h4>
-                    <p>Hit die: {this.state.data}</p>
-                    <img src={'./images/Class-Images/' + `${this.state.classUrl}` + '.png'} alt={this.state.name} />
-                    <button onClick={this.buttonClickEvent}>Back to grid</button>
-                </div>
-                <div className="class-stats">
-                    <h5>Proficiencies</h5>
-                    {this.state.profs}
-                    <h5>Saving Throws</h5>
-                    {this.state.saveThrows}
-                    <h5>Starting Equipment</h5>
-                    {this.state.startEquips}
-                    <h5>Subclasses</h5>
-                    {this.state.subclasses}
-                </div>
-            </div>
-            </ReactTransitionGroup.CSSTransition>
-        )
-    }
-
 }
-
