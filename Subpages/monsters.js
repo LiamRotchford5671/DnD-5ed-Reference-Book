@@ -1,6 +1,4 @@
-window.onload = function () {
-  start();
-};
+window.onload = start();
 
 class Monsters extends React.Component {
   constructor(props) {
@@ -31,7 +29,7 @@ class Monsters extends React.Component {
 async function start() {
   //Api request for classes.
   let monstersFromAPI = await doAPIrequest("monsters/");
-  //console.log(monstersFromAPI);
+  console.log(monstersFromAPI);
 
   let arrayOfMonsterNames = monstersFromAPI.results.map(
     (current) => current.index

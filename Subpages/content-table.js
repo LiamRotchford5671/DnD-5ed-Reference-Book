@@ -1,4 +1,6 @@
 //Determine which banner was selected and load that table
+/*
+
 determine();
 
 function determine() {
@@ -17,3 +19,5 @@ function determine() {
   //ReactDom.render(scriptInsert, body);
   document.body.appendChild(scriptInsert);
 }
+
+*/
