@@ -1,6 +1,6 @@
 //Determine which banner was selected and load that table
-/*
 
+/*
 determine();
 
 function determine() {
