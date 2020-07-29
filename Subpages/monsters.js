@@ -71,7 +71,8 @@ function addRow(arrayOfMonsterNames) {
   arrayOfMonsterNames.forEach((element) => {
     let newRow = document.createElement("tr");
     newRow.className = "header";
-    newRow.innerHTML = "<td>" + element + "</td>";
+    var nameCapitalized = element.charAt(0).toUpperCase() + element.slice(1);
+    newRow.innerHTML = "<td>" + nameCapitalized + "</td>";
     bodyRef.appendChild(newRow);
 
     let newNestedRow = document.createElement("tr");
