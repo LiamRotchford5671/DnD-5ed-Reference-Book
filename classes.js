@@ -58,7 +58,6 @@ class Classes extends React.Component {
                         {/*<td>{current.class_specific.brutal_critical_dice}</td>*/}
                     </tr>)
 
-
                 //Proficiency Data
                 let profChoices = results.proficiency_choices.map((current, i) =>
                     <div key={i}>
@@ -114,7 +113,6 @@ class Classes extends React.Component {
                             </ReactTransitionGroup.CSSTransition>
                         </div>
                     )
-                    console.log(spellResults);
 
                     this.setState({
                         spellCasting: <div>
@@ -124,7 +122,6 @@ class Classes extends React.Component {
                         </div>
                     })
                 }
-
 
                 //Set Data
                 this.setState({
@@ -152,6 +149,7 @@ class Classes extends React.Component {
                 profChoices: [],
                 saveThrows: [],
                 spellCasting: [],
+                spellDesc: false,
                 startEquips: [],
                 equipChoiceItems: [],
                 subclasses: []
