@@ -6,7 +6,6 @@ class Races extends React.Component {
             toggle: true,
             raceUrl: '',
             name: '',
-            ability: [],
             abilityOptions: [],
             age: '',
             alignment: '',
@@ -41,17 +40,45 @@ class Races extends React.Component {
                 console.log(results);
 
                 //Ability Bonuses
-                let abilityBonuses = results.ability_bonuses.map((current, i) =>
-                    <p key={i}>{current.name}: {current.bonus}</p>
-                );
+
+                let abilityBonusNames = results.ability_bonuses.map(current => current.name);
+                let abilityBonuses = results.ability_bonuses.map(current => current.bonus);
+
+                console.log(results.ability_bonuses);
+
+                var ctx = document.querySelector('.statsChart');
+                var myBarChart = new Chart(ctx, {
+                    type: 'horizontalBar',
+                    data: {
+                        labels: abilityBonusNames,
+                        datasets: [{
+                            data: abilityBonuses,
+                            backgroundColor: 'rgba(255,46,46,0.8)'
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    min: 0,
+                                    max: 4
+                                }
+                            }]
+                        }
+                    }
+                });
+
                 if (results.ability_bonus_options) {
                     let abilityOptions =
                         <div>
                             <h5>Ability Bonus Options</h5>
                             <p>Choose: {results.ability_bonus_options.choose}</p>
-                            <div className="Options">
+                            <div className="list-group-flush">
                                 {results.ability_bonus_options.from.map((current, i) =>
-                                <p key={i}>{current.name}: {current.bonus}</p>)}
+                                <button type="button" className="list-group-item list-group-item-action" key={i}>{current.name}: {current.bonus}</button>)}
                             </div>
                         </div>;
 
@@ -65,9 +92,9 @@ class Races extends React.Component {
                     let languageOptions =
                         <div>
                             <p>Choose 1: </p>
-                            <div className="Options">
+                            <div className="list-group-flush">
                             {results.language_options.from.map((current, i) =>
-                            <p key={i}>{current.name}</p>)}
+                            <button type="button" className="list-group-item list-group-item-action" key={i}>{current.name}</button>)}
                             </div>
                         </div>;
 
@@ -89,9 +116,9 @@ class Races extends React.Component {
                             <div>
                                 <h5>Proficiency Options</h5>
                                 <p>Choose 1:</p>
-                                <div className="Options">
+                                <div className="list-group-flush">
                                     {results.starting_proficiency_options.from.map((current, i) =>
-                                        <p key={i}>{current.name}</p>)}
+                                        <button type="button" className="list-group-item list-group-item-action" key={i}>{current.name}</button>)}
                                 </div>
                             </div>;
 
@@ -137,9 +164,9 @@ class Races extends React.Component {
                         <div>
                             <h5>Trait Options</h5>
                             <p>Choose 1:</p>
-                            <div className="Options">
+                            <div className="list-group-flush">
                                 {results.trait_options.from.map((current,i) =>
-                                <p key={i}>{current.name}</p>)}
+                                <button type="button" className="list-group-item list-group-item-action" key={i}>{current.name}</button>)}
                             </div>
                         </div>;
 
@@ -148,9 +175,9 @@ class Races extends React.Component {
                     })
                 }
 
+                //Set Data
                 this.setState({
                     name: results.name,
-                    ability: abilityBonuses,
                     age: results.age,
                     alignment: results.alignment,
                     languageDesc: results.language_desc,
@@ -166,7 +193,6 @@ class Races extends React.Component {
             //Clear previous info.
             this.setState({
                 name: '',
-                ability: [],
                 abilityOptions: [],
                 age: '',
                 alignment: '',
@@ -209,9 +235,11 @@ class Races extends React.Component {
                             <button onClick={this.buttonClickEvent}>Back to grid</button>
                             <h4>{this.state.name}</h4>
                             <img src={'./images/Race-Images/' + `${this.state.raceUrl}` + '.png'} alt={this.state.raceUrl} />
-                            {this.state.subraces}
-                            <h5>Ability Bonuses</h5>
-                            {this.state.ability}
+                            <div className="race-stats">
+                                {this.state.subraces}
+                                <h5>Ability Bonuses</h5>
+                                <canvas className="statsChart" aria-label="bar chart" role="img"></canvas>
+                            </div>
                             {this.state.abilityOptions}
                         </div>
 

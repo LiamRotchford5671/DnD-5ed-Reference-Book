@@ -46,24 +46,54 @@ class Classes extends React.Component {
                 //Class Levels
                 const levelResults = await doAPIrequest(`classes/` + this.state.classUrl + '/levels');
                 console.log(levelResults);
-                console.log(levelResults[0].class_specific.rage_count);
-                let levelData = levelResults.map((current,i) =>
-                    <tr scope="row" key={i}>
-                        <td>{current.level}</td>
-                        <td>{current.ability_score_bonuses}</td>
-                        <td>{current.prof_bonus}</td>
-                        <td>{current.features.map(current2 => current2.name + ', ')}</td>
-                        {/*<td>{current.class_specific.rage_count}</td>*/}
-                        {/*<td>{current.class_specific.rage_damage_bonus}</td>*/}
-                        {/*<td>{current.class_specific.brutal_critical_dice}</td>*/}
-                    </tr>)
+                // console.log(levelResults[0].class_specific.rage_count);
+
+                let classSpecific = Object.keys(levelResults[0].class_specific);
+                let classSpecificArray = [];
+                for (let key in classSpecific) {
+                    let regex = new RegExp('_', 'g');
+                    classSpecificArray.push(<th scope="col" key={key}>{classSpecific[key].replace(regex, ' ')}</th>)
+                }
+
+                function ClassSpecificData(current) {
+                    let classSpecificDataArray = [];
+                    for (let key in current.class_specific) {
+                            classSpecificDataArray.push(<td key={key}>{current.class_specific[key]}</td>)
+                    };
+                    return classSpecificDataArray;
+                }
+
+                let levelTable =
+                    <table className="table table-sm table-striped table-hover">
+                        <thead className="thead-dark">
+                        <tr>
+                            <th scope="col">Level</th>
+                            <th scope="col">Ability Score Bonuses</th>
+                            <th scope="col">Proficiency Bonus</th>
+                            <th scope="col">Feature Choices</th>
+                            {classSpecificArray}
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {levelResults.map((current,i) =>
+                            <tr scope="row" key={i}>
+                                <td>{current.level}</td>
+                                <td>{current.ability_score_bonuses}</td>
+                                <td>{current.prof_bonus}</td>
+                                <td>{current.features.map(current2 => current2.name + ', ')}</td>
+                                {ClassSpecificData(current)}
+                            </tr>)}
+                        </tbody>
+                    </table>
 
                 //Proficiency Data
+                let proficiency = results.proficiencies.map((current, i) => <p key={i}>{current.name}</p>);
+
                 let profChoices = results.proficiency_choices.map((current, i) =>
                     <div key={i}>
                         <p>Choose: {current.choose}</p>
-                        <div className="class-profs-options">{current.from.map((next, j) =>
-                            <p key={j}>{next.name.replace('Skill:', '')}</p>)}
+                        <div className="class-profs-options list-group-flush">{current.from.map((next, j) =>
+                            <button type="button" className="list-group-item list-group-item-action" key={j}>{next.name.replace('Skill:', '')}</button>)}
                         </div>
                     </div>);
 
@@ -72,17 +102,20 @@ class Classes extends React.Component {
 
                 const equipResults = await doAPIrequest(startingEquipUrl);
 
-                let equipResultsItems = equipResults.starting_equipment;
+                let equipResultsItems = equipResults.starting_equipment.map((current, i) =>
+                    <p key={i}>{current.item.name}: {current.quantity}</p>
+                );
+
                 let equipChoiceItems = [];
 
-                for (var key in equipResults) {
+                for (let key in equipResults) {
                     if (equipResults.hasOwnProperty(key) && key.match("^choice_")) {
                         let equipItems =
                             <div key={key}>
                                 <p>Choose 1:</p>
-                                <div className="class-equips">
+                                <div className="class-equips list-group-flush">
                                     {equipResults[key].map(current => current.from.map((next, i) =>
-                                    <p key={i}>{next.item.name}</p>))}
+                                    <button type="button" className="list-group-item list-group-item-action" key={i}>{next.item.name}</button>))}
                                 </div>
                             </div>
                         equipChoiceItems.push(equipItems);
@@ -95,13 +128,13 @@ class Classes extends React.Component {
                     const spellResults = await doAPIrequest(`spellcasting/` + this.state.classUrl + '/');
 
                     let spells = spellResults.info.map((current, i) =>
-                        <div key={i}>
-                            <p className="spell-name" onClick={()=>{
+                        <div className="list-group-flush" key={i}>
+                            <button type="button" className="spell-name list-group-item list-group-item-action" onClick={()=>{
                                 this.setState(state => ({
                                     spellDesc: !state.spellDesc
                                 }));
                                 // console.log(this.state.spellDesc);
-                            }}>{current.name}</p>
+                            }}>{current.name}</button>
 
                             <ReactTransitionGroup.CSSTransition
                                 in={this.state.spellDesc}
@@ -128,11 +161,11 @@ class Classes extends React.Component {
                     name: results.name,
                     index: results.index,
                     hit_die: results.hit_die,
-                    class_levels: levelData,
-                    profs: results.proficiencies.map((current, i) => <p key={i}>{current.name}</p>),
+                    class_levels: levelTable,
+                    profs: proficiency,
                     profChoices: profChoices,
                     saveThrows: results.saving_throws.map((current, i) => <p key={i}>{current.name}</p>),
-                    startEquips: equipResultsItems.map((current, i) => <p key={i}>{current.item.name}</p>),
+                    startEquips: equipResultsItems,
                     equipChoiceItems: equipChoiceItems,
                     subclasses: results.subclasses.map((current, i) => <p key={i}>{current.name}</p>)
                 });
@@ -182,7 +215,7 @@ class Classes extends React.Component {
                                 onClick={this.buttonClickEvent}></button>
                         <div className="class-img">
                             <h4>{this.state.name}</h4>
-                            <p>Hit die: {this.state.data}</p>
+                            <p>Hit die: {this.state.hit_die}</p>
                             <img src={'./images/Class-Images/' + `${this.state.classUrl}` + '.png'}
                                  alt={this.state.name}/>
                              <div className="starting-equip">
@@ -191,22 +224,7 @@ class Classes extends React.Component {
                              </div>
                         </div>
                         <div className="class-levels">
-                            <table className="table table-sm table-striped table-hover">
-                                <thead className="thead-dark">
-                                    <tr>
-                                        <th scope="col">Level</th>
-                                        <th scope="col">Ability Score Bonuses</th>
-                                        <th scope="col">Proficiency Bonus</th>
-                                        <th scope="col">Feature Choices</th>
-                                        <th scope="col">Rage Count</th>
-                                        <th scope="col">Rage Damage Bonus</th>
-                                        <th scope="col">Brutal Critical</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.class_levels}
-                                </tbody>
-                            </table>
+                            {this.state.class_levels}
                         </div>
                         <div className="class-info">
                             <div>
@@ -217,7 +235,7 @@ class Classes extends React.Component {
                                 <h5>Subclasses</h5>
                                 {this.state.subclasses}
                             </div>
-                            <div className="class-stats">
+                            <div className="class-prof-choices">
                                 <h5>Proficiency Choices</h5>
                                 <div className="class-profs">
                                     {this.state.profChoices}

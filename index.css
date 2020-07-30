@@ -187,28 +187,15 @@ button:focus {
 }
 
 .class-levels {
-  max-width: 500px;
   font-size: .75em;
 }
 
 .class-profs-options, .class-equips {
-  height: 450px;
   overflow-y: auto;
 }
 
 .class-profs-options p, .class-equips p {
-  padding: 5px 20px 5px 5px;
   margin: 0;
-}
-
-.class-profs-options p:hover, .class-equips p:hover, .spell-name:hover {
-  background-color: #ddd;
-  cursor: pointer;
-}
-
-.class-profs-options p:active, .class-equips p:active, .spell-name:active {
-  background-color: #ddd;
-  color: white;
 }
 
 .cTrans-enter {
@@ -286,12 +273,16 @@ button:focus {
 
 .race-img {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   min-width: 300px;
 }
 
 .race-img img {
   width: 100%;
+}
+
+.race-stats {
+  margin: 20px 20px;
 }
 
 .race-info {
@@ -300,20 +291,6 @@ button:focus {
 
 .race-info h5 {
   color: red;
-}
-
-.Options p {
-  padding: 5px;
-}
-
-.Options p:hover {
-  background-color: #ddd;
-  cursor: pointer;
-}
-
-.Options p:active {
-  background-color: #ddd;
-  color: white;
 }
 
 .rTrans-enter {
