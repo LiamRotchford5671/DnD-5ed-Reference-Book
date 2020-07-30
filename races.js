@@ -64,58 +64,54 @@ class Races extends React.Component {
 
     //Render elements to DOM.
     render() {
-        if (this.state.toggle) {
-            return this.renderRaceNav();
-        } else if (!this.state.toggle) {
-            return this.renderRaceInfo();
-        }
-    }
-
-    //Structure for rendered DOM elements.
-    renderRaceNav() {
         return (
             <div id="race-grid" className="row">
-                {this.props.racesArray.map((current, i) => (
-                    <div className="col-3 col-md-2 col-lg-1 col-spacing" key={i}>
-                        <button className={'race-btns ' + `${current}` + '-icon'} onClick={() => this.buttonClickEvent(current)}></button>
-                        {current.charAt(0).toUpperCase() + current.slice(1)}
+                {this.state.toggle && ( <div className="row">
+                    {this.props.racesArray.map((current, i) => (
+                        <div className="col-3 col-md-2 col-lg-1 col-spacing" key={i}>
+                            <button className={'race-btns ' + `${current}` + '-icon'} onClick={() => this.buttonClickEvent(current)}></button>
+                            {current.charAt(0).toUpperCase() + current.slice(1)}
+                        </div>
+                    ))}
+                </div>)}
+
+                <ReactTransitionGroup.CSSTransition
+                    in={!this.state.toggle}
+                    timeout={500}
+                    classNames="rTrans"
+                    unmountOnExit
+                >
+                    <div className="race-row">
+                        <div className="race-img">
+                            <button onClick={this.buttonClickEvent}>Back to grid</button>
+                            <h4>{this.state.name}</h4>
+                            <img src={'./images/Race-Images/' + `${this.state.raceUrl}` + '.png'} alt={this.state.raceUrl} />
+
+                        </div>
+
+                        <div className="race-info">
+                            <h5>Age</h5>
+                            <p>{this.state.age}</p>
+                            <h5>Ability Bonuses</h5>
+                            <p>{this.state.alignment}</p>
+                            <h5>Language</h5>
+                            <p>{this.state.language}</p>
+                            <h5>Languages</h5>
+                            {this.state.languages}
+                            <h5>Size</h5>
+                            <p>{this.state.size}</p>
+                            <p>{this.state.size_desc}</p>
+                            <h5>Speed</h5>
+                            <p>{this.state.speed}</p>
+                            <h5>Traits Options</h5>
+                            {this.state.trait_options}
+                            <h5>Traits</h5>
+                            {this.state.traits}
+                        </div>
                     </div>
-                ))}
+                </ReactTransitionGroup.CSSTransition>
             </div>
         )
     }
-
-    renderRaceInfo() {
-        return (
-            <div className="race-row">
-                <div className="race-img">
-                    <h4>{this.state.name}</h4>
-                    <img src={'./images/Race-Images/' + `${this.state.raceUrl}` + '.png'} alt={this.state.raceUrl} />
-                    <button onClick={this.buttonClickEvent}>Back to grid</button>
-                </div>
-
-                <div className="race-info">
-                    <h5>Age</h5>
-                    <p>{this.state.age}</p>
-                    <h5>Ability Bonuses</h5>
-                    <p>{this.state.alignment}</p>
-                    <h5>Language</h5>
-                    <p>{this.state.language}</p>
-                    <h5>Languages</h5>
-                    {this.state.languages}
-                    <h5>Size</h5>
-                    <p>{this.state.size}</p>
-                    <p>{this.state.size_desc}</p>
-                    <h5>Speed</h5>
-                    <p>{this.state.speed}</p>
-                    <h5>Traits Options</h5>
-                    {this.state.trait_options}
-                    <h5>Traits</h5>
-                    {this.state.traits}
-                </div>
-            </div>
-        )
-    }
-
 }
 

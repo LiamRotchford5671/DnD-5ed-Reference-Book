@@ -62,7 +62,6 @@ body > footer {
   background-color: rgb(63, 63, 63);
 }
 
-
 /* =================================================================================
 ====================================================================================
 [Header, Navbar, Buttons] */
@@ -79,8 +78,12 @@ body > header > #logo {
 h1 {
   align-self: flex-end;
   margin: 5px;
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: bold;
+  color: #f12a2a;
+}
+
+h5 {
   color: red;
 }
 
@@ -158,26 +161,54 @@ button:focus {
 
 .class-row {
   display: flex;
+  flex-flow: row wrap;
   background-color: white;
   border-radius: 10px;
   padding: 25px;
 }
 
-.class-info {
+.class-img {
   display: flex;
   flex-flow: column wrap;
+  padding: 20px;
 }
 
-.class-info img {
-  width: 100%;
+.class-img img {
+  max-width: 300px;
 }
 
-.class-stats {
-  padding: 50px 100px;
+.class-info, .class-profs, .class-equip-items {
+  display: flex;
+  flex-flow: row wrap;
 }
 
-.class-stats h5 {
-  color: red;
+.class-levels, .class-info div, .class-stats div, .equip-choices div {
+  margin-right: 20px;
+}
+
+.class-levels {
+  max-width: 500px;
+  font-size: .75em;
+}
+
+.class-profs-options, .class-equips {
+  height: 450px;
+  overflow-y: auto;
+}
+
+.class-profs-options p, .class-equips p {
+  padding: 5px 20px 5px 5px;
+  margin: 0;
+}
+
+.class-profs-options p:hover, .class-equips p:hover, .spell-name:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.class-profs-options p:active, .class-equips p:active, .spell-name:active {
+  background-color: #ddd;
+  color: white;
 }
 
 .cTrans-enter {
@@ -201,6 +232,24 @@ button:focus {
   transition: opacity 500ms, transform 500ms;
 }
 
+.spellTrans-enter {
+  opacity: 0;
+}
+
+.spellTrans-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
+.spellTrans-exit {
+  opacity: 1;
+}
+
+.spellTrans-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
 
 /* =================================================================================
 ====================================================================================
@@ -211,12 +260,12 @@ button:focus {
   height: 13em;
   width: 10em;
   margin: 10px;
-  background-color: transparent;
-  transition: border .2s, filter .2s, transform .2s;
+  transition: border .2s, filter .2s, transform .2s, background-color .2s;
   transition-timing-function: ease;
 }
 
 .race-btns:hover {
+  background-color: transparent;
   border: 5px solid transparent;
   filter: saturate(1.3);
   transform: scale(1.05, 1.05);
@@ -229,31 +278,49 @@ button:focus {
 .race-row {
   display: flex;
   flex-flow: row nowrap;
+  width: 100%;
   background-color: white;
   border-radius: 10px;
   padding: 25px;
 }
 
 .race-img {
-  width: 33%;
+  display: flex;
+  flex-flow: column wrap;
+  min-width: 300px;
 }
 
 .race-img img {
   width: 100%;
 }
 
-.race-img, .rage-info {
-  display: flex;
-  flex-flow: column wrap;
-}
-
 .race-info {
-  width: 100%;
-  padding: 20px 100px;
+  padding: 20px 20px 20px 50px;
 }
 
 .race-info h5 {
   color: red;
+}
+
+.rTrans-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.rTrans-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.rTrans-exit {
+  opacity: 1;
+}
+
+.rTrans-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 500ms, transform 500ms;
 }
 
 /* =================================================================================
