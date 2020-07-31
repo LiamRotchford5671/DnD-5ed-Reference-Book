@@ -14,10 +14,10 @@ class Monsters extends React.Component {
   //Render elements to DOM.
   render() {
     return (
-      <table className="table table-hover table-bordered">
+      <table id="monsterTable" className="table table-hover table-bordered">
         <thead className="thead-dark">
           <tr className="header">
-            <th>Name</th>
+            <th>Monster Name</th>
           </tr>
         </thead>
         <tbody id="tableBody"></tbody>
@@ -35,7 +35,6 @@ async function start() {
     (current) => current.index
   );
 
-  ReactDOM.render(<Monsters />, document.getElementById("dataTable"));
   addRow(arrayOfMonsterNames);
 }
 
@@ -52,17 +51,19 @@ async function doAPIrequest(endpoint) {
 }
 
 async function addRow(arrayOfMonsterNames) {
+  ReactDOM.render(<Monsters />, document.getElementById("dataTable"));
   let bodyRef = document.getElementById("tableBody");
   let monsterData = await gatherData(arrayOfMonsterNames).catch((err) => {
     console.error(err);
   });
 
-  //console.log(monsterData);
+  console.log(monsterData);
 
   arrayOfMonsterNames.forEach((element) => {
     let newRow = document.createElement("tr");
-    newRow.className = "header";
     var nameCapitalized = element.charAt(0).toUpperCase() + element.slice(1);
+    newRow.className = "header";
+    newRow.setAttribute("value", element);
     newRow.innerHTML = "<td>" + nameCapitalized + "</td>";
     bodyRef.appendChild(newRow);
 
@@ -72,7 +73,7 @@ async function addRow(arrayOfMonsterNames) {
     bodyRef.appendChild(newNestedRow);
   });
 
-  //toggle the nested expanding row
+  //toggle the nested expanding row & monster data gather
   var ua = navigator.userAgent,
     event = ua.match(/iPad/i) ? "touchstart" : "click";
   if ($(".table").length > 0) {

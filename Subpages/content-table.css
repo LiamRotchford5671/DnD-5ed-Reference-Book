@@ -100,8 +100,9 @@ button:focus {
   ====================================================================================
   [Table] */
 
-.dataTable {
-  max-width: 960px;
+#tableHeader {
+  margin-top: 2em;
+  font-weight: bold;
 }
 
 .table > tbody > tr.active > td,
@@ -157,10 +158,8 @@ button:focus {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  float: right;
   color: #999;
   text-align: center;
-  padding: 3px;
   transition: transform 0.25s linear;
   -webkit-transition: -webkit-transform 0.25s linear;
 }

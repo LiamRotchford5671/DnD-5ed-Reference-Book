@@ -1,23 +1,18 @@
-//Determine which banner was selected and load that table
-
-/*
-determine();
-
-function determine() {
-  var determine = localStorage.getItem("determine");
-  var scriptInsert = document.createElement("script");
-  scriptInsert.type = "text/babel";
-
-  if (determine.toString() === "monsters") {
-    scriptInsert.src = "./monsters.js";
-  } else if (determine.toString() === "equipment") {
-    //scriptInsert.src = "./equipment.js";
-  } else if (determine.toString() === "spells") {
-    //scriptInsert.src = "./spells.js";
+function filterTable() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("filterInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("monsterTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
   }
-
-  //ReactDom.render(scriptInsert, body);
-  document.body.appendChild(scriptInsert);
 }
-
-*/
