@@ -50,14 +50,9 @@ async function doAPIrequest(endpoint) {
   return json;
 }
 
-async function addRow(arrayOfMonsterNames) {
+function addRow(arrayOfMonsterNames) {
   ReactDOM.render(<Monsters />, document.getElementById("dataTable"));
   let bodyRef = document.getElementById("tableBody");
-  let monsterData = await gatherData(arrayOfMonsterNames).catch((err) => {
-    console.error(err);
-  });
-
-  console.log(monsterData);
 
   arrayOfMonsterNames.forEach((element) => {
     let newRow = document.createElement("tr");
@@ -68,8 +63,7 @@ async function addRow(arrayOfMonsterNames) {
     bodyRef.appendChild(newRow);
 
     let newNestedRow = document.createElement("tr");
-
-    newNestedRow.innerHTML = "<div>" + "data" + "</div>";
+    newNestedRow.innerHTML = '<div class="innerRow"></div>';
     bodyRef.appendChild(newNestedRow);
   });
 
@@ -78,6 +72,15 @@ async function addRow(arrayOfMonsterNames) {
     event = ua.match(/iPad/i) ? "touchstart" : "click";
   if ($(".table").length > 0) {
     $(".table .header").on(event, function () {
+      $(this).each(function () {
+        $.each(this.attributes, function () {
+          // this.attributes is not a plain object, but an array
+          // of attribute nodes, which contain both the name and value
+          if (this.name == "value") {
+            constructInnerData(this.value);
+          }
+        });
+      });
       $(this)
         .toggleClass("active", "")
         .nextUntil(".header")
@@ -88,17 +91,8 @@ async function addRow(arrayOfMonsterNames) {
   }
 }
 
-function gatherData(arrayOfMonsterNames) {
-  return new Promise((resolve) => {
-    let dataArr = [];
-    arrayOfMonsterNames.forEach(async function (element) {
-      let endpoint = "monsters/" + element;
-      var data = await doAPIrequest(endpoint);
-      dataArr.push(data);
-    });
-
-    setTimeout(() => {
-      resolve(dataArr);
-    }, 4000);
-  });
+async function constructInnerData(monsterName) {
+  let endpoint = "monsters/" + monsterName;
+  var data = await doAPIrequest(endpoint);
+  console.log(data);
 }

@@ -102,6 +102,7 @@ button:focus {
 
 #tableHeader {
   margin-top: 2em;
+  font-size: 2em;
   font-weight: bold;
 }
 
@@ -166,4 +167,16 @@ button:focus {
 
 .table .header.active td:after {
   content: "\2212";
+}
+
+/* =================================================================================
+==================================================================================== 
+[Mobile Screen Size Query] */
+
+@media (max-width: 414px) {
+  #tableHeader {
+    margin-top: 2em;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
 }
