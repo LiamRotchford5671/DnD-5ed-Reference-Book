@@ -41,33 +41,29 @@ class Classes extends React.Component {
 
                 //Initial Class API Fetch
                 const results = await doAPIrequest(`classes/` + this.state.classUrl + '/');
-                console.log(results);
 
                 //Class Levels
                 const levelResults = await doAPIrequest(`classes/` + this.state.classUrl + '/levels');
-                console.log(levelResults);
 
-                let classSpecific = Object.keys(levelResults[0].class_specific);
-                let classSpecificArray = [];
-                for (let key in classSpecific) {
-                    let regex = new RegExp('_', 'g');
-                    classSpecificArray.push(<th scope="col" key={key}>{classSpecific[key].replace(regex, ' ')}</th>)
+                function ClassSpecificDataHeads() {
+                    let classSpecificArray = [];
+                    let classSpecific = Object.keys(levelResults[0].class_specific);
+
+                    for (let key in classSpecific) {
+                        let regex = new RegExp('_', 'g');
+                        if (typeof levelResults[0].class_specific[classSpecific[key]] !== 'object') {
+                            classSpecificArray.push(<th scope="col" key={key}>{classSpecific[key].replace(regex, ' ')}</th>);
+                        }
+                    }
+                    return classSpecificArray;
                 }
 
                 function ClassSpecificData(current) {
                     let classSpecificDataArray = [];
                     for (let key in current.class_specific) {
-                            if (typeof current.class_specific[key] === 'object' && current.class_specific[key] !== null) {
-                                console.log(current.class_specific[key] + ' Is an object');
-                                if (current.class_specific[key] !== undefined && current.class_specific[key].length !== 0) {
-                                    for (let key2 in current.class_specific[key]) {
-                                        classSpecificDataArray.push(<td
-                                            key={key2}>{key2}: {current.class_specific[key][key2]}</td>)
-                                    }
-                                }
-                            } else {
-                                classSpecificDataArray.push(<td key={key}>{current.class_specific[key]}</td>)
-                            }
+                        if (typeof current.class_specific[key] !== 'object') {
+                            classSpecificDataArray.push(<td key={key}>{current.class_specific[key]}</td>);
+                        }
                     };
                     return classSpecificDataArray;
                 }
@@ -80,7 +76,7 @@ class Classes extends React.Component {
                             <th scope="col">Ability Score Bonuses</th>
                             <th scope="col">Proficiency Bonus</th>
                             <th scope="col">Feature Choices</th>
-                            {classSpecificArray}
+                            {ClassSpecificDataHeads()}
                         </tr>
                         </thead>
                         <tbody>
