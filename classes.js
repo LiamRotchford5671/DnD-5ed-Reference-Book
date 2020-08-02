@@ -46,7 +46,6 @@ class Classes extends React.Component {
                 //Class Levels
                 const levelResults = await doAPIrequest(`classes/` + this.state.classUrl + '/levels');
                 console.log(levelResults);
-                // console.log(levelResults[0].class_specific.rage_count);
 
                 let classSpecific = Object.keys(levelResults[0].class_specific);
                 let classSpecificArray = [];
@@ -58,7 +57,17 @@ class Classes extends React.Component {
                 function ClassSpecificData(current) {
                     let classSpecificDataArray = [];
                     for (let key in current.class_specific) {
-                            classSpecificDataArray.push(<td key={key}>{current.class_specific[key]}</td>)
+                            if (typeof current.class_specific[key] === 'object' && current.class_specific[key] !== null) {
+                                console.log(current.class_specific[key] + ' Is an object');
+                                if (current.class_specific[key] !== undefined && current.class_specific[key].length !== 0) {
+                                    for (let key2 in current.class_specific[key]) {
+                                        classSpecificDataArray.push(<td
+                                            key={key2}>{key2}: {current.class_specific[key][key2]}</td>)
+                                    }
+                                }
+                            } else {
+                                classSpecificDataArray.push(<td key={key}>{current.class_specific[key]}</td>)
+                            }
                     };
                     return classSpecificDataArray;
                 }
