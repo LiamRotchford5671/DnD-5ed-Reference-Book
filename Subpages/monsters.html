@@ -51,9 +51,11 @@
     
 
 <!--Our scripts-->
-    <script type="text/babel" src="./content-table.js"></script>
     <script type="text/babel" src="./monsters.js"></script>
-    
+    <script type="text/babel" src="./content-table.js"></script>
+    <script type="text/babel">
+        ReactDOM.render(<Monsters />, document.getElementById("dataTable") );
+    </script>
 
 
 </body>

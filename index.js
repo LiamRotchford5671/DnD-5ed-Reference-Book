@@ -49,5 +49,5 @@ async function doAPIrequest(endpoint) {
 var monsterTable = document.getElementById("M-banner");
 monsterTable.onclick = function () {
   localStorage.setItem("determine", "monsters");
-  window.location.href = "Subpages/content-table.html";
+  window.location.href = "Subpages/monsters.html";
 };
