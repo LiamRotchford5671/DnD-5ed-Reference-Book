@@ -96,6 +96,7 @@ class Monsters extends React.Component {
     );
 
     this.genChart(mdata);
+    this.genTables(mdata);
   }
 
   genChart(mdata) {
@@ -109,7 +110,7 @@ class Monsters extends React.Component {
     var ctx = document.getElementsByClassName("mchart_" + mdata.index);
 
     var chart = new Chart(ctx, {
-      type: "bar",
+      type: "horizontalBar",
       data: {
         labels: [
           "Hit Points",
@@ -169,6 +170,27 @@ class Monsters extends React.Component {
       },
     });
   }
+
+  genTables(mdata) {
+    let actionTableRef = document.getElementById("actionTable_" + mdata.index);
+    if (mdata.index == "zombie") {
+      console.log(mdata.actions);
+    }
+
+    mdata.actions.forEach((element) => {
+      let newRow = document.createElement("tr");
+      newRow.setAttribute("scope", "row");
+      newRow.innerHTML =
+        "<td>" +
+        element.name +
+        "</td><td>" +
+        element.attack_bonus +
+        "</td><td>" +
+        element.desc +
+        "</td>";
+      actionTableRef.appendChild(newRow);
+    });
+  }
 }
 
 class MonsterDetails extends React.Component {
@@ -213,7 +235,20 @@ class MonsterDetails extends React.Component {
           <p>{this.props.detailsObj.size}</p>
         </section>
 
-        <section id={"contentRight_" + this.props.detailsObj.index}></section>
+        <section id={"contentRight_" + this.props.detailsObj.index}>
+          <table className="table table-bordered">
+            <thead>
+              <tr>
+                <td>Name</td>
+                <td>Attack Bonus</td>
+                <td>Description</td>
+                <td>Damage Type</td>
+                <td>Damage Dice</td>
+              </tr>
+            </thead>
+            <tbody id={"actionTable_" + this.props.detailsObj.index}></tbody>
+          </table>
+        </section>
       </div>
     );
   }

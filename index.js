@@ -48,6 +48,15 @@ async function doAPIrequest(endpoint) {
 
 var monsterTable = document.getElementById("M-banner");
 monsterTable.onclick = function () {
-  localStorage.setItem("determine", "monsters");
   window.location.href = "Subpages/monsters.html";
+};
+
+var equipTable = document.getElementById("E-banner");
+equipTable.onclick = function () {
+  window.location.href = "Subpages/equipment.html";
+};
+
+var spellTable = document.getElementById("S-banner");
+spellTable.onclick = function () {
+  window.location.href = "Subpages/spells.html";
 };
