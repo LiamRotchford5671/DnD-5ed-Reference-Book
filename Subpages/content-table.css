@@ -98,7 +98,7 @@ button:focus {
 
 /* =================================================================================
   ====================================================================================
-  [Table] */
+  [Table & ROw Toggle] */
 
 #tableHeader {
   margin-top: 2em;
@@ -167,6 +167,33 @@ button:focus {
 
 .table .header.active td:after {
   content: "\2212";
+}
+
+/* =================================================================================
+  ====================================================================================
+  [Inner Row Styling] */
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "img chart"
+    "main main";
+  grid-template-rows: 400px auto;
+}
+
+.grid-container > .image {
+  grid-area: img;
+  border-radius: 10%;
+  border-color: 10px solid #000;
+  width: 300px;
+  height: 350px;
+}
+
+.grid-container > section[id^="chartContain_"] {
+  grid-area: chart;
+  width: 800px;
+  height: 600px;
+  margin-top: 5px;
 }
 
 /* =================================================================================

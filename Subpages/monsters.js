@@ -59,7 +59,7 @@ class Monsters extends React.Component {
       bodyRef.appendChild(newRow);
 
       let newNestedRow = document.createElement("tr");
-      newNestedRow.innerHTML = '<div class="innerRow"></div>';
+      newNestedRow.className = "innerRow";
       newNestedRow.setAttribute("id", element);
       bodyRef.appendChild(newNestedRow);
 
@@ -83,13 +83,89 @@ class Monsters extends React.Component {
   async constructInnerData(monsterName) {
     let endpoint = "monsters/" + monsterName;
     var mdata = await this.doAPIrequest(endpoint);
+
     //console.log(mdata);
+
     mdata.holderName = "../images/Monster-Images/" + monsterName + ".jpg";
 
     ReactDOM.render(
       <MonsterDetails detailsObj={mdata} />,
       document.getElementById(monsterName)
     );
+
+    this.genChart(mdata);
+  }
+
+  genChart(mdata) {
+    let mRef = document.getElementById("chartContain_" + mdata.index);
+    let chartSet = document.createElement("canvas");
+    chartSet.className = "mchart_" + mdata.index;
+    chartSet.setAttribute("aria-label", "horizonalBar chart");
+    chartSet.setAttribute("role", "img");
+    mRef.appendChild(chartSet);
+
+    var ctx = document.getElementsByClassName("mchart_" + mdata.index);
+
+    var chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: [
+          "Hit Points",
+          "Armor Class",
+          "Challenge Rating",
+          "Charisma",
+          "Constitution",
+          "Dexterity",
+          "Intelligence",
+          "Strength",
+          "Wisdom",
+        ],
+        datasets: [
+          {
+            backgroundColor: [
+              "rgba(255, 0, 0, 0.8)",
+              "rgba(119, 136, 153, 0.8)",
+              "rgba(147, 112, 219, 0.8)",
+              "rgba(173, 255, 47, 0.8)",
+              "rgba(32, 178, 170, 0.8)",
+              "rgba(50, 205, 50, 0.8)",
+              "rgba(30, 144, 255, 0.8)",
+              "rgba(255, 191, 0, 0.8)",
+              "rgba(95, 158, 160, 0.8)",
+            ],
+            borderColor: [
+              "rgba(255, 0, 0, 1)",
+              "rgba(119, 136, 153, 1)",
+              "rgba(147, 112, 219, 1)",
+              "rgba(173, 255, 47, 1)",
+              "rgba(32, 178, 170, 1)",
+              "rgba(50, 205, 50, 1)",
+              "rgba(30, 144, 255, 1)",
+              "rgba(255, 191, 0, 0.8)",
+              "rgba(95, 158, 160, 0.8)",
+            ],
+            data: [
+              mdata.hit_points,
+              mdata.armor_class,
+              mdata.challenge_rating,
+              mdata.charisma,
+              mdata.constitution,
+              mdata.dexterity,
+              mdata.intelligence,
+              mdata.strength,
+              mdata.wisdom,
+            ],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRation: false,
+        legend: {
+          display: false,
+        },
+      },
+    });
   }
 }
 
@@ -106,9 +182,13 @@ class MonsterDetails extends React.Component {
 
   render() {
     return (
-      <div>
+      <div
+        className="grid-container"
+        id={"contain_" + this.props.detailsObj.index}
+      >
         <img
           src={this.props.detailsObj.holderName}
+          className="image"
           onError={(event) =>
             event.target.setAttribute(
               "src",
@@ -117,7 +197,7 @@ class MonsterDetails extends React.Component {
           }
           alt={this.props.detailsObj.holderName + " image"}
         />
-        {this.props.detailsObj.type}
+        <section id={"chartContain_" + this.props.detailsObj.index}></section>
       </div>
     );
   }
