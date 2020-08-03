@@ -177,7 +177,7 @@ button:focus {
   display: grid;
   grid-template-areas:
     "img chart"
-    "main main";
+    "main-left main-right";
   grid-template-rows: 400px auto;
 }
 
@@ -194,6 +194,26 @@ button:focus {
   width: 800px;
   height: 600px;
   margin-top: 5px;
+}
+
+.grid-container > section[id^="contentLeft_"] > h5 {
+  grid-area: main-left;
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.grid-container > section[id^="contentLeft_"] > p {
+  grid-area: main-left;
+}
+
+.grid-container > section[id^="contentRight_"] > h5 {
+  grid-area: main-left;
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.grid-container > section[id^="contentRIght_"] > p {
+  grid-area: main-left;
 }
 
 /* =================================================================================

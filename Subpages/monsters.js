@@ -84,7 +84,9 @@ class Monsters extends React.Component {
     let endpoint = "monsters/" + monsterName;
     var mdata = await this.doAPIrequest(endpoint);
 
-    //console.log(mdata);
+    if (mdata.index == "zombie") {
+      console.log(mdata);
+    }
 
     mdata.holderName = "../images/Monster-Images/" + monsterName + ".jpg";
 
@@ -198,6 +200,20 @@ class MonsterDetails extends React.Component {
           alt={this.props.detailsObj.holderName + " image"}
         />
         <section id={"chartContain_" + this.props.detailsObj.index}></section>
+        <section id={"contentLeft_" + this.props.detailsObj.index}>
+          <h5>Type:</h5>
+          <p>{this.props.detailsObj.type}</p>
+          <h5>Alignment:</h5>
+          <p>{this.props.detailsObj.alignment}</p>
+          <h5>Hit Dice:</h5>
+          <p>{this.props.detailsObj.hit_dice}</p>
+          <h5>Languages</h5>
+          <p>{this.props.detailsObj.languages}</p>
+          <h5>Size:</h5>
+          <p>{this.props.detailsObj.size}</p>
+        </section>
+
+        <section id={"contentRight_" + this.props.detailsObj.index}></section>
       </div>
     );
   }
