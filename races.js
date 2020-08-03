@@ -49,8 +49,25 @@ class Races extends React.Component {
                 // let abilityBonusNames = results.ability_bonuses.map(current => current.name);
                 // let abilityBonuses = results.ability_bonuses.map(current => current.bonus);
 
-                let abilityBonusNames = ['STR', 'DEX', 'CON', 'INT', 'WIS'];
-                let abilityBonuses = results.ability_bonuses.map(current => current.bonus);
+                let abilityBonusNames = ['STR', 'DEX', 'CON', 'CHA', 'INT', 'WIS'];
+                let abilityBonuses = ['', '', '', '', '', ''];
+
+                results.ability_bonuses.map(current => {
+                    if (current.name === 'STR') {
+                        abilityBonuses[0] = current.bonus;
+                    } else if (current.name === 'DEX') {
+                        abilityBonuses[1] = current.bonus;
+                    } else if (current.name === 'CON') {
+                        abilityBonuses[2] = current.bonus;
+                    } else if (current.name === 'CHA') {
+                        abilityBonuses[3] = current.bonus;
+                    } else if (current.name === 'INT') {
+                        abilityBonuses[4] = current.bonus;
+                    } else if (current.name === 'WIS') {
+                        abilityBonuses[5] = current.bonus;
+                    }
+                });
+
 
                 console.log(results.ability_bonuses);
                 console.log(abilityBonuses);
