@@ -12,7 +12,6 @@ class Classes extends React.Component {
             profChoices: [],
             saveThrows: [],
             spellCasting: [],
-            spellDesc: false,
             startEquips: [],
             equipChoiceItems: [],
             subclasses: []
@@ -41,6 +40,7 @@ class Classes extends React.Component {
 
                 //Initial Class API Fetch
                 const results = await doAPIrequest(`classes/` + this.state.classUrl + '/');
+                console.log(results);
 
                 //Class Levels
                 const levelResults = await doAPIrequest(`classes/` + this.state.classUrl + '/levels');
@@ -95,10 +95,10 @@ class Classes extends React.Component {
                 let proficiency = results.proficiencies.map((current, i) => <p key={i}>{current.name}</p>);
 
                 let profChoices = results.proficiency_choices.map((current, i) =>
-                    <div key={i}>
-                        <p>Choose: {current.choose}</p>
-                        <div className="class-profs-options list-group-flush">{current.from.map((next, j) =>
-                            <button type="button" className="list-group-item list-group-item-action" key={j}>{next.name.replace('Skill:', '')}</button>)}
+                    <div key={i} className="dropdown dropright">
+                        <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose: {current.choose}</button>
+                        <div className="dropdown-menu">{current.from.map((next, j) =>
+                            <button type="button" className="dropdown-item" key={j}>{next.name.replace('Skill:', '')}</button>)}
                         </div>
                     </div>);
 
@@ -106,6 +106,7 @@ class Classes extends React.Component {
                 let startingEquipUrl = results.starting_equipment.url.replace('/api/', '')
 
                 const equipResults = await doAPIrequest(startingEquipUrl);
+                console.log(equipResults);
 
                 let equipResultsItems = equipResults.starting_equipment.map((current, i) =>
                     <p key={i}>{current.item.name}: {current.quantity}</p>
@@ -116,11 +117,11 @@ class Classes extends React.Component {
                 for (let key in equipResults) {
                     if (equipResults.hasOwnProperty(key) && key.match("^choice_")) {
                         let equipItems =
-                            <div key={key}>
-                                <p>Choose 1:</p>
-                                <div className="class-equips list-group-flush">
+                            <div className="dropdown dropright" key={key}>
+                                <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose 1:</button>
+                                <div className="dropdown-menu">
                                     {equipResults[key].map(current => current.from.map((next, i) =>
-                                    <button type="button" className="list-group-item list-group-item-action" key={i}>{next.item.name}</button>))}
+                                    <button type="button" className="dropdown-item" key={i}>{next.item.name}</button>))}
                                 </div>
                             </div>
                         equipChoiceItems.push(equipItems);
@@ -133,27 +134,14 @@ class Classes extends React.Component {
                     const spellResults = await doAPIrequest(`spellcasting/` + this.state.classUrl + '/');
 
                     let spells = spellResults.info.map((current, i) =>
-                        <div className="list-group-flush" key={i}>
-                            <button type="button" className="spell-name list-group-item list-group-item-action" onClick={()=>{
-                                this.setState(state => ({
-                                    spellDesc: !state.spellDesc
-                                }));
-                                // console.log(this.state.spellDesc);
-                            }}>{current.name}</button>
-
-                            <ReactTransitionGroup.CSSTransition
-                                in={this.state.spellDesc}
-                                timeout={500}
-                                classNames="spellTrans"
-                                unmountOnExit
-                            >
-                                <p className="spell-desc">{current.desc}</p>
-                            </ReactTransitionGroup.CSSTransition>
+                        <div key={i}>
+                            <button type="button" className="btn btn-danger" data-toggle="collapse" data-target={'#spell-desc' + i}>{current.name}</button>
+                            <p id={'spell-desc' + i} className="spell-desc collapse">{current.desc}</p>
                         </div>
                     )
 
                     this.setState({
-                        spellCasting: <div>
+                        spellCasting: <div className="class-spells">
                             <h5>Spellcasting</h5>
                             <p>{spellResults.spellcasting_ability.name}</p>
                             {spells}
@@ -167,7 +155,7 @@ class Classes extends React.Component {
                     index: results.index,
                     hit_die: results.hit_die,
                     class_levels: levelTable,
-                    profs: proficiency,
+                    profs: <div className="profs">{proficiency}</div>,
                     profChoices: profChoices,
                     saveThrows: results.saving_throws.map((current, i) => <p key={i}>{current.name}</p>),
                     startEquips: equipResultsItems,
@@ -187,7 +175,6 @@ class Classes extends React.Component {
                 profChoices: [],
                 saveThrows: [],
                 spellCasting: [],
-                spellDesc: false,
                 startEquips: [],
                 equipChoiceItems: [],
                 subclasses: []
@@ -215,45 +202,45 @@ class Classes extends React.Component {
                     classNames="cTrans"
                     unmountOnExit
                 >
-                    <div className="class-row">
-                        <button className={'class-btns ' + `${this.state.index}` + '-icon'}
-                                onClick={this.buttonClickEvent}></button>
-                        <div className="class-img">
-                            <h4>{this.state.name}</h4>
-                            <p>Hit die: {this.state.hit_die}</p>
-                            <img src={'./images/Class-Images/' + `${this.state.classUrl}` + '.png'}
-                                 alt={this.state.name}/>
-                             <div className="starting-equip">
-                                <h5>Starting Equipment</h5>
-                                {this.state.startEquips}
-                             </div>
-                        </div>
-                        <div className="class-levels">
-                            {this.state.class_levels}
-                        </div>
+                    <div className="class-section">
                         <div className="class-info">
-                            <div>
-                                <h5>Proficiencies</h5>
-                                {this.state.profs}
+                            <div className="class-header">
+                                <button className={'class-btns ' + `${this.state.index}` + '-icon'} onClick={this.buttonClickEvent}></button>
+                                <div className="class-img">
+                                    <h4>{this.state.name}</h4>
+                                    <p>Hit die: {this.state.hit_die}</p>
+                                    <img src={'./images/Class-Images/' + `${this.state.classUrl}` + '.png'} alt={this.state.name}/>
+                                </div>
+                            </div>
+                            <div className="class-levels">
+                                {this.state.class_levels}
+                            </div>
+                        </div>
+                        <div className="class-stats">
+                            <div className="class-subs">
                                 <h5>Saving Throws</h5>
                                 {this.state.saveThrows}
                                 <h5>Subclasses</h5>
                                 {this.state.subclasses}
                             </div>
-                            <div className="class-prof-choices">
+                            <div className="class-profs">
+                                <h5>Proficiencies</h5>
+                                {this.state.profs}
                                 <h5>Proficiency Choices</h5>
-                                <div className="class-profs">
+                                <div className="class-prof-options">
                                     {this.state.profChoices}
                                 </div>
                             </div>
-                        </div>
-                        <div className="equip-choices">
-                            <h5>Equipment Choices</h5>
-                            <div className="class-equip-items">
-                                {this.state.equipChoiceItems}
+                            <div className="class-equips">
+                                <h5>Starting Equipment</h5>
+                                {this.state.startEquips}
+                                <h5>Equipment Choices</h5>
+                                <div className="class-equip-items">
+                                    {this.state.equipChoiceItems}
+                                </div>
                             </div>
+                            {this.state.spellCasting}
                         </div>
-                        {this.state.spellCasting}
                     </div>
                 </ReactTransitionGroup.CSSTransition>
             </div>

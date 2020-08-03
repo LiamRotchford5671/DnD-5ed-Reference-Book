@@ -87,6 +87,10 @@ h5 {
   color: red;
 }
 
+p {
+  margin-top: 1rem;
+}
+
 body > header > nav {
   align-self: flex-end;
 }
@@ -107,6 +111,10 @@ body > header > nav {
 
 button:focus {
   outline: 0;
+}
+
+.dropdown {
+  margin-bottom: 10px;
 }
 
 /* =================================================================================
@@ -159,43 +167,49 @@ button:focus {
   border: 5px solid rgb(63, 63, 63);
 }
 
-.class-row {
-  display: flex;
-  flex-flow: row wrap;
+.class-section {
   background-color: white;
   border-radius: 10px;
   padding: 25px;
 }
 
-.class-img {
+.class-info, .class-header, .class-stats {
   display: flex;
-  flex-flow: column wrap;
+  flex-wrap: wrap;
+}
+
+.class-img {
   padding: 20px;
 }
 
 .class-img img {
-  max-width: 300px;
+  max-width: 400px;
+  width: 100%;
 }
 
-.class-info, .class-profs, .class-equip-items {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.class-levels, .class-info div, .class-stats div, .equip-choices div {
-  margin-right: 20px;
+.class-subs, .class-profs, .class-equips, .class-spells {
+  margin: 20px 50px 20px 50px;
 }
 
 .class-levels {
   font-size: .75em;
+  margin: 20px;
+  max-width: 800px;
 }
 
-.class-profs-options, .class-equips {
-  overflow-y: auto;
+.class-profs .profs {
+  max-height: 400px;
+  margin-bottom: 20px;
+  overflow: auto;
 }
 
-.class-profs-options p, .class-equips p {
-  margin: 0;
+.class-spells {
+  max-width: 400px;
+}
+
+.spell-desc {
+  max-height: 400px;
+  overflow: auto;
 }
 
 .cTrans-enter {
@@ -262,9 +276,22 @@ button:focus {
   border: 5px solid rgb(63, 63, 63);
 }
 
+.race-section-btn {
+  border: none;
+  background-color: transparent;
+  transition: font-weight .2s, filter .2s, transform .2s;
+  transition-timing-function: ease;
+}
+
+.race-section-btn:hover {
+  font-weight: bold;
+  filter: saturate(1.3);
+  transform: scale(1.03, 1.03);
+}
+
 .race-row {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   width: 100%;
   background-color: white;
   border-radius: 10px;
@@ -273,24 +300,29 @@ button:focus {
 
 .race-img {
   display: flex;
-  flex-flow: column nowrap;
-  min-width: 300px;
+  flex-flow: column wrap;
 }
 
 .race-img img {
+  max-width: 400px;
   width: 100%;
 }
 
-.race-stats {
-  margin: 20px 20px;
+.race-subs {
+  padding: 20px;
 }
 
 .race-info {
   padding: 20px 20px 20px 50px;
+  max-width: 30vw;
 }
 
-.race-info h5 {
-  color: red;
+.race-stats {
+  margin: 20px 20px 20px 50px;
+}
+
+.statsChart {
+  margin-bottom: 20px;
 }
 
 .rTrans-enter {

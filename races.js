@@ -22,6 +22,7 @@ class Races extends React.Component {
             trait_options: []
         };
         this.buttonClickEvent = this.buttonClickEvent.bind(this);
+        this.raceDataHandler = this.raceDataHandler.bind(this);
     }
 
     //On click, toggles between nav and info section.
@@ -31,6 +32,10 @@ class Races extends React.Component {
             toggle: !state.toggle
         }));
 
+        this.raceDataHandler(name);
+    }
+
+    raceDataHandler(name) {
         if (this.state.toggle === true) {
             const raceInfoRequest = async () => {
                 await this.setState({
@@ -41,10 +46,14 @@ class Races extends React.Component {
 
                 //Ability Bonuses
 
-                let abilityBonusNames = results.ability_bonuses.map(current => current.name);
+                // let abilityBonusNames = results.ability_bonuses.map(current => current.name);
+                // let abilityBonuses = results.ability_bonuses.map(current => current.bonus);
+
+                let abilityBonusNames = ['STR', 'DEX', 'CON', 'INT', 'WIS'];
                 let abilityBonuses = results.ability_bonuses.map(current => current.bonus);
 
                 console.log(results.ability_bonuses);
+                console.log(abilityBonuses);
 
                 var ctx = document.querySelector('.statsChart');
                 var myBarChart = new Chart(ctx, {
@@ -73,12 +82,12 @@ class Races extends React.Component {
 
                 if (results.ability_bonus_options) {
                     let abilityOptions =
-                        <div>
+                        <div className="dropdown dropright">
                             <h5>Ability Bonus Options</h5>
-                            <p>Choose: {results.ability_bonus_options.choose}</p>
-                            <div className="list-group-flush">
+                            <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose: {results.ability_bonus_options.choose}</button>
+                            <div className="dropdown-menu">
                                 {results.ability_bonus_options.from.map((current, i) =>
-                                <button type="button" className="list-group-item list-group-item-action" key={i}>{current.name}: {current.bonus}</button>)}
+                                <button type="button" className="dropdown-item" key={i}>{current.name}: {current.bonus}</button>)}
                             </div>
                         </div>;
 
@@ -90,11 +99,11 @@ class Races extends React.Component {
                 //Language Bonuses
                 if (results.language_options) {
                     let languageOptions =
-                        <div>
-                            <p>Choose 1: </p>
-                            <div className="list-group-flush">
+                        <div className="dropdown dropright">
+                            <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose 1: </button>
+                            <div className="dropdown-menu">
                             {results.language_options.from.map((current, i) =>
-                            <button type="button" className="list-group-item list-group-item-action" key={i}>{current.name}</button>)}
+                            <button type="button" className="dropdown-item" key={i}>{current.name}</button>)}
                             </div>
                         </div>;
 
@@ -113,12 +122,12 @@ class Races extends React.Component {
                         </div>;
                     if (results.starting_proficiency_options) {
                         let profOptions =
-                            <div>
+                            <div className="dropdown dropright">
                                 <h5>Proficiency Options</h5>
-                                <p>Choose 1:</p>
-                                <div className="list-group-flush">
+                                <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose 1:</button>
+                                <div className="dropdown-menu">
                                     {results.starting_proficiency_options.from.map((current, i) =>
-                                        <button type="button" className="list-group-item list-group-item-action" key={i}>{current.name}</button>)}
+                                        <button type="button" className="dropdown-item" key={i}>{current.name}</button>)}
                                 </div>
                             </div>;
 
@@ -135,7 +144,7 @@ class Races extends React.Component {
                 //Subraces
                 if (results.subraces != '') {
                     let subraces =
-                        <div>
+                        <div className="race-subs">
                             <h5>Subraces</h5>
                             {results.subraces.map((current, i) =>
                                 <p key={i}>{current.name}</p>)}
@@ -161,12 +170,12 @@ class Races extends React.Component {
 
                 if (results.trait_options) {
                     let trait_options =
-                        <div>
+                        <div className="dropdown dropright">
                             <h5>Trait Options</h5>
-                            <p>Choose 1:</p>
-                            <div className="list-group-flush">
+                            <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose 1:</button>
+                            <div className="dropdown-menu">
                                 {results.trait_options.from.map((current,i) =>
-                                <button type="button" className="list-group-item list-group-item-action" key={i}>{current.name}</button>)}
+                                <button type="button" className="dropdown-item" key={i}>{current.name}</button>)}
                             </div>
                         </div>;
 
@@ -232,20 +241,14 @@ class Races extends React.Component {
                 >
                     <div className="race-row">
                         <div className="race-img">
-                            <button onClick={this.buttonClickEvent}>Back to grid</button>
                             <h4>{this.state.name}</h4>
-                            <img src={'./images/Race-Images/' + `${this.state.raceUrl}` + '.png'} alt={this.state.raceUrl} />
-                            <div className="race-stats">
-                                {this.state.subraces}
-                                <h5>Ability Bonuses</h5>
-                                <canvas className="statsChart" aria-label="bar chart" role="img"></canvas>
-                            </div>
-                            {this.state.abilityOptions}
+                            <button className="race-section-btn" onClick={this.buttonClickEvent}>
+                                <img src={'./images/Race-Images/' + `${this.state.raceUrl}` + '.png'} alt={this.state.raceUrl} />
+                            </button>
+                            {this.state.subraces}
                         </div>
 
                         <div className="race-info">
-                            <h5>Speed</h5>
-                            <p>{this.state.speed}</p>
                             <h5>Size</h5>
                             <p>{this.state.size}</p>
                             <p>{this.state.size_desc}</p>
@@ -258,6 +261,13 @@ class Races extends React.Component {
                             <h5>Languages</h5>
                             {this.state.languages}
                             {this.state.languageOptions}
+                        </div>
+                        <div className="race-stats">
+                            <h5>Speed</h5>
+                            <p>{this.state.speed}</p>
+                            <h5>Ability Bonuses</h5>
+                            <canvas className="statsChart" aria-label="bar chart" role="img"></canvas>
+                            {this.state.abilityOptions}
                             {this.state.profs}
                             {this.state.profOptions}
                             {this.state.traits}
