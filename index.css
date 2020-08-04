@@ -62,18 +62,6 @@ body > footer {
   background-color: rgb(63, 63, 63);
 }
 
-/* =================================================================================
-====================================================================================
-[Header, Navbar, Buttons] */
-
-body > header > #logo {
-  display: flex;
-  filter: saturate(.85);
-}
-
-#logo:hover {
-  text-decoration: none;
-}
 
 h1 {
   align-self: flex-end;
@@ -89,6 +77,20 @@ h5 {
 
 p {
   margin-top: 1rem;
+  padding-right: 10px;
+}
+
+/* =================================================================================
+====================================================================================
+[Header, Navbar, Buttons] */
+
+body > header > #logo {
+  display: flex;
+  filter: saturate(.85);
+}
+
+#logo:hover {
+  text-decoration: none;
 }
 
 body > header > nav {
@@ -125,6 +127,11 @@ button:focus {
   margin-top: 1.5em;
   font-size: 2.5em;
   font-weight: bold;
+}
+
+.row {
+  width: 100%;
+  margin: 0;
 }
 
 .row > div[class^="col"] {
@@ -171,6 +178,7 @@ button:focus {
   background-color: white;
   border-radius: 10px;
   padding: 25px;
+  width: 100%;
 }
 
 .class-info, .class-header, .class-stats {
@@ -183,18 +191,24 @@ button:focus {
 }
 
 .class-img img {
-  max-width: 400px;
-  width: 100%;
+  min-width: 250px;
+  max-width: 25vw;
 }
 
-.class-subs, .class-profs, .class-equips, .class-spells {
-  margin: 20px 50px 20px 50px;
+.class-subs, .class-profs, .class-equips {
+  margin: 20px 20px 20px 20px;
+  max-width: 25vw;
+  min-width: 200px;
 }
 
 .class-levels {
   font-size: .75em;
-  margin: 20px;
-  max-width: 800px;
+  margin: 50px 20px;
+}
+
+.class-subs div p {
+  overflow: auto;
+  max-height: 300px;
 }
 
 .class-profs .profs {
@@ -204,7 +218,7 @@ button:focus {
 }
 
 .class-spells {
-  max-width: 400px;
+  margin: 20px 20px 20px 20px;
 }
 
 .spell-desc {
@@ -289,22 +303,23 @@ button:focus {
   transform: scale(1.03, 1.03);
 }
 
-.race-row {
+.race-section {
   display: flex;
   flex-flow: row wrap;
-  width: 100%;
   background-color: white;
   border-radius: 10px;
   padding: 25px;
+  width: 100%;
 }
 
 .race-img {
   display: flex;
   flex-flow: column wrap;
+  max-width: 30vw;
+  min-width: 300px;
 }
 
 .race-img img {
-  max-width: 400px;
   width: 100%;
 }
 
@@ -313,16 +328,24 @@ button:focus {
 }
 
 .race-info {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.race-specs {
   padding: 20px 20px 20px 50px;
   max-width: 30vw;
+  min-width: 300px;
 }
 
 .race-stats {
   margin: 20px 20px 20px 50px;
+  max-width: 30vw;
+  min-width: 300px;
 }
 
-.statsChart {
-  margin-bottom: 20px;
+canvas {
+  margin: 0 0 20px 0 !important;
 }
 
 .rTrans-enter {
@@ -455,30 +478,42 @@ button:focus {
 [Mobile Screen Size Query] */
 
 @media (max-width: 414px) {
+
+  h1 {
+    font-size: 1.2em;
+  }
+
+  nav {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-end;
+  }
+
   .titles {
     font-size: 1.5em;
-    font-weight: bold;
   }
 
   .row > div[class^="col"] {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #000;
     font-weight: bold;
     font-size: 1em;
   }
 
   .class-btns {
-    border: 1.5px solid #000;
-    height: 3em;
-    width: 3em;
-    border-radius: 50%;
+    height: 3.5em;
+    width: 3.5em;
+  }
+
+  .class-subs, .class-profs, .class-equips {
+    margin: 20px 20px 20px 20px;
+    max-width: 300px;
+    min-width: 200px;
+  }
+
+  .class-levels table {
+    width: 300px;
   }
 
   .race-btns {
-    border: 4px solid #000;
     height: 5em;
     width: 4em;
   }

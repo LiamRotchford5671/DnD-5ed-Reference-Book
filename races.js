@@ -68,10 +68,6 @@ class Races extends React.Component {
                     }
                 });
 
-
-                console.log(results.ability_bonuses);
-                console.log(abilityBonuses);
-
                 var ctx = document.querySelector('.statsChart');
                 var myBarChart = new Chart(ctx, {
                     type: 'horizontalBar',
@@ -256,7 +252,7 @@ class Races extends React.Component {
                     classNames="rTrans"
                     unmountOnExit
                 >
-                    <div className="race-row">
+                    <div className="race-section">
                         <div className="race-img">
                             <h4>{this.state.name}</h4>
                             <button className="race-section-btn" onClick={this.buttonClickEvent}>
@@ -264,31 +260,34 @@ class Races extends React.Component {
                             </button>
                             {this.state.subraces}
                         </div>
-
                         <div className="race-info">
-                            <h5>Size</h5>
-                            <p>{this.state.size}</p>
-                            <p>{this.state.size_desc}</p>
-                            <h5>Age</h5>
-                            <p>{this.state.age}</p>
-                            <h5>Alignment</h5>
-                            <p>{this.state.alignment}</p>
-                            <h5>Language</h5>
-                            <p>{this.state.languageDesc}</p>
-                            <h5>Languages</h5>
-                            {this.state.languages}
-                            {this.state.languageOptions}
-                        </div>
-                        <div className="race-stats">
-                            <h5>Speed</h5>
-                            <p>{this.state.speed}</p>
-                            <h5>Ability Bonuses</h5>
-                            <canvas className="statsChart" aria-label="bar chart" role="img"></canvas>
-                            {this.state.abilityOptions}
-                            {this.state.profs}
-                            {this.state.profOptions}
-                            {this.state.traits}
-                            {this.state.trait_options}
+                            <div className="race-specs">
+                                <h5>Size</h5>
+                                <p>{this.state.size}</p>
+                                <p>{this.state.size_desc}</p>
+                                <h5>Age</h5>
+                                <p>{this.state.age}</p>
+                                <h5>Alignment</h5>
+                                <p>{this.state.alignment}</p>
+                                <h5>Language</h5>
+                                <p>{this.state.languageDesc}</p>
+                                <h5>Languages</h5>
+                                {this.state.languages}
+                                {this.state.languageOptions}
+                            </div>
+                            <div className="race-stats">
+                                <h5>Speed</h5>
+                                <p>{this.state.speed}</p>
+                                <h5>Ability Bonuses</h5>
+                                <div className="canvas-container">
+                                    <canvas className="statsChart" width="200" aria-label="bar chart" role="img"></canvas>
+                                </div>
+                                {this.state.abilityOptions}
+                                {this.state.profs}
+                                {this.state.profOptions}
+                                {this.state.traits}
+                                {this.state.trait_options}
+                            </div>
                         </div>
                     </div>
                 </ReactTransitionGroup.CSSTransition>

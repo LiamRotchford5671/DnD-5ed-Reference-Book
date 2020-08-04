@@ -106,7 +106,7 @@ class Classes extends React.Component {
                 let startingEquipUrl = results.starting_equipment.url.replace('/api/', '')
 
                 const equipResults = await doAPIrequest(startingEquipUrl);
-                console.log(equipResults);
+                // console.log(equipResults);
 
                 let equipResultsItems = equipResults.starting_equipment.map((current, i) =>
                     <p key={i}>{current.item.name}: {current.quantity}</p>
@@ -128,6 +128,26 @@ class Classes extends React.Component {
                     }
                 }
 
+                //Subclasses
+                let subClasses = results.subclasses.map(async (current, i) => {
+                    let subClassUrl = current.name.toLowerCase().replace(' ', '-');
+                    let subClassResults = await doAPIrequest(`subclasses/` + subClassUrl + '/');
+
+                    let subClassFeatures =
+                        <div>
+                            <p>Features: {subClassResults.features.map((next, i) => next.name + ', ')}</p>
+                        </div>;
+
+                    this.setState({
+                        subclasses: <div key={i}>
+                                        <p><b>- {current.name} -</b></p>
+                                        <p>Subclass Flavor: {subClassResults.subclass_flavor}</p>
+                                        <p>{subClassResults.desc}</p>
+                                        {subClassFeatures}
+                                    </div>
+                    })
+                });
+
                 //Spellcasting
                 if (results.spellcasting) {
 
@@ -135,7 +155,9 @@ class Classes extends React.Component {
 
                     let spells = spellResults.info.map((current, i) =>
                         <div key={i}>
-                            <button type="button" className="btn btn-danger" data-toggle="collapse" data-target={'#spell-desc' + i}>{current.name}</button>
+                            <button type="button" className="btn btn-danger" data-toggle="collapse" data-target={'#spell-desc' + i}>
+                                {current.name}
+                            </button>
                             <p id={'spell-desc' + i} className="spell-desc collapse">{current.desc}</p>
                         </div>
                     )
@@ -159,8 +181,7 @@ class Classes extends React.Component {
                     profChoices: profChoices,
                     saveThrows: results.saving_throws.map((current, i) => <p key={i}>{current.name}</p>),
                     startEquips: equipResultsItems,
-                    equipChoiceItems: equipChoiceItems,
-                    subclasses: results.subclasses.map((current, i) => <p key={i}>{current.name}</p>)
+                    equipChoiceItems: equipChoiceItems
                 });
             };
             classInfoRequest();
@@ -212,34 +233,34 @@ class Classes extends React.Component {
                                     <img src={'./images/Class-Images/' + `${this.state.classUrl}` + '.png'} alt={this.state.name}/>
                                 </div>
                             </div>
-                            <div className="class-levels">
-                                {this.state.class_levels}
+                            <div className="class-stats">
+                                <div className="class-subs">
+                                    <h5>Saving Throws</h5>
+                                    {this.state.saveThrows}
+                                    <h5>Subclasses</h5>
+                                    {this.state.subclasses}
+                                </div>
+                                <div className="class-profs">
+                                    <h5>Proficiencies</h5>
+                                    {this.state.profs}
+                                    <h5>Proficiency Choices</h5>
+                                    <div className="class-prof-options">
+                                        {this.state.profChoices}
+                                    </div>
+                                </div>
+                                <div className="class-equips">
+                                    <h5>Starting Equipment</h5>
+                                    {this.state.startEquips}
+                                    <h5>Equipment Choices</h5>
+                                    <div className="class-equip-items">
+                                        {this.state.equipChoiceItems}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="class-stats">
-                            <div className="class-subs">
-                                <h5>Saving Throws</h5>
-                                {this.state.saveThrows}
-                                <h5>Subclasses</h5>
-                                {this.state.subclasses}
-                            </div>
-                            <div className="class-profs">
-                                <h5>Proficiencies</h5>
-                                {this.state.profs}
-                                <h5>Proficiency Choices</h5>
-                                <div className="class-prof-options">
-                                    {this.state.profChoices}
-                                </div>
-                            </div>
-                            <div className="class-equips">
-                                <h5>Starting Equipment</h5>
-                                {this.state.startEquips}
-                                <h5>Equipment Choices</h5>
-                                <div className="class-equip-items">
-                                    {this.state.equipChoiceItems}
-                                </div>
-                            </div>
-                            {this.state.spellCasting}
+                        {this.state.spellCasting}
+                        <div className="class-levels">
+                            {this.state.class_levels}
                         </div>
                     </div>
                 </ReactTransitionGroup.CSSTransition>
