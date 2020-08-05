@@ -58,8 +58,11 @@ body > main > .container-fluid {
 
 body > footer {
   grid-area: foot;
-  height: 3em;
+  height: 4em;
   background-color: rgb(63, 63, 63);
+  color: #c7c7c7;
+  font-size: .75em;
+  padding-left: 20px;
 }
 
 
@@ -100,7 +103,7 @@ body > header > nav {
 .nav-btns {
   border: none;
   background-color: transparent;
-  color: white;
+  color: #c7c7c7;
 }
 
 .nav-btns:hover {
@@ -303,9 +306,12 @@ button:focus {
   transform: scale(1.03, 1.03);
 }
 
-.race-section {
+.race-section, .race-info {
   display: flex;
   flex-flow: row wrap;
+}
+
+.race-section {
   background-color: white;
   border-radius: 10px;
   padding: 25px;
@@ -317,6 +323,7 @@ button:focus {
   flex-flow: column wrap;
   max-width: 30vw;
   min-width: 300px;
+  margin-right: 20px;
 }
 
 .race-img img {
@@ -327,21 +334,16 @@ button:focus {
   padding: 20px;
 }
 
-.race-info {
-  display: flex;
-  flex-flow: row wrap;
-}
-
 .race-specs {
-  padding: 20px 20px 20px 50px;
+  padding: 20px 50px 20px 20px;
   max-width: 30vw;
   min-width: 300px;
 }
 
 .race-stats {
-  margin: 20px 20px 20px 50px;
-  max-width: 30vw;
-  min-width: 300px;
+    padding: 20px 0 20px 20px;
+    max-width: 30vw;
+    min-width: 300px;
 }
 
 canvas {
@@ -499,23 +501,30 @@ canvas {
   }
 
   .class-btns {
-    height: 3.5em;
-    width: 3.5em;
+    height: 4em;
+    width: 4em;
   }
 
   .class-subs, .class-profs, .class-equips {
     margin: 20px 20px 20px 20px;
-    max-width: 300px;
+    max-width: 100%;
     min-width: 200px;
   }
 
   .class-levels table {
-    width: 300px;
+    width: 100vw;
   }
 
   .race-btns {
     height: 5em;
     width: 4em;
+  }
+
+  .race-specs, .race-stats {
+    margin: 20px 20px 20px 20px;
+    padding: 0;
+    max-width: 100%;
+    min-width: 300px;
   }
 
   .monster-title {

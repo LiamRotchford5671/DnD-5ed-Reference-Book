@@ -45,7 +45,7 @@ class Classes extends React.Component {
                 //Class Levels
                 const levelResults = await doAPIrequest(`classes/` + this.state.classUrl + '/levels');
 
-                function ClassSpecificDataHeads() {
+                function LevelDataHeads() {
                     let classSpecificArray = [];
                     let classSpecific = Object.keys(levelResults[0].class_specific);
 
@@ -65,6 +65,7 @@ class Classes extends React.Component {
                             classSpecificDataArray.push(<td key={key}>{current.class_specific[key]}</td>);
                         }
                     };
+
                     return classSpecificDataArray;
                 }
 
@@ -76,7 +77,7 @@ class Classes extends React.Component {
                             <th scope="col">Ability Score Bonuses</th>
                             <th scope="col">Proficiency Bonus</th>
                             <th scope="col">Feature Choices</th>
-                            {ClassSpecificDataHeads()}
+                            {LevelDataHeads()}
                         </tr>
                         </thead>
                         <tbody>
@@ -90,6 +91,49 @@ class Classes extends React.Component {
                             </tr>)}
                         </tbody>
                     </table>
+
+                let levels = [];
+                let abilityBonus = [];
+                let proficiencyBonus = [];
+                levelResults.map(current => {
+                    levels.push(current.level);
+                    abilityBonus.push(current.ability_score_bonuses);
+                    proficiencyBonus.push(current.prof_bonus);
+                })
+
+
+
+                var ctx = document.querySelector('.levelsChart');
+                var myBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: levels,
+                        datasets: [{
+                            label: ["Ability Score Bonus"],
+                            data: abilityBonus,
+                            backgroundColor: 'rgba(255,46,46,0.8)'
+                        },
+                        {
+                            label: ["Proficiency Bonus"],
+                            data: proficiencyBonus,
+                            backgroundColor: 'rgba(83,217,255,0.8)'
+                        }
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            display: true
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    min: 0,
+                                    max: 10
+                                }
+                            }]
+                        }
+                    }
+                });
 
                 //Proficiency Data
                 let proficiency = results.proficiencies.map((current, i) => <p key={i}>{current.name}</p>);
@@ -152,6 +196,8 @@ class Classes extends React.Component {
                 if (results.spellcasting) {
 
                     const spellResults = await doAPIrequest(`spellcasting/` + this.state.classUrl + '/');
+
+                    console.log(spellResults);
 
                     let spells = spellResults.info.map((current, i) =>
                         <div key={i}>
@@ -261,6 +307,7 @@ class Classes extends React.Component {
                         {this.state.spellCasting}
                         <div className="class-levels">
                             {this.state.class_levels}
+                            <canvas className="levelsChart" width="200" aria-label="bar chart" role="img"></canvas>
                         </div>
                     </div>
                 </ReactTransitionGroup.CSSTransition>
