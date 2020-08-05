@@ -252,6 +252,13 @@ section[id^="contentBottom_"] > p {
   margin-left: 20px;
 }
 
+.grid-containerNonChart > section[id^="contentLeft_"] > h6 {
+  grid-area: left;
+  color: #ff0000;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
 .grid-containerNonChart > section[id^="contentLeft_"] > p {
   grid-area: left;
   margin-left: 20px;
@@ -262,10 +269,17 @@ section[id^="contentBottom_"] > p {
   color: #ff0000;
   font-weight: bold;
   margin-top: 20px;
+  margin-left: 30px;
 }
 
 .grid-containerNonChart > section[id^="contentRight_"] > p {
   grid-area: right;
+  margin-left: 30px;
+}
+
+.grid-containerNonChart > section > div[id^="equipPack_"] > p {
+  grid-area: left;
+  margin-left: 20px;
 }
 
 /* =================================================================================

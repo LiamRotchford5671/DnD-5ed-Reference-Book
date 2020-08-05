@@ -101,10 +101,19 @@ class Equipment extends React.Component {
       case "Artisan's Tools":
       case "Gaming Sets":
       case "Musical Instruments":
-        ReactDOM.render(
-          <Gear detailsObj={edata} />,
-          document.getElementById(edata.index)
-        );
+      case "Equipment Packs":
+        if (edata.index.includes("pack") && edata.index != "backpack") {
+          ReactDOM.render(
+            <EquipmentPacks detailsObj={edata} />,
+            document.getElementById(edata.index)
+          );
+          this.genItemTable(edata);
+        } else {
+          ReactDOM.render(
+            <Gear detailsObj={edata} />,
+            document.getElementById(edata.index)
+          );
+        }
         break;
 
       case "Armor":
@@ -117,14 +126,6 @@ class Equipment extends React.Component {
           document.getElementById(edata.index)
         );
         this.genArmorChart(edata);
-        break;
-
-      case "Equipment Packs":
-        ReactDOM.render(
-          <EquipmentPacks detailsObj={edata} />,
-          document.getElementById(edata.index)
-        );
-        this.genItemTable(edata);
         break;
 
       case "Martial Melee Weapons":
@@ -190,11 +191,21 @@ class Equipment extends React.Component {
         },
       },
     });
+  }
 
-    genItemTable(edata){
+  genItemTable(edata) {
+    let itemRef = document.getElementById("equipPack_" + edata.index);
+    edata.contents.forEach((element) => {
+      let newItem = document.createElement("p");
+      let itemURLArray = element.item_url.split("/");
+      console.log(itemURLArray);
+      let nameCapitalized =
+        itemURLArray[3].charAt(0).toUpperCase() + itemURLArray[3].slice(1);
 
-      
-    }
+      newItem.innerHTML = nameCapitalized + " ~ " + element.quantity;
+      itemRef.appendChild(newItem);
+      itemRef.appendChild(document.createElement("hr"));
+    });
   }
 }
 
@@ -211,7 +222,7 @@ class Gear extends React.Component {
 
   render() {
     return (
-      <div>
+      <td>
         <div
           className="grid-containerNonChart"
           id={"contain_" + this.props.detailsObj.index}
@@ -243,7 +254,7 @@ class Gear extends React.Component {
           <h5>Description:</h5>
           <p>{this.props.detailsObj.desc}</p>
         </section>
-      </div>
+      </td>
     );
   }
 }
@@ -256,7 +267,7 @@ class Armor extends React.Component {
 
   render() {
     return (
-      <div>
+      <td>
         <div
           className="grid-containerChart"
           id={"contain_" + this.props.detailsObj.index}
@@ -282,7 +293,7 @@ class Armor extends React.Component {
             {this.props.detailsObj.cost.unit}
           </p>
         </section>
-      </div>
+      </td>
     );
   }
 }
@@ -295,40 +306,33 @@ class EquipmentPacks extends React.Component {
 
   render() {
     return (
-      <div>
-      <div
-        className="grid-containerNonChart"
-        id={"contain_" + this.props.detailsObj.index}
-      >
-        <img
-          src={this.props.detailsObj.holderName}
-          className="equipImage"
-          alt={this.props.detailsObj.holderName + " image"}
-        />
-        <section id={"contentTopLeft_" + this.props.detailsObj.index}>
-          <table>
-            <thead class="thead-dark">
-              <th>#</th>
-              <th>Item</th>
-              <th>Quantity</th>
-            </thead>
-            <tbody  id={"equipPack" + this.props.detailsObj.index}>
+      <td>
+        <div
+          className="grid-containerNonChart"
+          id={"contain_" + this.props.detailsObj.index}
+        >
+          <img
+            src={this.props.detailsObj.holderName}
+            className="equipImage"
+            alt={this.props.detailsObj.holderName + " image"}
+          />
+          <section id={"contentLeft_" + this.props.detailsObj.index}>
+            <h5>Pack Contents:</h5>
+            <h6>Item ~ Quantity</h6>
+            <div id={"equipPack_" + this.props.detailsObj.index}></div>
+          </section>
 
-            </tbody>
-          </table>
-        </section>
-        </div>
-        <section id={"contentBottom_" + this.props.detailsObj.index}>
-          <h5>Gear Category:</h5>
+          <section id={"contentRight_" + this.props.detailsObj.index}>
+            <h5>Gear Category:</h5>
             <p>{this.props.detailsObj.gear_category}</p>
             <h5>Cost:</h5>
             <p>
               {this.props.detailsObj.cost.quantity + " "}{" "}
               {this.props.detailsObj.cost.unit}
             </p>
-        </section>
-       
-      </div>
+          </section>
+        </div>
+      </td>
     );
   }
 }
@@ -341,7 +345,8 @@ class Weapons extends React.Component {
 
   render() {
     return (
-      <div
+      <td></td> /*
+      <td
         className="grid-container"
         id={"contain_" + this.props.detailsObj.index}
       >
@@ -354,7 +359,7 @@ class Weapons extends React.Component {
         <section id={"contentLeft_" + this.props.detailsObj.index}></section>
 
         <section id={"contentRight_" + this.props.detailsObj.index}></section>
-      </div>
+      </td>*/
     );
   }
 }
@@ -367,7 +372,8 @@ class MountsVehicles extends React.Component {
 
   render() {
     return (
-      <div
+      <td></td> /*
+      <td
         className="grid-container"
         id={"contain_" + this.props.detailsObj.index}
       >
@@ -378,9 +384,8 @@ class MountsVehicles extends React.Component {
         />
         <section id={"contentTopLeft_" + this.props.detailsObj.index}></section>
         <section id={"contentLeft_" + this.props.detailsObj.index}></section>
-
         <section id={"contentRight_" + this.props.detailsObj.index}></section>
-      </div>
+      </td>*/
     );
   }
 }

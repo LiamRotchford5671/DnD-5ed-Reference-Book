@@ -207,7 +207,7 @@ class MonsterDetails extends React.Component {
 
   render() {
     return (
-      <div
+      <td
         className="grid-containerChart"
         id={"contain_" + this.props.detailsObj.index}
       >
@@ -250,7 +250,7 @@ class MonsterDetails extends React.Component {
             <tbody id={"actionTable_" + this.props.detailsObj.index}></tbody>
           </table>
         </section>
-      </div>
+      </td>
     );
   }
 }

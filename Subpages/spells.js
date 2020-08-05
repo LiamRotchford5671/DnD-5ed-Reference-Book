@@ -108,7 +108,7 @@ class SpellDetails extends React.Component {
 
   render() {
     return (
-      <div>
+      <td>
         <div
           className="grid-containerNonChartSpells"
           id={"contain_" + this.props.detailsObj.index}
@@ -160,7 +160,7 @@ class SpellDetails extends React.Component {
           <h5>Higher Level:</h5>
           <p>{this.props.detailsObj.higher_level}</p>
         </section>
-      </div>
+      </td>
     );
   }
 }
