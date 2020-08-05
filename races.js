@@ -280,7 +280,7 @@ class Races extends React.Component {
                                 <p>{this.state.speed}</p>
                                 <h5>Ability Bonuses</h5>
                                 <div className="canvas-container">
-                                    <canvas className="statsChart" width="200" aria-label="bar chart" role="img"></canvas>
+                                    <canvas className="statsChart" aria-label="bar chart" role="img"></canvas>
                                 </div>
                                 {this.state.abilityOptions}
                                 {this.state.profs}

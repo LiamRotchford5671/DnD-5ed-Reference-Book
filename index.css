@@ -12,7 +12,7 @@ DnD Homepage
 7. [Inner Grid, Equipment Section]
 8. [Inner Grid, Spells Section]
 9. [Inner Grid Div, Searchbars]
-10. [Mobile Screen Size Query]
+10. [Media Queries]
 11. [Class Icon Button Images]
 12. [Races Icon Images]
 
@@ -155,7 +155,6 @@ button:focus {
 /* =================================================================================
 ====================================================================================
 [Inner Grid, Classes Section] */
-
 .class-btns {
   border: 5px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
@@ -167,13 +166,23 @@ button:focus {
   transition-timing-function: ease;
 }
 
-.class-btns:hover {
+.class-section-btns {
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  height: 6em;
+  width: 6em;
+  filter: saturate(1);
+  transition: border .2s, filter .2s, transform .2s;
+  transition-timing-function: ease;
+}
+
+.class-btns:hover, .class-section-btns:hover {
   border: 5px solid transparent;
   filter: saturate(1.5);
   transform: scale(1.05, 1.05);
 }
 
-.class-btns:active {
+.class-btns:active, .class-section-btns:active {
   border: 5px solid rgb(63, 63, 63);
 }
 
@@ -184,49 +193,44 @@ button:focus {
   width: 100%;
 }
 
-.class-info, .class-header, .class-stats {
+.class-header {
+  padding: 0;
+}
+
+.class-info {
   display: flex;
   flex-wrap: wrap;
 }
 
 .class-img {
-  padding: 20px;
+  padding: 20px 0 20px 20px;
 }
 
 .class-img img {
-  min-width: 250px;
-  max-width: 25vw;
+  max-width: 100%;
 }
 
-.class-subs, .class-profs, .class-equips {
-  margin: 20px 20px 20px 20px;
-  max-width: 25vw;
-  min-width: 200px;
+.class-stats, .class-profs, .class-equips, .class-spells {
+  margin-top: 20px;
 }
 
-.class-levels {
-  font-size: .75em;
-  margin: 50px 20px;
-}
-
-.class-subs div p {
-  overflow: auto;
-  max-height: 300px;
+.saveThrows, .startEquips {
+  margin-bottom: 20px;
 }
 
 .class-profs .profs {
-  max-height: 400px;
+  max-height: 300px;
   margin-bottom: 20px;
   overflow: auto;
 }
 
-.class-spells {
-  margin: 20px 20px 20px 20px;
+.class-levels {
+  margin-top: 50px;
+  font-size: .75em;
 }
 
-.spell-desc {
-  max-height: 400px;
-  overflow: auto;
+.levelsChart {
+  padding-top: 20px;
 }
 
 .cTrans-enter {
@@ -477,7 +481,7 @@ canvas {
 
 /* =================================================================================
 ==================================================================================== 
-[Mobile Screen Size Query] */
+[Media Queries] */
 
 @media (max-width: 414px) {
 
@@ -503,16 +507,6 @@ canvas {
   .class-btns {
     height: 4em;
     width: 4em;
-  }
-
-  .class-subs, .class-profs, .class-equips {
-    margin: 20px 20px 20px 20px;
-    max-width: 100%;
-    min-width: 200px;
-  }
-
-  .class-levels table {
-    width: 100vw;
   }
 
   .race-btns {
@@ -543,6 +537,12 @@ canvas {
     font-size: 1.5em;
     text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
     color: #fff;
+  }
+}
+
+@media (min-width: 415px) and (max-width: 768px) {
+  .class-subs, .class-profs, .class-equips {
+
   }
 }
 
