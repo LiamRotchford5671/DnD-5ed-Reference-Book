@@ -96,7 +96,7 @@ class Monsters extends React.Component {
     );
 
     this.genChart(mdata);
-    this.genTables(mdata);
+    // this.genTables(mdata);
   }
 
   genChart(mdata) {
@@ -163,14 +163,14 @@ class Monsters extends React.Component {
       },
       options: {
         responsive: true,
-        maintainAspectRation: false,
+        maintainAspectRatio: false,
         legend: {
           display: false,
         },
       },
     });
   }
-
+  /*
   genTables(mdata) {
     let actionTableRef = document.getElementById("actionTable_" + mdata.index);
     if (mdata.index == "zombie") {
@@ -191,6 +191,7 @@ class Monsters extends React.Component {
       actionTableRef.appendChild(newRow);
     });
   }
+  */
 }
 
 class MonsterDetails extends React.Component {
@@ -207,12 +208,12 @@ class MonsterDetails extends React.Component {
   render() {
     return (
       <div
-        className="grid-container"
+        className="grid-containerChart"
         id={"contain_" + this.props.detailsObj.index}
       >
         <img
           src={this.props.detailsObj.holderName}
-          className="image"
+          className="monsterImage"
           onError={(event) =>
             event.target.setAttribute(
               "src",

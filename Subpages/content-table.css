@@ -171,63 +171,180 @@ button:focus {
 
 /* =================================================================================
   ====================================================================================
-  [Inner Row Styling] */
+  [Inner Row Styling Chart] */
 
-.grid-container {
+.grid-containerChart {
   display: grid;
   grid-template-areas:
     "img chart"
-    "main-left main-right";
+    "bottom-left bottom-right";
   grid-template-rows: 400px auto;
 }
 
-.grid-container > .image {
-  grid-area: img;
-  border-radius: 10%;
-  border-color: 10px solid #000;
-  width: 300px;
-  height: 350px;
-}
-
-.grid-container > section[id^="chartContain_"] {
+.grid-containerChart > section[id^="chartContain_"] {
   grid-area: chart;
-  width: 800px;
-  height: 600px;
+  width: 1000px;
+  height: 350px;
   margin-top: 5px;
 }
 
-.grid-container > section[id^="contentLeft_"] > h5 {
-  grid-area: main-left;
+.grid-containerChart > section[id^="contentLeft_"] > h5 {
+  grid-area: bottom-left;
   color: #ff0000;
   font-weight: bold;
 }
 
-.grid-container > section[id^="contentTopLeft_"] > h5 {
-  grid-area: chart;
-  color: #ff0000;
-  font-weight: bold;
-  margin-left: 40px;
+.grid-containerChart > section[id^="contentLeft_"] > p {
+  grid-area: bottom-left;
 }
 
-.grid-container > section[id^="contentTopLeft_"] > p {
-  grid-area: chart;
-  margin-left: 40px;
-}
-
-.grid-container > section[id^="contentLeft_"] > p {
-  grid-area: main-left;
-}
-
-.grid-container > section[id^="contentRight_"] > h5 {
-  grid-area: main-left;
+.grid-containerChart > section[id^="contentRight_"] > h5 {
+  grid-area: bottom-right;
   color: #ff0000;
   font-weight: bold;
   margin-left: 40px;
 }
 
-.grid-container > section[id^="contentRight_"] > p {
-  grid-area: main-left;
+.grid-containerChart > section[id^="contentRight_"] > p {
+  grid-area: bottom-right;
   margin-left: 40px;
+}
+
+/* =================================================================================
+  ====================================================================================
+  [Inner Row Styling NonChart] */
+
+.grid-containerNonChart {
+  display: grid;
+  grid-template-areas:
+    "img left mid right"
+    "bottom bottom bottom";
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-containerNonChart > section[id^="contentBottom_"] > h5 {
+  grid-area: bottom;
+  color: #ff0000;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.grid-containerNonChart > section[id^="contentBottom_"] > p {
+  grid-area: bottom;
+  margin-left: 20px;
+}
+
+.grid-containerNonChart > section[id^="contentLeft_"] > h5 {
+  grid-area: left;
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.grid-containerNonChart > section[id^="contentLeft_"] > p {
+  grid-area: left;
+}
+
+.grid-containerNonChart > section[id^="contentRight_"] > h5 {
+  grid-area: right;
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.grid-containerNonChart > section[id^="contentRight_"] > p {
+  grid-area: right;
+}
+
+/* =================================================================================
+  ====================================================================================
+  [Inner Row Styling NonChart Spells Special] */
+
+.grid-containerNonChartSpells {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 250px 1fr 1fr 1fr;
+  grid-template-areas: "img left mid right";
+}
+
+section[id^="contentBottom_"] > h5 {
+  grid-area: bottom;
+  color: #ff0000;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+section[id^="contentBottom_"] > p {
+  grid-area: bottom;
+  margin-left: 20px;
+}
+
+.grid-containerNonChartSpells > section[id^="contentLeft_"] > h5 {
+  grid-area: left;
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.grid-containerNonChartSpells > section[id^="contentLeft_"] > p {
+  grid-area: left;
+}
+
+.grid-containerNonChartSpells > section[id^="contentMid_"] > h5 {
+  grid-area: mid;
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.grid-containerNonChartSpells > section[id^="contentMid_"] > p {
+  grid-area: mid;
+}
+
+.grid-containerNonChartSpells > section[id^="contentRight_"] > h5 {
+  grid-area: right;
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.grid-containerNonChartSpells > section[id^="contentRight_"] > p {
+  grid-area: right;
+}
+/* =================================================================================
+==================================================================================== 
+[Inner Row Images] */
+
+.monsterImage {
+  grid-area: img;
+  border-radius: 10%;
+  border-color: 5px solid rgba(105, 105, 105, 0.5);
+  width: 300px;
+  height: 350px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.spellImage {
+  grid-area: img;
+  border-radius: 10%;
+  border: 5px solid rgba(105, 105, 105, 0.5);
+  width: 200px;
+  height: 250px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.equipImage {
+  grid-area: img;
+  border-radius: 10%;
+  border-color: 5px solid rgba(105, 105, 105, 0.5);
+  width: 600px;
+  height: 350px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 /* =================================================================================
