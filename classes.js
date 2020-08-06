@@ -192,8 +192,6 @@ class Classes extends React.Component {
 
                     const spellResults = await doAPIrequest(`spellcasting/` + this.state.classUrl + '/');
 
-                    console.log(spellResults);
-
                     let spells = spellResults.info.map((current, i) =>
                         <div key={i}>
                             <button type="button" className="btn btn-danger" data-toggle="collapse" data-target={'#spell-desc' + i}>
@@ -271,43 +269,43 @@ class Classes extends React.Component {
                     proficiencyBonus.push(current.prof_bonus);
                 })
 
-                // var ctx = document.querySelector('.levelsChart');
-                // var myBarChart = new Chart(ctx, {
-                //     type: 'bar',
-                //     data: {
-                //         labels: levels,
-                //         datasets: [{
-                //             label: ["Ability Score Bonus"],
-                //             data: abilityBonus,
-                //             backgroundColor: 'rgba(255,46,46,0.8)'
-                //         },
-                //             {
-                //                 label: ["Proficiency Bonus"],
-                //                 data: proficiencyBonus,
-                //                 backgroundColor: 'rgba(83,217,255,0.8)'
-                //             }
-                //         ]
-                //     },
-                //     options: {
-                //         legend: {
-                //             display: true
-                //         },
-                //         scales: {
-                //             yAxes: [{
-                //                 ticks: {
-                //                     min: 0,
-                //                     max: 10
-                //                 }
-                //             }],
-                //             xAxes: [{
-                //                 scaleLabel: {
-                //                     display: true,
-                //                     labelString: 'Levels'
-                //                 }
-                //             }]
-                //         }
-                //     }
-                // });
+                var ctx = document.querySelector('.levelsChart');
+                var myBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: levels,
+                        datasets: [{
+                            label: ["Ability Score Bonus"],
+                            data: abilityBonus,
+                            backgroundColor: 'rgba(255,46,46,0.8)'
+                        },
+                            {
+                                label: ["Proficiency Bonus"],
+                                data: proficiencyBonus,
+                                backgroundColor: 'rgba(83,217,255,0.8)'
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            display: true
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    min: 0,
+                                    max: 10
+                                }
+                            }],
+                            xAxes: [{
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Levels'
+                                }
+                            }]
+                        }
+                    }
+                });
 
                 //Set Data
                 this.setState({
@@ -401,7 +399,7 @@ class Classes extends React.Component {
 
                         <div className="class-levels">
                             {this.state.class_levels}
-                            <div>
+                            <div className="container">
                                 <canvas className="levelsChart" aria-label="bar chart" role="img"></canvas>
                             </div>
                         </div>
