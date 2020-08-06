@@ -177,47 +177,65 @@ button:focus {
   display: grid;
   grid-template-areas:
     "img chart"
-    "bottom-left bottom-right";
-  grid-template-rows: 400px auto;
+    "left right";
+  grid-template-rows: 400px 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .grid-containerChart > section[id^="chartContain_"] {
   grid-area: chart;
   width: 1000px;
   height: 350px;
-  margin-top: 5px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 .grid-containerChart > section[id^="contentLeft_"] > h5 {
-  grid-area: bottom-left;
+  grid-area: left;
   color: #ff0000;
   font-weight: bold;
+  margin-left: 20px;
 }
 
 .grid-containerChart > section[id^="contentLeft_"] > p {
-  grid-area: bottom-left;
-}
-
-section[id^="contentLeft_"] > h5 {
-  grid-area: bottom-left;
-  color: #ff0000;
-  font-weight: bold;
-}
-
-section[id^="contentLeft_"] > p {
-  grid-area: bottom-left;
+  grid-area: left;
+  margin-left: 20px;
 }
 
 .grid-containerChart > section[id^="contentRight_"] > h5 {
-  grid-area: bottom-right;
+  grid-area: right;
   color: #ff0000;
   font-weight: bold;
   margin-left: 40px;
 }
 
 .grid-containerChart > section[id^="contentRight_"] > p {
-  grid-area: bottom-right;
+  grid-area: right;
   margin-left: 40px;
+}
+
+/* =================================================================================
+  ====================================================================================
+  [Inner Row Styling Chart Equipment Build In's Post Render] */
+
+.grid-containerChart > section[id^="contentRight_"] > div > h5 {
+  grid-area: right;
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 50px;
+}
+
+.grid-containerChart > section[id^="contentRight_"] > div > h6 {
+  grid-area: right;
+  color: #ff0000;
+  margin-top: 20px;
+  margin-left: 70px;
+}
+
+.grid-containerChart > section[id^="contentRight_"] > div > p {
+  grid-area: right;
+  margin-left: 70px;
 }
 
 /* =================================================================================
@@ -289,7 +307,7 @@ section[id^="contentBottom_"] > p {
 
 /* =================================================================================
   ====================================================================================
-  [Inner Row Styling NonChart Weapon Build In's Post Render] */
+  [Inner Row Styling NonChart Equipment Build In's Post Render] */
 
 .grid-containerNonChart > section[id^="contentLeft_"] > div > h5 {
   grid-area: left;
@@ -320,7 +338,7 @@ section[id^="contentBottom_"] > p {
 }
 
 .grid-containerNonChart > section[id^="contentRight_"] > div > h6 {
-  grid-area: left;
+  grid-area: right;
   color: #ff0000;
   margin-top: 20px;
   margin-left: 30px;
@@ -419,6 +437,10 @@ section[id^="contentBottom_"] > p {
   margin-left: 20px;
 }
 
+/* =================================================================================
+  ====================================================================================
+  [Inner Row Styling NonChart Spell Build In's Post Render] */
+
 .grid-containerNonChartSpells > section[id^="contentLeft_"] > div > h5 {
   grid-area: left;
   color: #ff0000;
@@ -454,7 +476,7 @@ section[id^="contentBottom_"] > p {
   grid-area: img;
   border-radius: 10%;
   border: 5px solid rgba(105, 105, 105, 0.5);
-  width: 300px;
+  width: 400px;
   height: 350px;
   margin-top: 20px;
   margin-left: 20px;

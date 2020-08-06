@@ -96,7 +96,7 @@ class Monsters extends React.Component {
     );
 
     this.genChart(mdata);
-    // this.genTables(mdata);
+    this.genMonsterOmits(mdata);
   }
 
   genChart(mdata) {
@@ -170,28 +170,42 @@ class Monsters extends React.Component {
       },
     });
   }
-  /*
-  genTables(mdata) {
-    let actionTableRef = document.getElementById("actionTable_" + mdata.index);
-    if (mdata.index == "zombie") {
-      console.log(mdata.actions);
-    }
 
-    mdata.actions.forEach((element) => {
-      let newRow = document.createElement("tr");
-      newRow.setAttribute("scope", "row");
-      newRow.innerHTML =
-        "<td>" +
-        element.name +
-        "</td><td>" +
-        element.attack_bonus +
-        "</td><td>" +
-        element.desc +
-        "</td>";
-      actionTableRef.appendChild(newRow);
+  genMonsterOmits(mdata) {
+    let mSpeedRef = document.getElementById("mSpeed_" + mdata.index);
+    let mSpeedTitle = document.createElement("h5");
+    mSpeedTitle.innerHTML = "Monster Speed:";
+    mSpeedRef.appendChild(mSpeedTitle);
+
+    Object.entries(mdata.speed).forEach((element) => {
+      let subtitleOne = document.createElement("h6");
+      let capitalized =
+        element[0].charAt(0).toUpperCase() + element[0].slice(1);
+      subtitleOne.innerHTML = capitalized;
+      mSpeedRef.appendChild(subtitleOne);
+
+      let content = document.createElement("p");
+      content.innerHTML = element[1];
+      mSpeedRef.appendChild(content);
+    });
+
+    let mSensesRef = document.getElementById("mSenses_" + mdata.index);
+    let mSensesTitle = document.createElement("h5");
+    mSensesTitle.innerHTML = "Monster Senses:";
+    mSensesRef.appendChild(mSensesTitle);
+
+    Object.entries(mdata.senses).forEach((element) => {
+      let subtitleOne = document.createElement("h6");
+      let capitalized =
+        element[0].charAt(0).toUpperCase() + element[0].slice(1);
+      subtitleOne.innerHTML = capitalized;
+      mSensesRef.appendChild(subtitleOne);
+
+      let content = document.createElement("p");
+      content.innerHTML = element[1];
+      mSensesRef.appendChild(content);
     });
   }
-  */
 }
 
 class MonsterDetails extends React.Component {
@@ -228,27 +242,16 @@ class MonsterDetails extends React.Component {
           <p>{this.props.detailsObj.type}</p>
           <h5>Alignment:</h5>
           <p>{this.props.detailsObj.alignment}</p>
-          <h5>Hit Dice:</h5>
-          <p>{this.props.detailsObj.hit_dice}</p>
           <h5>Languages</h5>
           <p>{this.props.detailsObj.languages}</p>
           <h5>Size:</h5>
           <p>{this.props.detailsObj.size}</p>
+          <h5>Hit Dice:</h5>
+          <p>{this.props.detailsObj.hit_dice}</p>
         </section>
-
         <section id={"contentRight_" + this.props.detailsObj.index}>
-          <table className="table table-bordered">
-            <thead>
-              <tr>
-                <td>Name</td>
-                <td>Attack Bonus</td>
-                <td>Description</td>
-                <td>Damage Type</td>
-                <td>Damage Dice</td>
-              </tr>
-            </thead>
-            <tbody id={"actionTable_" + this.props.detailsObj.index}></tbody>
-          </table>
+          <div id={"mSenses_" + this.props.detailsObj.index}></div>
+          <div id={"mSpeed_" + this.props.detailsObj.index}></div>
         </section>
       </td>
     );
