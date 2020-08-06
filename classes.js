@@ -70,17 +70,12 @@ class Classes extends React.Component {
                     let subClassUrl = current.name.toLowerCase().replace(' ', '-');
                     let subClassResults = await doAPIrequest(`subclasses/` + subClassUrl + '/');
 
-                    let subClassFeatures =
-                        <div>
-                            <p>Features: {subClassResults.features.map((next, i) => next.name + ', ')}</p>
-                        </div>;
-
                     this.setState({
                         subclasses: <div key={i}>
                             <p><b>- {current.name} -</b></p>
                             <p>Subclass Flavor: {subClassResults.subclass_flavor}</p>
                             <p>{subClassResults.desc}</p>
-                            {subClassFeatures}
+                            <p>Features: {subClassResults.features.map((next, i) => next.name + ', ')}</p>
                         </div>
                     })
                 });
@@ -88,6 +83,7 @@ class Classes extends React.Component {
                 //Proficiency Data
                 let proficiency = results.proficiencies.map((current, i) => <p key={i}>{current.name}</p>);
 
+                //Proficiency Choices
                 let profChoices = results.proficiency_choices.map((current, i) =>
                     <div key={i} className="dropdown dropright">
                         <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose: {current.choose}</button>
@@ -108,7 +104,7 @@ class Classes extends React.Component {
 
                 for (let item in equips) {
                     const eachEquipResults = await doAPIrequest(equipResultsUrls[item]);
-
+                    console.log(eachEquipResults);
 
                     function Contents() {
                         if (eachEquipResults.contents) {
@@ -121,12 +117,34 @@ class Classes extends React.Component {
                         if (eachEquipResults.equipment_category.name === "Weapon") {
                             let rangeLong = [];
                             let throwRange = [];
+                            let rangeData = [eachEquipResults.range.normal, 0, 0, 0];
 
                             if (eachEquipResults.range.long !== null) {
                                 rangeLong = ", Long - " + eachEquipResults.range.long;
+                                rangeData[1] = eachEquipResults.range.long
                             } else if (eachEquipResults.throw_range) {
                                 throwRange = <p>Throw Range: Normal - {eachEquipResults.throw_range.normal}, Long - {eachEquipResults.throw_range.long}</p>;
+                                rangeData[2] = eachEquipResults.throw_range.normal;
+                                rangeData[3] = eachEquipResults.throw_range.long;
                             }
+                            console.log(rangeData);
+
+                            var ctx2 = document.querySelector('#weaponChart');
+                            var myBarChart2 = new Chart(ctx2, {
+                                type: 'polarArea',
+                                data: {
+                                    datasets: [{
+                                        label: ['Normal', 'Long'],
+                                        data: rangeData,
+                                        backgroundColor: 'rgba(255,46,46,0.8)'
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: true
+                                    }
+                                }
+                            });
 
                             return <div>
                                 <p>{eachEquipResults.category_range}</p>
@@ -165,12 +183,11 @@ class Classes extends React.Component {
                                 {equipWeight}
                                 <p>Cost: {eachEquipResults.cost.quantity} {eachEquipResults.cost.unit}</p>
                             </div>
-                        </div>);
-                    console.log(eachEquipResults);
+                        </div>
+                    );
                 }
 
-
-``
+                //Equipment Choices
                 let equipChoiceItems = [];
 
                 for (let key in equipResults) {
@@ -393,6 +410,9 @@ class Classes extends React.Component {
                                 <div className="class-equip-items">
                                     {this.state.equipChoiceItems}
                                 </div>
+                            </div>
+                            <div className="weapon-chart collapse equip-desc1 container col-lg-4">
+                                <canvas id="weaponChart" aria-label="bar chart" role="img"></canvas>
                             </div>
                             {this.state.spellCasting}
                         </div>

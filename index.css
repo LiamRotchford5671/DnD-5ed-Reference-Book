@@ -210,7 +210,7 @@ button:focus {
   max-width: 100%;
 }
 
-.class-stats, .class-profs, .class-equips, .class-spells {
+.class-stats, .class-profs, .class-equips, .weapon-chart, .class-spells {
   margin-top: 20px;
 }
 
@@ -230,7 +230,7 @@ button:focus {
 }
 
 .levelsChart {
-  padding-top: 20px;
+  padding-top: 50px;
 }
 
 .cTrans-enter {
