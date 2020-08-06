@@ -28,11 +28,11 @@ class Spells extends React.Component {
     let spellsFromAPI = await this.doAPIrequest("spells/");
     //console.log(spellsFromAPI);
 
-    let arrayOfspellNames = spellsFromAPI.results.map(
+    let arrayOfSpellNames = spellsFromAPI.results.map(
       (current) => current.index
     );
 
-    this.buildRows(arrayOfspellNames);
+    this.buildRows(arrayOfSpellNames);
   }
 
   //Run asynchronous api request and return in json format.
@@ -47,12 +47,13 @@ class Spells extends React.Component {
     return json;
   }
 
-  buildRows(arrayOfspellNames) {
+  buildRows(arrayOfSpellNames) {
     let bodyRef = document.getElementById("tableBody");
 
-    arrayOfspellNames.forEach((element) => {
+    arrayOfSpellNames.forEach((element) => {
       let newRow = document.createElement("tr");
       var nameCapitalized = element.charAt(0).toUpperCase() + element.slice(1);
+      nameCapitalized = nameCapitalized.replace(/-/g, " ");
       newRow.className = "header";
       newRow.setAttribute("value", element);
       newRow.innerHTML = "<td>" + nameCapitalized + "</td>";

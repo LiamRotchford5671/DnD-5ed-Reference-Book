@@ -53,6 +53,7 @@ class Equipment extends React.Component {
     arrayOfequipmentNames.forEach((element) => {
       let newRow = document.createElement("tr");
       var nameCapitalized = element.charAt(0).toUpperCase() + element.slice(1);
+      nameCapitalized = nameCapitalized.replace(/-/g, " ");
       newRow.className = "header";
       newRow.setAttribute("value", element);
       newRow.innerHTML = "<td>" + nameCapitalized + "</td>";
@@ -139,7 +140,8 @@ class Equipment extends React.Component {
           <Weapons detailsObj={edata} />,
           document.getElementById(edata.index)
         );
-
+        this.genWeaponOmits(edata);
+        break;
       case "Mounts and Vehicles":
       case "Mounts and Other Animals":
       case "Land Vehicles":
@@ -198,7 +200,6 @@ class Equipment extends React.Component {
     edata.contents.forEach((element) => {
       let newItem = document.createElement("p");
       let itemURLArray = element.item_url.split("/");
-      console.log(itemURLArray);
       let nameCapitalized =
         itemURLArray[3].charAt(0).toUpperCase() + itemURLArray[3].slice(1);
 
@@ -206,6 +207,66 @@ class Equipment extends React.Component {
       itemRef.appendChild(newItem);
       itemRef.appendChild(document.createElement("hr"));
     });
+  }
+
+  genWeaponOmits(edata) {
+    if ("damage" in edata) {
+      let damageRef = document.getElementById("weaponDamage_" + edata.index);
+      let dmgtitle = document.createElement("h5");
+      dmgtitle.innerHTML = "Damage:";
+      damageRef.appendChild(dmgtitle);
+
+      let dmgSubtitleOne = document.createElement("h6");
+      dmgSubtitleOne.innerHTML = "Damage Dice:";
+      damageRef.appendChild(dmgSubtitleOne);
+
+      let dmgDice = document.createElement("p");
+      dmgDice.innerHTML = edata.damage.damage_dice;
+      damageRef.appendChild(dmgDice);
+
+      let dmgSubtitleTwo = document.createElement("h6");
+      dmgSubtitleTwo.innerHTML = "Damage Type:";
+      damageRef.appendChild(dmgSubtitleTwo);
+
+      let dmgType = document.createElement("p");
+      dmgType.innerHTML = edata.damage.damage_type.name;
+      damageRef.appendChild(dmgType);
+    }
+
+    if ("throw_range" in edata) {
+      let throwRef = document.getElementById("weaponThrowRange_" + edata.index);
+      let thrtitle = document.createElement("h5");
+      thrtitle.innerHTML = "Throw Range:";
+      throwRef.appendChild(thrtitle);
+
+      let throwSubtitleOne = document.createElement("h6");
+      throwSubtitleOne.innerHTML = "Normal:";
+      throwRef.appendChild(throwSubtitleOne);
+
+      let throwNormal = document.createElement("p");
+      throwNormal.innerHTML = edata.throw_range.normal;
+      throwRef.appendChild(throwNormal);
+
+      let throwSubtitleTwo = document.createElement("h6");
+      throwSubtitleTwo.innerHTML = "Long:";
+      throwRef.appendChild(throwSubtitleTwo);
+
+      let throwLong = document.createElement("p");
+      throwLong.innerHTML = edata.throw_range.long;
+      throwRef.appendChild(throwLong);
+    }
+
+    if ("special" in edata) {
+      let specialRef = document.getElementById("weaponSpecial_" + edata.index);
+      let specialTitle = document.createElement("h5");
+      specialTitle.innerHTML = "Special Effect:";
+      +"<p>" + edata.special + "</p>";
+      specialRef.appendChild(specialTitle);
+
+      let specialContent = document.createElement("p");
+      specialContent.innerHTML = edata.special;
+      specialRef.appendChild(specialContent);
+    }
   }
 }
 
@@ -345,21 +406,42 @@ class Weapons extends React.Component {
 
   render() {
     return (
-      <td></td> /*
-      <td
-        className="grid-container"
-        id={"contain_" + this.props.detailsObj.index}
-      >
-        <img
-          src={this.props.detailsObj.holderName}
-          className="equipImage"
-          alt={this.props.detailsObj.holderName + " image"}
-        />
-        <section id={"contentTopLeft_" + this.props.detailsObj.index}></section>
-        <section id={"contentLeft_" + this.props.detailsObj.index}></section>
+      <td>
+        <div
+          className="grid-containerNonChart"
+          id={"contain_" + this.props.detailsObj.index}
+        >
+          <img
+            src={this.props.detailsObj.holderName}
+            className="equipImage"
+            alt={this.props.detailsObj.holderName + " image"}
+          />
+          <section id={"contentLeft_" + this.props.detailsObj.index}>
+            <h5>Weapon Category:</h5>
+            <p>{this.props.detailsObj.category_range}</p>
+            <div id={"weaponDamage_" + this.props.detailsObj.index}></div>
 
-        <section id={"contentRight_" + this.props.detailsObj.index}></section>
-      </td>*/
+            <h5>Cost:</h5>
+            <p>
+              {this.props.detailsObj.cost.quantity + " "}{" "}
+              {this.props.detailsObj.cost.unit}
+            </p>
+          </section>
+          <section id={"contentRight_" + this.props.detailsObj.index}>
+            <h5>Range:</h5>
+            <h6>Normal:</h6>
+            <p>{this.props.detailsObj.range.normal}</p>
+            <h6>Long:</h6>
+            <p>{this.props.detailsObj.range.long}</p>
+            <div id={"weaponThrowRange_" + this.props.detailsObj.index}></div>
+            <h5>Weight:</h5>
+            <p>{this.props.detailsObj.weight}</p>
+          </section>
+        </div>
+        <section id={"contentBottom_" + this.props.detailsObj.index}>
+          <div id={"weaponSpecial_" + this.props.detailsObj.index}></div>
+        </section>
+      </td>
     );
   }
 }
