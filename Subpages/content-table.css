@@ -344,24 +344,13 @@ section[id^="contentBottom_"] > div > p {
 
 /* =================================================================================
   ====================================================================================
-  [Inner Row Styling NonChart Spells Special] */
+  [Inner Row Styling NonChart Spells] */
 
 .grid-containerNonChartSpells {
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: 250px 1fr 1fr 1fr;
-  grid-template-areas: "img left mid right";
-}
-
-section[id^="contentBottom_"] > h5 {
-  color: #ff0000;
-  font-weight: bold;
-  margin-left: 20px;
-  margin-top: 20px;
-}
-
-section[id^="contentBottom_"] > p {
-  margin-left: 20px;
+  grid-template-columns: 250px 1fr 1fr 1fr 1fr;
+  grid-template-areas: "img left mid right slots";
 }
 
 .grid-containerNonChartSpells > section[id^="contentLeft_"] > h5 {
@@ -386,16 +375,77 @@ section[id^="contentBottom_"] > p {
   grid-area: mid;
 }
 
-.grid-containerNonChartSpells > section[id^="contentRight_"] > h5 {
+section[id^="contentRight_"] > h5 {
   grid-area: right;
   color: #ff0000;
   font-weight: bold;
   margin-top: 20px;
 }
 
-.grid-containerNonChartSpells > section[id^="contentRight_"] > p {
+section[id^="contentRight_"] {
   grid-area: right;
 }
+
+.grid-containerNonChartSpells > section[id^="contentSlots_"] > h5 {
+  grid-area: slots;
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.grid-containerNonChartSpells > section[id^="contentSlots_"] > h6 {
+  grid-area: slots;
+  color: #ff0000;
+  margin-left: 20px;
+}
+
+.grid-containerNonChartSpells > section[id^="contentSlots_"] > p {
+  grid-area: slots;
+  margin-left: 20px;
+}
+
+.grid-containerNonChartSpells > section[id^="contentLeft_"] > p {
+  grid-area: slots;
+}
+
+section[id^="contentBottom_"] > h5 {
+  color: #ff0000;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+section[id^="contentBottom_"] > p {
+  margin-left: 20px;
+}
+
+.grid-containerNonChartSpells > section[id^="contentLeft_"] > div > h5 {
+  grid-area: left;
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.grid-containerNonChartSpells > section[id^="contentLeft_"] > div > p {
+  grid-area: left;
+}
+
+.grid-containerNonChartSpells > section[id^="contentMid_"] > div > h5 {
+  grid-area: mid;
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.grid-containerNonChartSpells > section[id^="contentMid_"] > div > h6 {
+  grid-area: mid;
+  color: #ff0000;
+}
+
+.grid-containerNonChartSpells > section[id^="contentMid_"] > div > p {
+  grid-area: mid;
+}
+
 /* =================================================================================
 ==================================================================================== 
 [Inner Row Images] */
