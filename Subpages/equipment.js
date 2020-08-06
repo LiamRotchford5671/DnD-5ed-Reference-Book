@@ -147,10 +147,18 @@ class Equipment extends React.Component {
       case "Land Vehicles":
       case "Tack, Harness, and Drawn Vehicles":
       case "Waterborne Vehicles":
-        ReactDOM.render(
-          <MountsVehicles detailsObj={edata} />,
-          document.getElementById(edata.index)
-        );
+        if (edata.index.includes("barding")) {
+          ReactDOM.render(
+            <BardingVehicles detailsObj={edata} />,
+            document.getElementById(edata.index)
+          );
+        } else {
+          ReactDOM.render(
+            <MountsVehicles detailsObj={edata} />,
+            document.getElementById(edata.index)
+          );
+          this.genVehicleOmits(edata);
+        }
         break;
     }
   }
@@ -260,12 +268,46 @@ class Equipment extends React.Component {
       let specialRef = document.getElementById("weaponSpecial_" + edata.index);
       let specialTitle = document.createElement("h5");
       specialTitle.innerHTML = "Special Effect:";
-      +"<p>" + edata.special + "</p>";
       specialRef.appendChild(specialTitle);
 
       let specialContent = document.createElement("p");
       specialContent.innerHTML = edata.special;
       specialRef.appendChild(specialContent);
+    }
+  }
+
+  genVehicleOmits(edata) {
+    if ("speed" in edata) {
+      let speedRef = document.getElementById("vehicleSpeed_" + edata.index);
+      let speedTitle = document.createElement("h5");
+      speedTitle.innerHTML = "Speed:";
+      speedRef.appendChild(speedTitle);
+
+      let speedContent = document.createElement("p");
+      speedContent.innerHTML = edata.speed.quantity + " " + edata.speed.unit;
+      speedRef.appendChild(speedContent);
+    }
+    if ("capacity" in edata) {
+      let capacityRef = document.getElementById(
+        "vehicleCapacity_" + edata.index
+      );
+      let capacityTitle = document.createElement("h5");
+      capacityTitle.innerHTML = "Capacity:";
+      capacityRef.appendChild(capacityTitle);
+
+      let capacityContent = document.createElement("p");
+      capacityContent.innerHTML = edata.capacity;
+      capacityRef.appendChild(capacityContent);
+    }
+    if ("weight" in edata) {
+      let weightRef = document.getElementById("vehicleWeight_" + edata.index);
+      let weightTitle = document.createElement("h5");
+      weightTitle.innerHTML = "Weight:";
+      weightRef.appendChild(weightTitle);
+
+      let weightContent = document.createElement("p");
+      weightContent.innerHTML = edata.weight;
+      weightRef.appendChild(weightContent);
     }
   }
 }
@@ -454,9 +496,8 @@ class MountsVehicles extends React.Component {
 
   render() {
     return (
-      <td></td> /*
       <td
-        className="grid-container"
+        className="grid-containerNonChart"
         id={"contain_" + this.props.detailsObj.index}
       >
         <img
@@ -464,10 +505,56 @@ class MountsVehicles extends React.Component {
           className="equipImage"
           alt={this.props.detailsObj.holderName + " image"}
         />
-        <section id={"contentTopLeft_" + this.props.detailsObj.index}></section>
-        <section id={"contentLeft_" + this.props.detailsObj.index}></section>
-        <section id={"contentRight_" + this.props.detailsObj.index}></section>
-      </td>*/
+        <section id={"contentLeft_" + this.props.detailsObj.index}>
+          <h5>Vehicle Category:</h5>
+          <p>{this.props.detailsObj.vehicle_category}</p>
+          <div id={"vehicleSpeed_" + this.props.detailsObj.index}></div>
+          <div id={"vehicleCapacity_" + this.props.detailsObj.index}></div>
+          <h5>Cost:</h5>
+          <p>
+            {this.props.detailsObj.cost.quantity + " "}{" "}
+            {this.props.detailsObj.cost.unit}
+          </p>
+          <div id={"vehicleWeight_" + this.props.detailsObj.index}></div>
+        </section>
+      </td>
+    );
+  }
+}
+
+class BardingVehicles extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <td>
+        <div
+          className="grid-containerNonChart"
+          id={"contain_" + this.props.detailsObj.index}
+        >
+          <img
+            src={this.props.detailsObj.holderName}
+            className="equipImage"
+            alt={this.props.detailsObj.holderName + " image"}
+          />
+          <section id={"contentLeft_" + this.props.detailsObj.index}>
+            <h5>Vehicle Category:</h5>
+            <p>{this.props.detailsObj.vehicle_category}</p>
+            <h5>Cost:</h5>
+            <p>
+              {this.props.detailsObj.cost.quantity + " "}{" "}
+              {this.props.detailsObj.cost.unit}
+            </p>
+          </section>
+          <section id={"contentRight_" + this.props.detailsObj.index}>
+            <h5>Description:</h5>
+            <p>{this.props.detailsObj.desc}</p>
+          </section>
+        </div>
+      </td>
     );
   }
 }

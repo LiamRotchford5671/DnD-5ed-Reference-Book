@@ -185,7 +185,7 @@ button:focus {
 
 .monster-title {
   font-size: 2em;
-  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+  text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
   color: #fff;
 }
 
@@ -217,7 +217,7 @@ button:focus {
 
 .item-title {
   font-size: 2em;
-  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+  text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
   color: #fff;
 }
 
@@ -249,7 +249,7 @@ button:focus {
 
 .spell-title {
   font-size: 2em;
-  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+  text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
   color: #fff;
 }
 
