@@ -1,4 +1,14 @@
 class Races extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toggle: true,
+      raceUrl: "",
+      name: "",
+      data: [],
+    };
+    this.buttonClickEvent = this.buttonClickEvent.bind(this);
+  }
 
     constructor(props) {
         super(props);
@@ -232,6 +242,7 @@ class Races extends React.Component {
             })
         }
     }
+  }
 
     //Render elements to DOM.
     render() {
@@ -295,4 +306,3 @@ class Races extends React.Component {
         )
     }
 }
-
