@@ -3,19 +3,18 @@ Liam Rotchford ~ Sarah Kim
 DnD Homepage
 
 [Table of Contents]
-
-1. [General Body of Homepage] - 21
-2. [Header, Navbar, Buttons] - 67
-3. [Inner Grid] - 111
-4. [Inner Grid, Classes Section] - 136
-5. [Inner Grid, Races Section] - 161
-6. [Inner Grid, Monsters Section] - 185
-7. [Inner Grid, Equipment Section] - 217
-8. [Inner Grid, Spells Section] - 249
-9. [Mobile Screen Size Query] - 281
-10. [Tablet Screen Size Query] - 425
-11. [Class Icon Button Images] - 569
-12. [Races Icon Images] - 632
+1. [General Body of Homepage]
+2. [Header, Navbar, Buttons]
+3. [Inner Grid]
+4. [Inner Grid, Classes Section]
+5. [Inner Grid, Races Section]
+6. [Inner Grid, Monsters Section]
+7. [Inner Grid, Equipment Section]
+8. [Inner Grid, Spells Section]
+9. [Inner Grid Div, Searchbars]
+10. [Media Queries]
+11. [Class Icon Button Images]
+12. [Races Icon Images]
 
 =================================================================================
 ====================================================================================
@@ -46,7 +45,7 @@ body > header {
   justify-content: space-between;
   grid-area: head;
   padding: 10px 20px;
-  background-color: rgb(46, 46, 46);
+  background-color: rgb(63, 63, 63);
 }
 
 body > main {
@@ -54,12 +53,13 @@ body > main {
 }
 
 body > main > .container-fluid {
-  padding: 0px 50px 0px 50px;
+    padding: 0px 50px 0px 50px;
 }
 
 body > footer {
   grid-area: foot;
-  height: 4em;  
+  height: 4em;
+  background-color: rgb(63, 63, 63);
   color: #c7c7c7;
   font-size: .75em;
   padding-left: 20px;
@@ -84,26 +84,16 @@ p {
 }
 
 /* =================================================================================
-  ====================================================================================
-  [Header, Navbar, Buttons] */
+====================================================================================
+[Header, Navbar, Buttons] */
 
 body > header > #logo {
   display: flex;
-  filter: saturate(0.85);
+  filter: saturate(.85);
 }
 
 #logo:hover {
   text-decoration: none;
-}
-
-
-h1 {
-  align-self: flex-end;
-  margin: 5px;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #ff1a1a;
-  filter: saturate(0.85);
 }
 
 body > header > nav {
@@ -117,15 +107,11 @@ body > header > nav {
 }
 
 .nav-btns:hover {
-  color: #ff1a1a;
-}
-
-.nav-btns:focus {
-  color: #ff1a1a;
+  color: red;
 }
 
 .nav-btns:active {
-  color: #000;
+  color: black;
 }
 
 button:focus {
@@ -176,7 +162,7 @@ button:focus {
   width: 7em;
   margin: 10px;
   filter: saturate(1);
-  transition: border 0.2s, filter 0.2s, transform 0.2s;
+  transition: border .2s, filter .2s, transform .2s;
   transition-timing-function: ease;
 }
 
@@ -292,7 +278,7 @@ button:focus {
 [Inner Grid, Races Section] */
 
 .race-btns {
-  border: 5px solid rgba(255, 255, 255, 0.5);
+  border: 8px solid rgba(255, 255, 255, 0.5);
   height: 13em;
   width: 10em;
   margin: 10px;
@@ -395,30 +381,18 @@ canvas {
 
 .monster-title {
   font-size: 2em;
-  text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
+  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
   color: #fff;
 }
 
 .monster-banner {
-  border: 5px solid rgba(255, 255, 255, 0.5);
+  border: 4px solid #000;
   background-image: url("./images/Banners/Monster-banner.jpg");
   overflow: hidden;
   background-size: cover;
   background-position: 50% 48%;
   height: 12em;
   margin: 2em auto 0 auto;
-  transition: border 0.2s, filter 0.2s, transform 0.2s;
-  transition-timing-function: ease;
-}
-
-.monster-banner:hover {
-  border: 5px solid transparent;
-  filter: saturate(1.3);
-  transform: scale(1.05, 1.05);
-}
-
-.monster-banner:active {
-  border: 5px solid rgb(63, 63, 63);
 }
 
 /* =================================================================================
@@ -427,30 +401,18 @@ canvas {
 
 .item-title {
   font-size: 2em;
-  text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
+  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
   color: #fff;
 }
 
 .items-banner {
-  border: 5px solid rgba(255, 255, 255, 0.5);
+  border: 4px solid #000;
   background-image: url("./images/Banners/items-banner.jpg");
   overflow: hidden;
   background-size: cover;
   background-position: 50% 48%;
   height: 12em;
   margin: 2em auto 0 auto;
-  transition: border 0.2s, filter 0.2s, transform 0.2s;
-  transition-timing-function: ease;
-}
-
-.items-banner:hover {
-  border: 5px solid transparent;
-  filter: saturate(1.3);
-  transform: scale(1.05, 1.05);
-}
-
-.items-banner:active {
-  border: 5px solid rgb(63, 63, 63);
 }
 
 /* =================================================================================
@@ -459,179 +421,66 @@ canvas {
 
 .spell-title {
   font-size: 2em;
-  text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
+  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
   color: #fff;
 }
 
 .spells-banner {
-  border: 5px solid rgba(255, 255, 255, 0.5);
+  border: 4px solid #000;
   background-image: url("./images/Banners/SpellBanner.jpg");
   overflow: hidden;
   background-size: cover;
   background-position: 50% 35%;
   height: 12em;
   margin: 2em auto 2em auto;
-  transition: border 0.2s, filter 0.2s, transform 0.2s;
-  transition-timing-function: ease;
 }
 
-.spells-banner:hover {
-  border: 5px solid transparent;
-  filter: saturate(1.3);
-  transform: scale(1.05, 1.05);
+/* =================================================================================
+====================================================================================
+[Inner Grid Div, Searchbars] */
+
+.search {
+  width: 30%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.spells-banner:active {
-  border: 5px solid rgb(63, 63, 63);
+.searchbar {
+  border: 2px solid #f33201;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #000;
+}
+
+.search-btn:hover,
+.search-btn:active {
+  background-color: #ff4617;
+}
+
+.search-btn {
+  width: 100%;
+  height: 85%;
+  background-image: url(images/Icons/search-icon.png);
+  overflow: hidden;
+  background-size: 90% 90%;
+  border: 1px solid #f33201;
+  background-color: #f33201;
+  border-radius: 0 5px 5px 0;
+}
+
+.list-btn {
+  border-radius: 5px;
+  background-color: #f33201;
+  border: 1px solid #f33201;
+  font-size: 1em;
+  color: #fff;
+  font-weight: bold;
 }
 
 /* =================================================================================
 ==================================================================================== 
-[Mobile Screen Size Query] */
-
-@media (max-width: 414px) {
-  .titles {
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-
-  .row > div[class^="col"] {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #000;
-    font-weight: bold;
-    font-size: 0.9em;
-  }
-
-  .class-btns {
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    height: 4em;
-    width: 4em;
-    border-radius: 50%;
-    filter: saturate(1);
-    transition: border 0.2s, filter 0.2s, transform 0.2s;
-    transition-timing-function: ease;
-  }
-
-  .class-btns:hover {
-    border: 3px solid transparent;
-    filter: saturate(1.5);
-    transform: scale(1.05, 1.05);
-  }
-
-  .class-btns:active {
-    border: 3px solid rgb(63, 63, 63);
-  }
-
-  .race-btns {
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    height: 6em;
-    width: 5em;
-    background-color: transparent;
-    transition: border 0.2s, filter 0.2s, transform 0.2s;
-    transition-timing-function: ease;
-  }
-
-  .race-btns:hover {
-    border: 3px solid transparent;
-    filter: saturate(1.3);
-    transform: scale(1.05, 1.05);
-  }
-
-  .race-btns:active {
-    border: 3px solid rgb(63, 63, 63);
-  }
-
-  .monster-title {
-    font-size: 1.5em;
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-    color: #fff;
-  }
-
-  .monster-banner {
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    background-image: url("./images/Banners/Monster-banner.jpg");
-    overflow: hidden;
-    background-size: cover;
-    background-position: 50% 48%;
-    height: 12em;
-    margin: 2em auto 0 auto;
-    transition: border 0.2s, filter 0.2s, transform 0.2s;
-    transition-timing-function: ease;
-  }
-
-  .monster-banner:hover {
-    border: 3px solid transparent;
-    filter: saturate(1.3);
-    transform: scale(1.05, 1.05);
-  }
-
-  .monster-banner:active {
-    border: 3px solid rgb(63, 63, 63);
-  }
-
-  .item-title {
-    font-size: 1.4em;
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-    color: #fff;
-  }
-
-  .items-banner {
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    background-image: url("./images/Banners/items-banner.jpg");
-    overflow: hidden;
-    background-size: cover;
-    background-position: 50% 48%;
-    height: 12em;
-    margin: 2em auto 0 auto;
-    transition: border 0.2s, filter 0.2s, transform 0.2s;
-    transition-timing-function: ease;
-  }
-
-  .items-banner:hover {
-    border: 3px solid transparent;
-    filter: saturate(1.3);
-    transform: scale(1.05, 1.05);
-  }
-
-  .items-banner:active {
-    border: 3px solid rgb(63, 63, 63);
-  }
-
-  .spell-title {
-    font-size: 1.5em;
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-    color: #fff;
-  }
-
-  .spells-banner {
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    background-image: url("./images/Banners/SpellBanner.jpg");
-    overflow: hidden;
-    background-size: cover;
-    background-position: 50% 35%;
-    height: 12em;
-    margin: 2em auto 2em auto;
-    transition: border 0.2s, filter 0.2s, transform 0.2s;
-    transition-timing-function: ease;
-  }
-
-  .spells-banner:hover {
-    border: 3px solid transparent;
-    filter: saturate(1.3);
-    transform: scale(1.05, 1.05);
-  }
-
-  .spells-banner:active {
-    border: 3px solid rgb(63, 63, 63);
-  }
-}
-
-/* =================================================================================
-==================================================================================== 
-
 [Media Queries] */
 
 @media (max-width: 414px) {
@@ -674,86 +523,20 @@ canvas {
 
   .monster-title {
     font-size: 1.5em;
-    text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -2px black;
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
     color: #fff;
-  }
-
-  .monster-banner {
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    background-image: url("./images/Banners/Monster-banner.jpg");
-    overflow: hidden;
-    background-size: cover;
-    background-position: 50% 48%;
-    height: 12em;
-    margin: 2em auto 0 auto;
-    transition: border 0.2s, filter 0.2s, transform 0.2s;
-    transition-timing-function: ease;
-  }
-
-  .monster-banner:hover {
-    border: 3px solid transparent;
-    filter: saturate(1.3);
-    transform: scale(1.05, 1.05);
-  }
-
-  .monster-banner:active {
-    border: 3px solid rgb(63, 63, 63);
   }
 
   .item-title {
     font-size: 1.4em;
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
     color: #fff;
-  }
-
-  .items-banner {
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    background-image: url("./images/Banners/items-banner.jpg");
-    overflow: hidden;
-    background-size: cover;
-    background-position: 50% 48%;
-    height: 12em;
-    margin: 2em auto 0 auto;
-    transition: border 0.2s, filter 0.2s, transform 0.2s;
-    transition-timing-function: ease;
-  }
-
-  .items-banner:hover {
-    border: 3px solid transparent;
-    filter: saturate(1.3);
-    transform: scale(1.05, 1.05);
-  }
-
-  .items-banner:active {
-    border: 3px solid rgb(63, 63, 63);
   }
 
   .spell-title {
     font-size: 1.5em;
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
     color: #fff;
-  }
-
-  .spells-banner {
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    background-image: url("./images/Banners/SpellBanner.jpg");
-    overflow: hidden;
-    background-size: cover;
-    background-position: 50% 35%;
-    height: 12em;
-    margin: 2em auto 2em auto;
-    transition: border 0.2s, filter 0.2s, transform 0.2s;
-    transition-timing-function: ease;
-  }
-
-  .spells-banner:hover {
-    border: 3px solid transparent;
-    filter: saturate(1.3);
-    transform: scale(1.05, 1.05);
-  }
-
-  .spells-banner:active {
-    border: 3px solid rgb(63, 63, 63);
   }
 }
 
