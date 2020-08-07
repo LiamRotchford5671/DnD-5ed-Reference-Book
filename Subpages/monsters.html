@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--    CSS Code-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link 
+        rel="stylesheet" 
+        href="content-table.css" 
+    />
+
+    <link 
+        rel="stylesheet" 
+        href="subpageMediaQueries.css" 
+    />
+
+    <title>DnD Dashboard</title>
+</head>
+
+<body>
+    <header>
+        <a id="logo" href="">
+            <img src="../images/dnd-red-logo.png" class="logo" width="100px" height="100px" alt="DnD Logo img Art"></img>
+            <h1>D&D Dashboard</h1>
+        </a>
+        <nav>
+            
+            <button class="nav-btns" onclick="window.location.href = '../index.html';">Home</button>
+            <button id="about" class="nav-btns">About</button>
+            <button class="nav-btns">Guide</button>
+            <button class="nav-btns">Resources</button>
+        </nav>
+    </header>
+
+    <main>
+        <div id="tableHeader">Monster Data List</div>
+        <input type="text" id="filterInput" onkeyup="filterTable()" placeholder="Search..." title="Type in a name">
+        <div id="dataTable">
+            
+        </div>
+    </main>
+
+    <footer></footer>
+
+<!--Frameworks-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    
+<!--Our scripts-->
+    <script type="text/babel" src="./monsters.js"></script>
+    <script type="text/babel" src="./content-table.js"></script>
+    <script type="text/babel">
+        ReactDOM.render(<Monsters />, document.getElementById("dataTable") );
+    </script>
+    
+
+
+</body>
+</html>
