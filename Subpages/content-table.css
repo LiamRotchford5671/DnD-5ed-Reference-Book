@@ -531,15 +531,3 @@ section[id^="contentBottom_"] > p {
   margin-top: 20px;
   margin-left: 20px;
 }
-
-/* =================================================================================
-==================================================================================== 
-[Mobile Screen Size Query] */
-
-@media (max-width: 414px) {
-  #tableHeader {
-    margin-top: 2em;
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-}

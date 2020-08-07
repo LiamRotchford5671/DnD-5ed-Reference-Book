@@ -382,20 +382,21 @@ class Armor extends React.Component {
           />
 
           <section id={"chartContain_" + this.props.detailsObj.index}></section>
+
+          <section id={"contentLeft_" + this.props.detailsObj.index}>
+            <h5>Armor Category:</h5>
+            <p>{this.props.detailsObj.armor_category}</p>
+            <h5>Dexterity Bonus:</h5>
+            <p>{this.props.detailsObj.armor_class.dex_bonus.toString()}</p>
+            <h5>Stealth Disadvantage:</h5>
+            <p>{this.props.detailsObj.stealth_disadvantage.toString()}</p>
+            <h5>Cost:</h5>
+            <p>
+              {this.props.detailsObj.cost.quantity + " "}{" "}
+              {this.props.detailsObj.cost.unit}
+            </p>
+          </section>
         </div>
-        <section id={"contentLeft_" + this.props.detailsObj.index}>
-          <h5>Armor Category:</h5>
-          <p>{this.props.detailsObj.armor_category}</p>
-          <h5>Dexterity Bonus:</h5>
-          <p>{this.props.detailsObj.armor_class.dex_bonus.toString()}</p>
-          <h5>Stealth Disadvantage:</h5>
-          <p>{this.props.detailsObj.stealth_disadvantage.toString()}</p>
-          <h5>Cost:</h5>
-          <p>
-            {this.props.detailsObj.cost.quantity + " "}{" "}
-            {this.props.detailsObj.cost.unit}
-          </p>
-        </section>
       </td>
     );
   }
