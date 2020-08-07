@@ -3,6 +3,7 @@ Liam Rotchford ~ Sarah Kim
 DnD Homepage
 
 [Table of Contents]
+
 1. [General Body of Homepage] - 21
 2. [Header, Navbar, Buttons] - 67
 3. [Inner Grid] - 111
@@ -58,8 +59,28 @@ body > main > .container-fluid {
 
 body > footer {
   grid-area: foot;
-  height: 3em;
-  background-color: rgb(46, 46, 46);
+  height: 4em;  
+  color: #c7c7c7;
+  font-size: .75em;
+  padding-left: 20px;
+}
+
+
+h1 {
+  align-self: flex-end;
+  margin: 5px;
+  font-size: 2em;
+  font-weight: bold;
+  color: #f12a2a;
+}
+
+h5 {
+  color: red;
+}
+
+p {
+  margin-top: 1rem;
+  padding-right: 10px;
 }
 
 /* =================================================================================
@@ -74,6 +95,7 @@ body > header > #logo {
 #logo:hover {
   text-decoration: none;
 }
+
 
 h1 {
   align-self: flex-end;
@@ -91,7 +113,7 @@ body > header > nav {
 .nav-btns {
   border: none;
   background-color: transparent;
-  color: #fff;
+  color: #c7c7c7;
 }
 
 .nav-btns:hover {
@@ -110,6 +132,10 @@ button:focus {
   outline: 0;
 }
 
+.dropdown {
+  margin-bottom: 10px;
+}
+
 /* =================================================================================
 ====================================================================================
 [Inner Grid] */
@@ -118,6 +144,11 @@ button:focus {
   margin-top: 1.5em;
   font-size: 2.5em;
   font-weight: bold;
+}
+
+.row {
+  width: 100%;
+  margin: 0;
 }
 
 .row > div[class^="col"] {
@@ -138,7 +169,6 @@ button:focus {
 /* =================================================================================
 ====================================================================================
 [Inner Grid, Classes Section] */
-
 .class-btns {
   border: 5px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
@@ -150,15 +180,112 @@ button:focus {
   transition-timing-function: ease;
 }
 
-.class-btns:hover {
+.class-section-btns {
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  height: 6em;
+  width: 6em;
+  filter: saturate(1);
+  transition: border .2s, filter .2s, transform .2s;
+  transition-timing-function: ease;
+}
+
+.class-btns:hover, .class-section-btns:hover {
   border: 5px solid transparent;
   filter: saturate(1.5);
   transform: scale(1.05, 1.05);
 }
 
-.class-btns:active {
+.class-btns:active, .class-section-btns:active {
   border: 5px solid rgb(63, 63, 63);
 }
+
+.class-section {
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+  width: 100%;
+}
+
+.class-header {
+  padding: 0;
+}
+
+.class-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.class-img {
+  padding: 20px 0 20px 20px;
+}
+
+.class-img img {
+  max-width: 100%;
+}
+
+.class-stats, .class-profs, .class-equips, .weapon-chart, .class-spells {
+  margin-top: 20px;
+}
+
+.saveThrows, .startEquips {
+  margin-bottom: 20px;
+}
+
+.class-profs .profs {
+  max-height: 300px;
+  margin-bottom: 20px;
+  overflow: auto;
+}
+
+.class-levels {
+  margin-top: 50px;
+  font-size: .75em;
+}
+
+.levelsChart {
+  padding-top: 50px;
+}
+
+.cTrans-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.cTrans-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.cTrans-exit {
+  opacity: 1;
+}
+
+.cTrans-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.spellTrans-enter {
+  opacity: 0;
+}
+
+.spellTrans-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
+.spellTrans-exit {
+  opacity: 1;
+}
+
+.spellTrans-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
 
 /* =================================================================================
 ====================================================================================
@@ -169,12 +296,12 @@ button:focus {
   height: 13em;
   width: 10em;
   margin: 10px;
-  background-color: transparent;
-  transition: border 0.2s, filter 0.2s, transform 0.2s;
+  transition: border .2s, filter .2s, transform .2s, background-color .2s;
   transition-timing-function: ease;
 }
 
 .race-btns:hover {
+  background-color: transparent;
   border: 5px solid transparent;
   filter: saturate(1.3);
   transform: scale(1.05, 1.05);
@@ -182,6 +309,84 @@ button:focus {
 
 .race-btns:active {
   border: 5px solid rgb(63, 63, 63);
+}
+
+.race-section-btn {
+  border: none;
+  background-color: transparent;
+  transition: font-weight .2s, filter .2s, transform .2s;
+  transition-timing-function: ease;
+}
+
+.race-section-btn:hover {
+  font-weight: bold;
+  filter: saturate(1.3);
+  transform: scale(1.03, 1.03);
+}
+
+.race-section, .race-info {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.race-section {
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+  width: 100%;
+}
+
+.race-img {
+  display: flex;
+  flex-flow: column wrap;
+  max-width: 30vw;
+  min-width: 300px;
+  margin-right: 20px;
+}
+
+.race-img img {
+  width: 100%;
+}
+
+.race-subs {
+  padding: 20px;
+}
+
+.race-specs {
+  padding: 20px 50px 20px 20px;
+  max-width: 30vw;
+  min-width: 300px;
+}
+
+.race-stats {
+    padding: 20px 0 20px 20px;
+    max-width: 30vw;
+    min-width: 300px;
+}
+
+canvas {
+  margin: 0 0 20px 0 !important;
+}
+
+.rTrans-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.rTrans-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.rTrans-exit {
+  opacity: 1;
+}
+
+.rTrans-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 500ms, transform 500ms;
 }
 
 /* =================================================================================
@@ -426,61 +631,45 @@ button:focus {
 
 /* =================================================================================
 ==================================================================================== 
-[Tablet Screen Size Query] */
 
-@media (min-width: 415px) and (max-width: 768px) {
+[Media Queries] */
+
+@media (max-width: 414px) {
+
+  h1 {
+    font-size: 1.2em;
+  }
+
+  nav {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-end;
+  }
+
   .titles {
     font-size: 1.5em;
-    font-weight: bold;
   }
 
   .row > div[class^="col"] {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #000;
     font-weight: bold;
     font-size: 1em;
   }
 
   .class-btns {
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    height: 6em;
-    width: 6em;
-    border-radius: 50%;
-    filter: saturate(1);
-    transition: border 0.2s, filter 0.2s, transform 0.2s;
-    transition-timing-function: ease;
-  }
-
-  .class-btns:hover {
-    border: 3px solid transparent;
-    filter: saturate(1.5);
-    transform: scale(1.05, 1.05);
-  }
-
-  .class-btns:active {
-    border: 3px solid rgb(63, 63, 63);
+    height: 4em;
+    width: 4em;
   }
 
   .race-btns {
-    border: 3px solid rgba(255, 255, 255, 0.5);
-    height: 11em;
-    width: 10em;
-    background-color: transparent;
-    transition: border 0.2s, filter 0.2s, transform 0.2s;
-    transition-timing-function: ease;
+    height: 5em;
+    width: 4em;
   }
 
-  .race-btns:hover {
-    border: 3px solid transparent;
-    filter: saturate(1.3);
-    transform: scale(1.05, 1.05);
-  }
-
-  .race-btns:active {
-    border: 3px solid rgb(63, 63, 63);
+  .race-specs, .race-stats {
+    margin: 20px 20px 20px 20px;
+    padding: 0;
+    max-width: 100%;
+    min-width: 300px;
   }
 
   .monster-title {
@@ -565,6 +754,12 @@ button:focus {
 
   .spells-banner:active {
     border: 3px solid rgb(63, 63, 63);
+  }
+}
+
+@media (min-width: 415px) and (max-width: 768px) {
+  .class-subs, .class-profs, .class-equips {
+
   }
 }
 
