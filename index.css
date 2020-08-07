@@ -45,7 +45,7 @@ body > header {
   justify-content: space-between;
   grid-area: head;
   padding: 10px 20px;
-  background-color: rgb(63, 63, 63);
+  background-color: rgb(46, 46, 46);
 }
 
 body > main {
@@ -59,12 +59,12 @@ body > main > .container-fluid {
 body > footer {
   grid-area: foot;
   height: 3em;
-  background-color: rgb(63, 63, 63);
+  background-color: rgb(46, 46, 46);
 }
 
 /* =================================================================================
-====================================================================================
-[Header, Navbar, Buttons] */
+  ====================================================================================
+  [Header, Navbar, Buttons] */
 
 body > header > #logo {
   display: flex;
@@ -80,7 +80,8 @@ h1 {
   margin: 5px;
   font-size: 1.5em;
   font-weight: bold;
-  color: red;
+  color: #ff0000;
+  filter: saturate(0.85);
 }
 
 body > header > nav {
@@ -90,15 +91,15 @@ body > header > nav {
 .nav-btns {
   border: none;
   background-color: transparent;
-  color: white;
+  color: #fff;
 }
 
 .nav-btns:hover {
-  color: red;
+  color: #ff0000;
 }
 
 .nav-btns:active {
-  color: black;
+  color: #000;
 }
 
 button:focus {
