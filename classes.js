@@ -10,15 +10,20 @@ class Classes extends React.Component {
             class_levels: [],
             profs: [],
             profChoices: [],
+            profSelectedItems: [],
             saveThrows: [],
             spellCasting: [],
             startEquips: [],
             equipChoiceItems: [],
+            equipSelectedItems: [],
+            equipChoiceDesc: [],
             subclasses: []
         };
 
         this.buttonClickEvent = this.buttonClickEvent.bind(this);
         this.classDataHandler = this.classDataHandler.bind(this);
+        this.addSelection = this.addSelection.bind(this);
+        this.removeSelection = this.removeSelection.bind(this);
     }
 
     //On click, toggles between nav and info section.
@@ -29,6 +34,97 @@ class Classes extends React.Component {
         }));
 
         this.classDataHandler(name);
+    }
+
+    addSelection(item, max, type, eachLimit, url) {
+        // console.log(eachLimit);
+        url = url.replace('/api/', '');
+        console.log(url);
+        const choiceInfoRequest = async () => {
+            if (type === "equip") {
+                const results = await doAPIrequest(url);
+                console.log(results);
+
+                await this.setState({
+                    equipChoiceDesc: <div className={"desc" + item + " collapse"}>
+                        <p>Category: {results.equipment_category.name}</p>
+                        <p>Weight: {results.weight}</p>
+                        <p>Cost: {results.cost.quantity} {results.cost.unit}</p>
+                    </div>
+                })
+            }
+
+            let selectionArray = [];
+            if (type === "equip") {
+                selectionArray = this.state.equipSelectedItems.slice();
+                if (selectionArray.length < max) {
+                    let index = selectionArray.length;
+                    selectionArray[index] = <div key={item}>
+                        <button type="button" className="btn btn-light choice" data-toggle="collapse" data-target={'.desc' + item}>{item}</button>
+                        <button className="btn badge badge-dark" onClick={() => this.removeSelection(type, index)}>x</button>
+                        {this.state.equipChoiceDesc}
+                    </div>;
+                }
+                this.setState({
+                    equipSelectedItems: selectionArray
+                });
+            } else if (type === "prof") {
+                selectionArray = this.state.profSelectedItems.slice();
+                if (selectionArray.length < max) {
+                    let index = selectionArray.length;
+                    selectionArray[index] = <div key={item}>
+                        <button type="button" className="btn btn-light choice">{item}</button>
+                        <button className="btn badge badge-dark" onClick={() => this.removeSelection(type, index)}>x</button>
+                    </div>;
+                }
+                this.setState({
+                    profSelectedItems: selectionArray
+                });
+            }
+        }
+        choiceInfoRequest();
+
+
+        //
+        // if (item === this.state.equipSelectedItems) {
+        //     this.setState({
+        //         equipSelectedItem: []
+        //     });
+        // } else {
+        //     this.setState({
+        //         equipSelectedItems: selectionArray
+        //     });
+        // }
+    }
+
+    removeSelection(type, index) {
+        console.log(index);
+        let selectionArray = [];
+        if (type === "equip") {
+            selectionArray = this.state.equipSelectedItems.slice();
+            if (this.state.equipSelectedItems.length === 1) {
+                selectionArray.splice(0, 1);
+            } else {
+                selectionArray.splice(index, 1);
+            }
+            this.setState({
+                equipSelectedItems: selectionArray
+            });
+        } else if (type === "prof") {
+            selectionArray = this.state.profSelectedItems.slice();
+            if (this.state.profSelectedItems.length === 1) {
+                selectionArray.splice(0, 1);
+            } else {
+                selectionArray.splice(index, 1);
+            }
+            this.setState({
+                profSelectedItems: selectionArray
+            });
+        }
+    }
+
+    choiceData(type, url) {
+
     }
 
     classDataHandler(name) {
@@ -61,9 +157,6 @@ class Classes extends React.Component {
                             </div>
                         </div>);
                 }
-                this.setState({
-
-                })
 
                 //Subclasses
                 let subClasses = results.subclasses.map(async (current, i) => {
@@ -88,7 +181,7 @@ class Classes extends React.Component {
                     <div key={i} className="dropdown dropright">
                         <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose: {current.choose}</button>
                         <div className="dropdown-menu">{current.from.map((next, j) =>
-                            <button type="button" className="dropdown-item" key={j}>{next.name.replace('Skill:', '')}</button>)}
+                            <button type="button" className="dropdown-item" key={j} onClick={() => this.addSelection(next.name.replace('Skill:', ''), current.choose, "prof", j, next.url)}>{next.name.replace('Skill:', '')}</button>)}
                         </div>
                     </div>);
 
@@ -104,7 +197,7 @@ class Classes extends React.Component {
 
                 for (let item in equips) {
                     const eachEquipResults = await doAPIrequest(equipResultsUrls[item]);
-                    console.log(eachEquipResults);
+                    // console.log(eachEquipResults);
 
                     function Contents() {
                         if (eachEquipResults.contents) {
@@ -127,31 +220,36 @@ class Classes extends React.Component {
                                 rangeData[2] = eachEquipResults.throw_range.normal;
                                 rangeData[3] = eachEquipResults.throw_range.long;
                             }
-                            console.log(rangeData);
 
-                            var ctx2 = document.querySelector('#weaponChart');
-                            var myBarChart2 = new Chart(ctx2, {
-                                type: 'polarArea',
-                                data: {
-                                    datasets: [{
-                                        label: ['Normal', 'Long'],
-                                        data: rangeData,
-                                        backgroundColor: 'rgba(255,46,46,0.8)'
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: true
-                                    }
-                                }
-                            });
+                            function weaponChart() {
+                                // var ctx2 = document.querySelector('#weaponChart');
+                                // var myBarChart2 = new Chart(ctx2, {
+                                //     type: 'polarArea',
+                                //     data: {
+                                //         datasets: [{
+                                //             label: ['Normal', 'Long'],
+                                //             data: [0,1,2,3],
+                                //             backgroundColor: 'rgba(255,46,46,0.8)'
+                                //         }]
+                                //     },
+                                //     options: {
+                                //         legend: {
+                                //             display: true
+                                //         }
+                                //     }
+                                // });
+                            }
 
                             return <div>
                                 <p>{eachEquipResults.category_range}</p>
+                                <p>Properties: {eachEquipResults.properties.map(current => current.name + ', ')}</p>
                                 <p>Damage: {eachEquipResults.damage.damage_type.name} {eachEquipResults.damage.damage_dice}</p>
                                 <p>Range: Normal - {eachEquipResults.range.normal}{rangeLong}</p>
                                 {throwRange}
-                                <p>Properties: {eachEquipResults.properties.map(current => current.name + ', ')}</p>
+                                <div className={"weapon-chart collapse equip-desc" + item + " container col-lg-4"}>
+                                    <canvas id="weaponChart" aria-label="polar chart" role="img"></canvas>
+                                </div>
+                                {weaponChart()}
                             </div>;
                         }
                     }
@@ -173,8 +271,7 @@ class Classes extends React.Component {
 
                     startEquips.push(
                         <div className="startEquips" key={item}>
-                            <p>{equips[item].item.name}: {equips[item].quantity}</p>
-                            <button className="btn btn-primary " data-toggle="collapse" data-target={'.equip-desc' + item}>Unpack</button>
+                            <button className="btn btn-light " data-toggle="collapse" data-target={'.equip-desc' + item}>{equips[item].item.name}: {equips[item].quantity}</button>
                             <div className={"collapse equip-desc" + item}>
                                 <p>Category: {eachEquipResults.equipment_category.name}</p>
                                 {WeaponEquips()}
@@ -197,7 +294,7 @@ class Classes extends React.Component {
                                 <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose 1:</button>
                                 <div className="dropdown-menu">
                                     {equipResults[key].map(current => current.from.map((next, i) =>
-                                    <button type="button" className="dropdown-item" key={i}>{next.item.name}</button>))}
+                                    <button type="button" className="dropdown-item" key={i} onClick={() => this.addSelection(next.item.name, equipResults.choices_to_make, "equip", 1, next.item.url)}>{next.item.name}</button>))}
                                 </div>
                             </div>
                         equipChoiceItems.push(equipItems);
@@ -347,10 +444,13 @@ class Classes extends React.Component {
                 class_levels: [],
                 profs: [],
                 profChoices: [],
+                profSelectedItems: [],
                 saveThrows: [],
                 spellCasting: [],
                 startEquips: [],
                 equipChoiceItems: [],
+                equipSelectedItems: [],
+                equipChoiceDesc: [],
                 subclasses: []
             });
         }
@@ -379,13 +479,11 @@ class Classes extends React.Component {
                     <div className="class-section">
                         <div className="class-info">
                             <div className="class-header col-lg-4 col-md-12 row">
-                                <button className={"class-section-btns " + this.state.classUrl + "-icon"} onClick={this.buttonClickEvent}>
-                                    {/*<img className='class-section-btns'  src={'./images/Class-Icons/' + `${this.state.classUrl}` + '-icon.jpeg'} alt={this.state.name} />*/}
-                                </button>
+                                <button className={"class-section-btns " + this.state.classUrl + "-icon"} onClick={this.buttonClickEvent}></button>
                                 <div className="class-img col-8">
                                     <h4>{this.state.name}</h4>
                                     <p>Hit die: {this.state.hit_die}</p>
-                                    <img src={'./images/Class-Images/' + `${this.state.classUrl}` + '.png'} alt={this.state.name}/>
+                                    <img src={'./images/Class-Images/' + this.state.classUrl + '.png'} alt={this.state.name}/>
                                 </div>
                             </div>
 
@@ -401,6 +499,7 @@ class Classes extends React.Component {
                                 <h5>Proficiency Choices</h5>
                                 <div className="class-prof-options">
                                     {this.state.profChoices}
+                                    {this.state.profSelectedItems}
                                 </div>
                             </div>
                             <div className="class-equips col-lg-4 col-md-6 col-sm-12">
@@ -409,10 +508,8 @@ class Classes extends React.Component {
                                 <h5>Equipment Choices</h5>
                                 <div className="class-equip-items">
                                     {this.state.equipChoiceItems}
+                                    {this.state.equipSelectedItems}
                                 </div>
-                            </div>
-                            <div className="weapon-chart collapse equip-desc1 container col-lg-4">
-                                <canvas id="weaponChart" aria-label="bar chart" role="img"></canvas>
                             </div>
                             {this.state.spellCasting}
                         </div>
