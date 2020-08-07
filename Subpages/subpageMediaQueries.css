@@ -237,4 +237,249 @@
 [Tablet Screen Size Query] */
 
 @media (min-width: 415px) and (max-width: 768px) {
+  * {
+    box-sizing: border-box;
+  }
+  #tableHeader {
+    margin-top: 2em;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  /* =================================================================================
+    ==================================================================================== 
+    [Inner Row Images] */
+
+  .monsterImage {
+    grid-area: img;
+    border-radius: 10%;
+    border: 5px solid rgba(105, 105, 105, 0.5);
+    width: 300px;
+    height: 250px;
+    margin-top: 10px;
+    margin-left: 10px;
+  } /* @ */
+
+  .spellImage {
+    grid-area: img;
+    border-radius: 10%;
+    border: 5px solid rgba(105, 105, 105, 0.5);
+    width: 200px;
+    height: 150px;
+    margin-top: 0;
+    margin-left: 0;
+  }
+
+  .equipImage {
+    grid-area: img;
+    border-radius: 10%;
+    border: 5px solid rgba(105, 105, 105, 0.5);
+    width: 340px;
+    height: 300px;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  /* =================================================================================
+  ====================================================================================
+  [Inner Row Styling Chart] */
+
+  .grid-containerChart {
+    display: grid;
+    grid-template-areas:
+      "img chart"
+      "left right";
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr;
+  }
+  .grid-containerChart > section[id^="chartContain_"] {
+    grid-area: chart;
+    width: 350px;
+    height: 300px;
+    margin-top: 10px;
+    margin-left: 0;
+    margin-right: 5px;
+  }
+
+  .grid-containerChart > section[id^="contentLeft_"] > h5 {
+    margin-left: 10px;
+  }
+
+  .grid-containerChart > section[id^="contentLeft_"] > p {
+    margin-left: 10px;
+  }
+
+  .grid-containerChart > section[id^="contentRight_"] > h5 {
+    margin-left: 10px;
+  }
+
+  .grid-containerChart > section[id^="contentRight_"] > p {
+    margin-left: 10px;
+  }
+
+  /* =================================================================================
+    ====================================================================================
+    [Inner Row Styling Chart Equipment Build In's Post Render] */
+
+  .grid-containerChart > section[id^="contentRight_"] > div > h5 {
+    margin-top: 0;
+    margin-left: 10px;
+  }
+
+  .grid-containerChart > section[id^="contentRight_"] > div > h6 {
+    margin-left: 15px;
+  }
+
+  .grid-containerChart > section[id^="contentRight_"] > div > p {
+    margin-left: 15px;
+  }
+
+  div[id^="mActions"] > h4 {
+    margin-top: 0;
+    margin-left: 0;
+  }
+
+  div[id^="mActions"] > h5 {
+    margin-left: 0;
+  }
+
+  div[id^="mActions"] > h6 {
+    margin-left: 5px;
+  }
+
+  div[id^="mActions"] > p {
+    margin-left: 5px;
+  }
+
+  /* =================================================================================
+  ====================================================================================
+  [Inner Row Styling NonChart] */
+
+  .grid-containerNonChart {
+    display: grid;
+    grid-template-areas: "img left right";
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .grid-containerNonChart > section[id^="contentLeft_"] > h5 {
+    margin-left: 5px;
+  }
+
+  .grid-containerNonChart > section[id^="contentLeft_"] > h6 {
+    margin-left: 5px;
+  }
+
+  .grid-containerNonChart > section[id^="contentLeft_"] > p {
+    margin-left: 5px;
+  }
+
+  .grid-containerNonChart > section[id^="contentRight_"] > h5 {
+    margin-left: 5px;
+  }
+
+  .grid-containerNonChart > section[id^="contentRight_"] > h6 {
+    margin-left: 5px;
+  }
+
+  .grid-containerNonChart > section[id^="contentRight_"] > p {
+    margin-left: 5px;
+  }
+
+  section[id^="contentBottom_"] > h5 {
+    margin-left: 5px;
+  }
+
+  section[id^="contentBottom_"] > p {
+    margin-left: 5px;
+  }
+
+  .grid-containerNonChart > section > div[id^="equipPack_"] > p {
+    margin-left: 5px;
+  }
+
+  /* =================================================================================
+    ====================================================================================
+    [Inner Row Styling NonChart Equipment Build In's Post Render] */
+
+  .grid-containerNonChart > section[id^="contentLeft_"] > div > h5 {
+    margin-left: 5px;
+  }
+
+  .grid-containerNonChart > section[id^="contentLeft_"] > div > h6 {
+    margin-left: 5px;
+  }
+
+  .grid-containerNonChart > section[id^="contentLeft_"] > div > p {
+    margin-left: 5px;
+  }
+
+  .grid-containerNonChart > section[id^="contentRight_"] > div > h5 {
+    margin-left: 5px;
+  }
+
+  .grid-containerNonChart > section[id^="contentRight_"] > div > h6 {
+    margin-left: 5px;
+  }
+
+  .grid-containerNonChart > section[id^="contentRight_"] > div > p {
+    margin-left: 5px;
+  }
+
+  section[id^="contentBottom_"] > div > h5 {
+    margin-left: 0;
+  }
+
+  section[id^="contentBottom_"] > div > p {
+    margin-left: 5px;
+  }
+
+  /* =================================================================================
+  ====================================================================================
+  [Inner Row Styling NonChart Spells] */
+
+  .grid-containerNonChartSpells {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      "img left mid right"
+      "slots slots slots slots";
+  }
+
+  .grid-containerNonChartSpells > section[id^="contentLeft_"] > h5 {
+    margin-left: 15px;
+  }
+
+  .grid-containerNonChartSpells > section[id^="contentLeft_"] > p {
+    margin-left: 15px;
+  }
+
+  .grid-containerNonChartSpells > section[id^="contentSlots_"] > h6 {
+    margin-left: 40px;
+  }
+
+  .grid-containerNonChartSpells > section[id^="contentSlots_"] > p {
+    margin-left: 40px;
+  }
+
+  section[id^="contentBottom_"] > h5 {
+    margin-left: 0;
+  }
+
+  section[id^="contentBottom_"] > p {
+    margin-left: 0;
+  }
+
+  /* =================================================================================
+  ====================================================================================
+  [Inner Row Styling NonChart Spell Build In's Post Render] */
+
+  .grid-containerNonChartSpells > section[id^="contentLeft_"] > div > h5 {
+    margin-left: 15px;
+  }
+
+  .grid-containerNonChartSpells > section[id^="contentLeft_"] > div > p {
+    margin-left: 15px;
+  }
 }

@@ -421,12 +421,6 @@ class EquipmentPacks extends React.Component {
             alt={this.props.detailsObj.holderName + " image"}
           />
           <section id={"contentLeft_" + this.props.detailsObj.index}>
-            <h5>Pack Contents:</h5>
-            <h6>Item ~ Quantity</h6>
-            <div id={"equipPack_" + this.props.detailsObj.index}></div>
-          </section>
-
-          <section id={"contentRight_" + this.props.detailsObj.index}>
             <h5>Gear Category:</h5>
             <p>{this.props.detailsObj.gear_category}</p>
             <h5>Cost:</h5>
@@ -434,6 +428,12 @@ class EquipmentPacks extends React.Component {
               {this.props.detailsObj.cost.quantity + " "}{" "}
               {this.props.detailsObj.cost.unit}
             </p>
+          </section>
+
+          <section id={"contentRight_" + this.props.detailsObj.index}>
+            <h5>Pack Contents:</h5>
+            <h6>Item ~ Quantity</h6>
+            <div id={"equipPack_" + this.props.detailsObj.index}></div>
           </section>
         </div>
       </td>
