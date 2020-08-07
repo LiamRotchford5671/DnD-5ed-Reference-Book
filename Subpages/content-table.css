@@ -229,13 +229,34 @@ button:focus {
 .grid-containerChart > section[id^="contentRight_"] > div > h6 {
   grid-area: right;
   color: #ff0000;
-  margin-top: 20px;
   margin-left: 70px;
 }
 
 .grid-containerChart > section[id^="contentRight_"] > div > p {
   grid-area: right;
   margin-left: 70px;
+}
+
+div[id^="mActions"] > h4 {
+  color: #ff0000;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: 40px;
+}
+
+div[id^="mActions"] > h5 {
+  color: #ff0000;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+div[id^="mActions"] > h6 {
+  color: #ff0000;
+  margin-left: 20px;
+}
+
+div[id^="mActions"] > p {
+  margin-left: 20px;
 }
 
 /* =================================================================================

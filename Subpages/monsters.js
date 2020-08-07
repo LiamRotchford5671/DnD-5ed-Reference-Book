@@ -84,10 +84,6 @@ class Monsters extends React.Component {
     let endpoint = "monsters/" + monsterName;
     var mdata = await this.doAPIrequest(endpoint);
 
-    if (mdata.index == "zombie") {
-      console.log(mdata);
-    }
-
     mdata.holderName = "../images/Monster-Images/" + monsterName + ".jpg";
 
     ReactDOM.render(
@@ -97,6 +93,7 @@ class Monsters extends React.Component {
 
     this.genChart(mdata);
     this.genMonsterOmits(mdata);
+    this.genMonsterActions(mdata);
   }
 
   genChart(mdata) {
@@ -206,6 +203,58 @@ class Monsters extends React.Component {
       mSensesRef.appendChild(content);
     });
   }
+
+  genMonsterActions(mdata) {
+    let mActionsRef = document.getElementById("mActions_" + mdata.index);
+    let mActionsTitle = document.createElement("h4");
+    mActionsTitle.innerHTML = "Actions:";
+    mActionsRef.appendChild(mActionsTitle);
+
+    if ("actions" in mdata) {
+      mdata.actions.forEach((element) => {
+        Object.entries(element).forEach((subElement) => {
+          if (element.name != "Multiattack") {
+            let subtitle;
+            if (subElement[0] == "name") {
+              subtitle = document.createElement("h5");
+            } else {
+              subtitle = document.createElement("h6");
+            }
+            let content = document.createElement("p");
+            if (
+              subElement[0] != "usage" &&
+              subElement[0] != "dc" &&
+              subElement[0] != "attacks"
+            ) {
+              if (subElement[0] != "damage") {
+                if (subElement[0] == "desc") {
+                  subtitle.innerHTML = "Description";
+                } else {
+                  let capitalized =
+                    subElement[0].charAt(0).toUpperCase() +
+                    subElement[0].slice(1);
+                  subtitle.innerHTML = capitalized;
+                }
+                mActionsRef.appendChild(subtitle);
+                content.innerHTML = subElement[1];
+                mActionsRef.appendChild(content);
+              } else {
+                subtitle.innerHTML = "Damage Dice:";
+                mActionsRef.appendChild(subtitle);
+
+                content.innerHTML = subElement[1]
+                  .slice(0, 1)
+                  .shift().damage_dice;
+                mActionsRef.appendChild(content);
+              }
+            }
+          }
+        });
+        let lineBreak = document.createElement("hr");
+        mActionsRef.appendChild(lineBreak);
+      });
+    }
+  }
 }
 
 class MonsterDetails extends React.Component {
@@ -221,37 +270,43 @@ class MonsterDetails extends React.Component {
 
   render() {
     return (
-      <td
-        className="grid-containerChart"
-        id={"contain_" + this.props.detailsObj.index}
-      >
-        <img
-          src={this.props.detailsObj.holderName}
-          className="monsterImage"
-          onError={(event) =>
-            event.target.setAttribute(
-              "src",
-              "../images/Monster-Images/non-img.png"
-            )
-          }
-          alt={this.props.detailsObj.holderName + " image"}
-        />
-        <section id={"chartContain_" + this.props.detailsObj.index}></section>
-        <section id={"contentLeft_" + this.props.detailsObj.index}>
-          <h5>Type:</h5>
-          <p>{this.props.detailsObj.type}</p>
-          <h5>Alignment:</h5>
-          <p>{this.props.detailsObj.alignment}</p>
-          <h5>Languages</h5>
-          <p>{this.props.detailsObj.languages}</p>
-          <h5>Size:</h5>
-          <p>{this.props.detailsObj.size}</p>
-          <h5>Hit Dice:</h5>
-          <p>{this.props.detailsObj.hit_dice}</p>
-        </section>
-        <section id={"contentRight_" + this.props.detailsObj.index}>
-          <div id={"mSenses_" + this.props.detailsObj.index}></div>
-          <div id={"mSpeed_" + this.props.detailsObj.index}></div>
+      <td>
+        <div
+          className="grid-containerChart"
+          id={"contain_" + this.props.detailsObj.index}
+        >
+          <img
+            src={this.props.detailsObj.holderName}
+            className="monsterImage"
+            onError={(event) =>
+              event.target.setAttribute(
+                "src",
+                "../images/Monster-Images/non-img.png"
+              )
+            }
+            alt={this.props.detailsObj.holderName + " image"}
+          />
+          <section id={"chartContain_" + this.props.detailsObj.index}></section>
+          <section id={"contentLeft_" + this.props.detailsObj.index}>
+            <h5>Type:</h5>
+            <p>{this.props.detailsObj.type}</p>
+            <h5>Alignment:</h5>
+            <p>{this.props.detailsObj.alignment}</p>
+            <h5>Languages</h5>
+            <p>{this.props.detailsObj.languages}</p>
+            <h5>Size:</h5>
+            <p>{this.props.detailsObj.size}</p>
+            <h5>Hit Dice:</h5>
+            <p>{this.props.detailsObj.hit_dice}</p>
+          </section>
+          <section id={"contentRight_" + this.props.detailsObj.index}>
+            <div id={"mSenses_" + this.props.detailsObj.index}></div>
+            <div id={"mSpeed_" + this.props.detailsObj.index}></div>
+          </section>
+        </div>
+
+        <section id={"contentBottom_" + this.props.detailsObj.index}>
+          <div id={"mActions_" + this.props.detailsObj.index}></div>
         </section>
       </td>
     );
