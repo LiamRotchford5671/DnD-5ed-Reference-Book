@@ -3,18 +3,18 @@ Liam Rotchford ~ Sarah Kim
 DnD Homepage
 
 [Table of Contents]
-1. [General Body of Homepage]
-2. [Header, Navbar, Buttons]
-3. [Inner Grid]
-4. [Inner Grid, Classes Section]
-5. [Inner Grid, Races Section]
-6. [Inner Grid, Monsters Section]
-7. [Inner Grid, Equipment Section]
-8. [Inner Grid, Spells Section]
-9. [Mobile Screen Size Query]
-10. [Tablet Screen Size Query]
-11. [Class Icon Button Images]
-12. [Races Icon Images]
+1. [General Body of Homepage] - 21
+2. [Header, Navbar, Buttons] - 67
+3. [Inner Grid] - 111
+4. [Inner Grid, Classes Section] - 136
+5. [Inner Grid, Races Section] - 161
+6. [Inner Grid, Monsters Section] - 185
+7. [Inner Grid, Equipment Section] - 217
+8. [Inner Grid, Spells Section] - 249
+9. [Mobile Screen Size Query] - 281
+10. [Tablet Screen Size Query] - 425
+11. [Class Icon Button Images] - 569
+12. [Races Icon Images] - 632
 
 =================================================================================
 ====================================================================================
@@ -80,7 +80,7 @@ h1 {
   margin: 5px;
   font-size: 1.5em;
   font-weight: bold;
-  color: #ff0000;
+  color: #ff1a1a;
   filter: saturate(0.85);
 }
 
@@ -95,7 +95,11 @@ body > header > nav {
 }
 
 .nav-btns:hover {
-  color: #ff0000;
+  color: #ff1a1a;
+}
+
+.nav-btns:focus {
+  color: #ff1a1a;
 }
 
 .nav-btns:active {

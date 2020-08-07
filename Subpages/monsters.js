@@ -55,12 +55,14 @@ class Monsters extends React.Component {
       var nameCapitalized = element.charAt(0).toUpperCase() + element.slice(1);
       newRow.className = "header";
       newRow.setAttribute("value", element);
+      newRow.setAttribute("tabindex", 0);
       newRow.innerHTML = "<td>" + nameCapitalized + "</td>";
       bodyRef.appendChild(newRow);
 
       let newNestedRow = document.createElement("tr");
       newNestedRow.className = "innerRow";
       newNestedRow.setAttribute("id", element);
+      newNestedRow.setAttribute("tabindex", 0);
       bodyRef.appendChild(newNestedRow);
 
       this.constructInnerData(element);

@@ -56,12 +56,14 @@ class Equipment extends React.Component {
       nameCapitalized = nameCapitalized.replace(/-/g, " ");
       newRow.className = "header";
       newRow.setAttribute("value", element);
+      newRow.setAttribute("tabindex", 0);
       newRow.innerHTML = "<td>" + nameCapitalized + "</td>";
       bodyRef.appendChild(newRow);
 
       let newNestedRow = document.createElement("tr");
       newNestedRow.className = "innerRow";
       newNestedRow.setAttribute("id", element);
+      newNestedRow.setAttribute("tabindex", 0);
       bodyRef.appendChild(newNestedRow);
 
       this.constructInnerData(element);
