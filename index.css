@@ -479,12 +479,6 @@ button:focus {
     font-size: 1.2em;
   }
 
-  nav {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: flex-end;
-  }
-
   .titles {
     font-size: 1.5em;
   }
