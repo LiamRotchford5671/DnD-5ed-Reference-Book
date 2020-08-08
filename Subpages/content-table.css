@@ -135,7 +135,7 @@ button:focus {
 }
 
 .table tbody tr:focus > td {
-  border: 5px solid #000;
+  border: 4px solid rgba(61, 61, 61, 0.781);
 }
 
 .table-bordered > tbody > tr > td,
@@ -245,6 +245,7 @@ button:focus {
   grid-area: left;
   color: #ee0000;
   font-weight: bold;
+  margin-top: 20px;
   margin-left: 20px;
 }
 
@@ -398,12 +399,12 @@ section[id^="contentBottom_"] > p {
   color: #ee0000;
   font-weight: 550;
   margin-top: 20px;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 .grid-containerNonChart > section[id^="contentLeft_"] > div > p {
   grid-area: left;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 .grid-containerNonChart > section[id^="contentRight_"] > div > h5 {
@@ -411,7 +412,7 @@ section[id^="contentBottom_"] > p {
   color: #ee0000;
   font-weight: bold;
   margin-top: 20px;
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 .grid-containerNonChart > section[id^="contentRight_"] > div > h6 {
@@ -419,12 +420,12 @@ section[id^="contentBottom_"] > p {
   color: #ee0000;
   font-weight: 550;
   margin-top: 20px;
-  margin-left: 30px;
+  margin-left: 40px;
 }
 
 .grid-containerNonChart > section[id^="contentRight_"] > div > p {
   grid-area: right;
-  margin-left: 30px;
+  margin-left: 40px;
 }
 
 section[id^="contentBottom_"] > div > h5 {

@@ -168,6 +168,19 @@ class Spells extends React.Component {
       aeSize.innerHTML = sdata.area_of_effect.size;
       areaEffectRef.appendChild(aeSize);
     }
+
+    if ("higher_level" in sdata) {
+      let higherLvlRef = document.getElementById(
+        "spellHigherLevel_" + sdata.index
+      );
+      let higherLvlTitle = document.createElement("h5");
+      higherLvlTitle.innerHTML = "Higher Level:";
+      higherLvlRef.appendChild(higherLvlTitle);
+
+      let higherLvl = document.createElement("p");
+      higherLvl.innerHTML = sdata.higher_level;
+      higherLvlRef.appendChild(higherLvl);
+    }
   }
 
   genSlotOmits(sdata) {
@@ -286,8 +299,7 @@ class SpellDetails extends React.Component {
         <section id={"contentBottom_" + this.props.detailsObj.index}>
           <h5>Description:</h5>
           <p>{this.props.detailsObj.desc}</p>
-          <h5>Higher Level:</h5>
-          <p>{this.props.detailsObj.higher_level}</p>
+          <div id={"spellHigherLevel_" + this.props.detailsObj.index}></div>
         </section>
       </td>
     );
