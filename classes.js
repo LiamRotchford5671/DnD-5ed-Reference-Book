@@ -10,15 +10,21 @@ class Classes extends React.Component {
             class_levels: [],
             profs: [],
             profChoices: [],
+            profSelectedItems: [],
             saveThrows: [],
             spellCasting: [],
             startEquips: [],
             equipChoiceItems: [],
+            equipSelectedItems: [],
+            equipChoiceDesc: [],
             subclasses: []
         };
 
         this.buttonClickEvent = this.buttonClickEvent.bind(this);
         this.classDataHandler = this.classDataHandler.bind(this);
+        this.addSelection = this.addSelection.bind(this);
+        this.removeSelection = this.removeSelection.bind(this);
+        this.weaponChart = this.weaponChart.bind(this);
     }
 
     //On click, toggles between nav and info section.
@@ -31,6 +37,149 @@ class Classes extends React.Component {
         this.classDataHandler(name);
     }
 
+    addSelection(item, type, url, eachLimit, index) {
+        url = url.replace('/api/', '');
+        const choiceInfoRequest = async () => {
+
+            const results = await doAPIrequest(url);
+            let idnum = results._id;
+
+            let rangeLong = [];
+            let throwRange = [];
+            let rangeData = [0,0,0,0];
+
+            if (type === "equip") {
+                if (results.equipment_category.name === "Weapon") {
+                    rangeData[0] = results.range.normal;
+                    if (results.range.long !== null) {
+                        rangeLong = ", Long - " + results.range.long;
+                        rangeData[1] = results.range.long
+                    } else if (results.throw_range) {
+                        throwRange = <p>Throw Range: Normal - {results.throw_range.normal}, Long
+                            - {results.throw_range.long}</p>;
+                        rangeData[2] = results.throw_range.normal;
+                        rangeData[3] = results.throw_range.long;
+                    }
+
+                    await this.setState({
+                        equipChoiceDesc: <div className={"desc" + idnum + " collapse"}>
+                            <p>Category: {results.equipment_category.name}</p>
+                            <p>{results.category_range}</p>
+                            <p>Properties: {results.properties.map(current => current.name + ', ')}</p>
+                            <p>Damage: {results.damage.damage_type.name} - {results.damage.damage_dice}</p>
+                            <p>Range: Normal - {results.range.normal}{rangeLong}</p>
+                            {throwRange}
+                            <div className={"weapon-chart collapse desc" + idnum + " container"}>
+                                <canvas id={"weaponChart2"} aria-label="polar chart" role="img"></canvas>
+                            </div>
+                            <p>Weight: {results.weight}</p>
+                            <p>Cost: {results.cost.quantity} {results.cost.unit}</p>
+                        </div>
+                    });
+                } else {
+                    let contents = [];
+                    if (results.contents) {
+                        contents =
+                            <p>Contents: {results.contents.map(current => current.item_url.replace('/api/equipment/', '') + ', ')}</p>;
+                    }
+
+                    await this.setState({
+                        equipChoiceDesc: <div className={"desc" + idnum + " collapse"}>
+                            <p>Category: {results.equipment_category.name}</p>
+                            <p>{results.gear_category} {results.quantity}</p>
+                            <p>{results.tool_category}</p>
+                            <p>{results.desc}</p>
+                            {contents}
+                            <p>Cost: {results.cost.quantity} {results.cost.unit}</p>
+                        </div>
+                    });
+                }
+            }
+
+            let typeName = type + 'SelectedItems';
+            let selectionArray = [];
+            let finalArray = [];
+
+            if (!this.state[typeName][index]) {
+                finalArray = this.state[typeName].slice();
+                finalArray[index] = selectionArray;
+                await this.setState({
+                    [typeName]: finalArray
+                })
+            }
+
+            if (this.state[typeName][index].length < eachLimit) {
+                finalArray = this.state[typeName].slice();
+                selectionArray = this.state[typeName][index].slice();
+                let i = selectionArray.length;
+
+                if (type === "equip") {
+                    let equipButton = [];
+                    if (results.equipment_category.name === "Weapon") {
+                        equipButton = <button type="button" className="btn btn-light choice" data-toggle="collapse"
+                                              data-target={'.desc' + idnum} onClick={() => this.weaponChart(rangeData, 'weaponChart2')}>{item}</button>;
+                    } else {
+                        equipButton = <button type="button" className="btn btn-light choice" data-toggle="collapse"
+                                              data-target={'.desc' + idnum}>{item}</button>;
+                    }
+
+                    selectionArray[i] = <div key={idnum}>
+                        {equipButton}
+                        <button className="btn badge badge-dark"
+                                onClick={() => this.removeSelection(type, index, i)}>x
+                        </button>
+                        {this.state.equipChoiceDesc}
+                    </div>;
+                } else if (type === "prof") {
+                    selectionArray[i] = <div key={idnum}>
+                        <button type="button" className="btn btn-light choice">{item}</button>
+                        <button className="btn badge badge-dark" onClick={() => this.removeSelection(type, index, i)}>x</button>
+                    </div>;
+                }
+
+                finalArray[index] = selectionArray;
+
+                this.setState({
+                    [typeName]: finalArray
+                });
+            }
+        }
+        choiceInfoRequest();
+    }
+
+    removeSelection(type, index, i) {
+        let typeName = type + 'SelectedItems';
+        let selectionArray = [];
+        let finalArray = [];
+
+        finalArray = this.state[typeName].slice();
+        selectionArray = this.state[typeName][index].slice();
+        selectionArray.splice(i, 1);
+        finalArray[index] = selectionArray;
+
+        this.setState({
+            [typeName]: finalArray
+        });
+    }
+
+    weaponChart(data, id) {
+        var ctx2 = document.querySelector('#' + id);
+        var myBarChart2 = new Chart(ctx2, {
+            type: 'polarArea',
+            data: {
+                labels: ['Normal', 'Long', 'Throw Normal', 'Throw Long'],
+                datasets: [{
+                    data: data,
+                    backgroundColor: ['rgba(66,66,66,0.8)', 'rgba(146,99,255,0.8)', 'rgba(255,46,46,0.8)', 'rgba(105,220,255,0.8)' ]
+                }]
+            },
+            options: {
+                maintainAspectRatio: false
+            }
+        });
+    }
+
+
     classDataHandler(name) {
         if (this.state.toggle === true) {
             const classInfoRequest = async () => {
@@ -40,7 +189,6 @@ class Classes extends React.Component {
 
                 //Initial Class API Fetch
                 const results = await doAPIrequest(`classes/` + this.state.classUrl + '/');
-                console.log(results);
 
                 //Saving Throws
                 let saveThrowNames = results.saving_throws.map(current => current.name);
@@ -61,9 +209,6 @@ class Classes extends React.Component {
                             </div>
                         </div>);
                 }
-                this.setState({
-
-                })
 
                 //Subclasses
                 let subClasses = results.subclasses.map(async (current, i) => {
@@ -88,7 +233,9 @@ class Classes extends React.Component {
                     <div key={i} className="dropdown dropright">
                         <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose: {current.choose}</button>
                         <div className="dropdown-menu">{current.from.map((next, j) =>
-                            <button type="button" className="dropdown-item" key={j}>{next.name.replace('Skill:', '')}</button>)}
+                            <button type="button" className="dropdown-item" key={j} onClick={() => this.addSelection(next.name.replace('Skill:', ''), "prof", next.url, current.choose, i)}>
+                                {next.name.replace('Skill:', '')}
+                            </button>)}
                         </div>
                     </div>);
 
@@ -96,7 +243,6 @@ class Classes extends React.Component {
                 let startingEquipUrl = results.starting_equipment.url.replace('/api/', '')
 
                 const equipResults = await doAPIrequest(startingEquipUrl);
-                console.log(equipResults);
 
                 let equipResultsUrls = equipResults.starting_equipment.map(current => current.item.url.replace('/api/', ''));
                 let startEquips = [];
@@ -104,7 +250,13 @@ class Classes extends React.Component {
 
                 for (let item in equips) {
                     const eachEquipResults = await doAPIrequest(equipResultsUrls[item]);
-                    console.log(eachEquipResults);
+
+                    let weaponEquips = [];
+                    let armorEquips = [];
+                    let rangeLong = [];
+                    let throwRange = [];
+                    let rangeData = [0,0,0,0];
+                    let equipButton = [];
 
                     function Contents() {
                         if (eachEquipResults.contents) {
@@ -113,57 +265,45 @@ class Classes extends React.Component {
                         }
                     }
 
-                    function WeaponEquips() {
-                        if (eachEquipResults.equipment_category.name === "Weapon") {
-                            let rangeLong = [];
-                            let throwRange = [];
-                            let rangeData = [eachEquipResults.range.normal, 0, 0, 0];
+                    if (eachEquipResults.equipment_category.name === "Weapon") {
+                        equipButton = <button className="btn btn-light" data-toggle="collapse" data-target={'.equip-desc' + item} onClick={() => this.weaponChart(rangeData, 'weaponChart1')}>
+                            {equips[item].item.name}: {equips[item].quantity}
+                        </button>;
 
-                            if (eachEquipResults.range.long !== null) {
-                                rangeLong = ", Long - " + eachEquipResults.range.long;
-                                rangeData[1] = eachEquipResults.range.long
-                            } else if (eachEquipResults.throw_range) {
-                                throwRange = <p>Throw Range: Normal - {eachEquipResults.throw_range.normal}, Long - {eachEquipResults.throw_range.long}</p>;
-                                rangeData[2] = eachEquipResults.throw_range.normal;
-                                rangeData[3] = eachEquipResults.throw_range.long;
-                            }
-                            console.log(rangeData);
-
-                            var ctx2 = document.querySelector('#weaponChart');
-                            var myBarChart2 = new Chart(ctx2, {
-                                type: 'polarArea',
-                                data: {
-                                    datasets: [{
-                                        label: ['Normal', 'Long'],
-                                        data: rangeData,
-                                        backgroundColor: 'rgba(255,46,46,0.8)'
-                                    }]
-                                },
-                                options: {
-                                    legend: {
-                                        display: true
-                                    }
-                                }
-                            });
-
-                            return <div>
-                                <p>{eachEquipResults.category_range}</p>
-                                <p>Damage: {eachEquipResults.damage.damage_type.name} {eachEquipResults.damage.damage_dice}</p>
-                                <p>Range: Normal - {eachEquipResults.range.normal}{rangeLong}</p>
-                                {throwRange}
-                                <p>Properties: {eachEquipResults.properties.map(current => current.name + ', ')}</p>
-                            </div>;
+                        rangeData[0] = eachEquipResults.range.normal;
+                        if (eachEquipResults.range.long !== null) {
+                            rangeLong = ", Long - " + eachEquipResults.range.long;
+                            rangeData[1] = eachEquipResults.range.long
+                        } else if (eachEquipResults.throw_range) {
+                            throwRange = <p>Throw Range: Normal - {eachEquipResults.throw_range.normal}, Long - {eachEquipResults.throw_range.long}</p>;
+                            rangeData[2] = eachEquipResults.throw_range.normal;
+                            rangeData[3] = eachEquipResults.throw_range.long;
                         }
-                    }
 
-                    function ArmorEquips() {
-                        if (eachEquipResults.equipment_category.name === "Armor") {
-                            return <div>
-                                <p>Armor Category: {eachEquipResults.armor_category}</p>
-                                <p>Armor Class: Base - {eachEquipResults.armor_class.base}</p>
-                                <p>Strength Minimum: {eachEquipResults.str_minimum}</p>
-                            </div>;
-                        }
+                        weaponEquips = <div>
+                            <p>{eachEquipResults.category_range}</p>
+                            <p>Properties: {eachEquipResults.properties.map(current => current.name + ', ')}</p>
+                            <p>Damage: {eachEquipResults.damage.damage_type.name} - {eachEquipResults.damage.damage_dice}</p>
+                            <p>Range: Normal - {eachEquipResults.range.normal}{rangeLong}</p>
+                            {throwRange}
+                            <div className={"weapon-chart collapse equip-desc" + item + " container"}>
+                                <canvas id="weaponChart1" aria-label="polar chart" role="img"></canvas>
+                            </div>
+                        </div>;
+                    } else if (eachEquipResults.equipment_category.name === "Armor") {
+                        equipButton = <button className="btn btn-light" data-toggle="collapse" data-target={'.equip-desc' + item}>
+                            {equips[item].item.name}: {equips[item].quantity}
+                        </button>;
+
+                        armorEquips = <div>
+                            <p>Armor Category: {eachEquipResults.armor_category}</p>
+                            <p>Armor Class: Base - {eachEquipResults.armor_class.base}</p>
+                            <p>Strength Minimum: {eachEquipResults.str_minimum}</p>
+                        </div>;
+                    } else {
+                        equipButton = <button className="btn btn-light" data-toggle="collapse" data-target={'.equip-desc' + item}>
+                            {equips[item].item.name}: {equips[item].quantity}
+                        </button>;
                     }
 
                     let equipWeight = '';
@@ -173,12 +313,11 @@ class Classes extends React.Component {
 
                     startEquips.push(
                         <div className="startEquips" key={item}>
-                            <p>{equips[item].item.name}: {equips[item].quantity}</p>
-                            <button className="btn btn-primary " data-toggle="collapse" data-target={'.equip-desc' + item}>Unpack</button>
+                            {equipButton}
                             <div className={"collapse equip-desc" + item}>
                                 <p>Category: {eachEquipResults.equipment_category.name}</p>
-                                {WeaponEquips()}
-                                {ArmorEquips()}
+                                {weaponEquips}
+                                {armorEquips}
                                 {Contents()}
                                 {equipWeight}
                                 <p>Cost: {eachEquipResults.cost.quantity} {eachEquipResults.cost.unit}</p>
@@ -197,7 +336,9 @@ class Classes extends React.Component {
                                 <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose 1:</button>
                                 <div className="dropdown-menu">
                                     {equipResults[key].map(current => current.from.map((next, i) =>
-                                    <button type="button" className="dropdown-item" key={i}>{next.item.name}</button>))}
+                                    <button type="button" className="dropdown-item" key={i} onClick={() => this.addSelection(next.item.name, "equip", next.item.url, current.choose, key.replace('choice_', '') - 1)}>
+                                        {next.item.name}
+                                    </button>))}
                                 </div>
                             </div>
                         equipChoiceItems.push(equipItems);
@@ -347,10 +488,13 @@ class Classes extends React.Component {
                 class_levels: [],
                 profs: [],
                 profChoices: [],
+                profSelectedItems: [],
                 saveThrows: [],
                 spellCasting: [],
                 startEquips: [],
                 equipChoiceItems: [],
+                equipSelectedItems: [],
+                equipChoiceDesc: [],
                 subclasses: []
             });
         }
@@ -379,13 +523,11 @@ class Classes extends React.Component {
                     <div className="class-section">
                         <div className="class-info">
                             <div className="class-header col-lg-4 col-md-12 row">
-                                <button className={"class-section-btns " + this.state.classUrl + "-icon"} onClick={this.buttonClickEvent}>
-                                    {/*<img className='class-section-btns'  src={'./images/Class-Icons/' + `${this.state.classUrl}` + '-icon.jpeg'} alt={this.state.name} />*/}
-                                </button>
+                                <button className={"class-section-btns " + this.state.classUrl + "-icon"} onClick={this.buttonClickEvent}></button>
                                 <div className="class-img col-8">
                                     <h4>{this.state.name}</h4>
                                     <p>Hit die: {this.state.hit_die}</p>
-                                    <img src={'./images/Class-Images/' + `${this.state.classUrl}` + '.png'} alt={this.state.name}/>
+                                    <img src={'./images/Class-Images/' + this.state.classUrl + '.png'} alt={this.state.name}/>
                                 </div>
                             </div>
 
@@ -401,6 +543,7 @@ class Classes extends React.Component {
                                 <h5>Proficiency Choices</h5>
                                 <div className="class-prof-options">
                                     {this.state.profChoices}
+                                    {this.state.profSelectedItems}
                                 </div>
                             </div>
                             <div className="class-equips col-lg-4 col-md-6 col-sm-12">
@@ -409,10 +552,8 @@ class Classes extends React.Component {
                                 <h5>Equipment Choices</h5>
                                 <div className="class-equip-items">
                                     {this.state.equipChoiceItems}
+                                    {this.state.equipSelectedItems}
                                 </div>
-                            </div>
-                            <div className="weapon-chart collapse equip-desc1 container col-lg-4">
-                                <canvas id="weaponChart" aria-label="bar chart" role="img"></canvas>
                             </div>
                             {this.state.spellCasting}
                         </div>
