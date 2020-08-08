@@ -37,15 +37,16 @@ class Classes extends React.Component {
     }
 
     addSelection(item, type, url, eachLimit, index) {
-
+        console.log(item);
         url = url.replace('/api/', '');
         const choiceInfoRequest = async () => {
-            if (type === "equip") {
-                const results = await doAPIrequest(url);
-                console.log(results);
 
+            const results = await doAPIrequest(url);
+            let idnum = results._id;
+
+            if (type === "equip") {
                 await this.setState({
-                    equipChoiceDesc: <div className={"desc" + item + " collapse"}>
+                    equipChoiceDesc: <div className={"desc" + idnum + " collapse"}>
                         <p>Category: {results.equipment_category.name}</p>
                         <p>Weight: {results.weight}</p>
                         <p>Cost: {results.cost.quantity} {results.cost.unit}</p>
@@ -73,7 +74,7 @@ class Classes extends React.Component {
                 if (type === "equip") {
                     selectionArray[i] = <div key={item}>
                         <button type="button" className="btn btn-light choice" data-toggle="collapse"
-                                data-target={'.desc' + item}>{item}</button>
+                                data-target={'.desc' + idnum}>{item}</button>
                         <button className="btn badge badge-dark"
                                 onClick={() => this.removeSelection(type, index, i)}>x
                         </button>

@@ -12,17 +12,22 @@ class Races extends React.Component {
             languageDesc: '',
             languages: [],
             languageOptions: [],
+            languagesSelectedItems: [],
             size: '',
             size_desc: '',
             speed: '',
             profs: [],
             profOptions: [],
+            profSelectedItems: [],
             subraces: [],
             traits: [],
-            trait_options: []
+            trait_options: [],
+            traitSelectedItems: []
         };
         this.buttonClickEvent = this.buttonClickEvent.bind(this);
         this.raceDataHandler = this.raceDataHandler.bind(this);
+        this.addSelection = this.addSelection.bind(this);
+        this.removeSelection = this.removeSelection.bind(this);
     }
 
     //On click, toggles between nav and info section.
@@ -33,6 +38,63 @@ class Races extends React.Component {
         }));
 
         this.raceDataHandler(name);
+    }
+
+    addSelection(item, type, url) {
+        let typeName = type + 'SelectedItems';
+        let selectionArray = [];
+
+        const setState = async () => {
+            url = url.replace('/api/', '');
+
+            const results = await doAPIrequest(url);
+
+            if (!this.state[typeName]) {
+                selectionArray = this.state[typeName].slice();
+                await this.setState({
+                    [typeName]: selectionArray
+                })
+            }
+
+            if (this.state[typeName].length < 1) {
+                if (type === "prof") {
+                    selectionArray = <div key={item}>
+                        <button type="button" className="btn btn-light choice" data-toggle="collapse"
+                                data-target={'.desc1'}>{item}</button>
+                        <button className="btn badge badge-dark"
+                                onClick={() => this.removeSelection(type)}>x
+                        </button>
+                        <p className={'collapse desc1'}>Type: {results.type}</p>
+                    </div>;
+                } else {
+                    selectionArray = <div key={item}>
+                        <button type="button" className="btn btn-light choice" data-toggle="collapse"
+                                data-target={'.desc1'}>{item}</button>
+                        <button className="btn badge badge-dark"
+                                onClick={() => this.removeSelection(type)}>x
+                        </button>
+                        <p className={'collapse desc1'}>{results.desc}</p>
+                    </div>;
+                }
+                this.setState({
+                    [typeName]: [selectionArray]
+                });
+            }
+        }
+
+        setState();
+    }
+
+    removeSelection(type) {
+        let typeName = type + 'SelectedItems';
+        let selectionArray = [];
+        selectionArray = this.state[typeName].slice();
+
+        selectionArray.splice(0, 1);
+
+        this.setState({
+            [typeName]: selectionArray
+        });
     }
 
     raceDataHandler(name) {
@@ -109,14 +171,14 @@ class Races extends React.Component {
                     });
                 }
 
-                //Language Bonuses
+                //Language Options
                 if (results.language_options) {
                     let languageOptions =
                         <div className="dropdown dropright">
                             <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose 1: </button>
                             <div className="dropdown-menu">
                             {results.language_options.from.map((current, i) =>
-                            <button type="button" className="dropdown-item" key={i}>{current.name}</button>)}
+                            <button type="button" className="dropdown-item" key={i}  onClick={() => this.addSelection(current.name, results.language_options.type, current.url)}>{current.name}</button>)}
                             </div>
                         </div>;
 
@@ -140,7 +202,7 @@ class Races extends React.Component {
                                 <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose 1:</button>
                                 <div className="dropdown-menu">
                                     {results.starting_proficiency_options.from.map((current, i) =>
-                                        <button type="button" className="dropdown-item" key={i}>{current.name}</button>)}
+                                        <button type="button" className="dropdown-item" key={i}  onClick={() => this.addSelection(current.name, "prof", current.url)}>{current.name}</button>)}
                                 </div>
                             </div>;
 
@@ -156,11 +218,20 @@ class Races extends React.Component {
 
                 //Subraces
                 if (results.subraces != '') {
+
+                    let subraceUrl = results.subraces.map(current => current.url.replace('/api/', ''));
+
+                    const subRaceResults = await doAPIrequest(subraceUrl);
+
+                    let abilityBonus = subRaceResults.ability_bonuses.map((current, i) => <p key={i}>{current.name} - {current.bonus}</p>)
+
                     let subraces =
                         <div className="race-subs">
                             <h5>Subraces</h5>
-                            {results.subraces.map((current, i) =>
-                                <p key={i}>{current.name}</p>)}
+                            <p><b>- {subRaceResults.name} -</b></p>
+                            <p>{subRaceResults.desc}</p>
+                            <p>Ability Bonuses:</p>
+                            {abilityBonus}
                         </div>;
                     this.setState({
                         subraces: subraces
@@ -188,7 +259,7 @@ class Races extends React.Component {
                             <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose 1:</button>
                             <div className="dropdown-menu">
                                 {results.trait_options.from.map((current,i) =>
-                                <button type="button" className="dropdown-item" key={i}>{current.name}</button>)}
+                                <button type="button" className="dropdown-item" key={i} onClick={() => this.addSelection(current.name, results.trait_options.type, current.url)}>{current.name}</button>)}
                             </div>
                         </div>;
 
@@ -221,14 +292,17 @@ class Races extends React.Component {
                 languageDesc: '',
                 languages: [],
                 languageOptions: [],
+                languagesSelectedItems: [],
                 size: '',
                 size_desc: '',
                 speed: '',
                 profs: [],
                 profOptions: [],
+                profSelectedItems: [],
                 subraces: [],
                 traits: [],
-                trait_options: []
+                trait_options: [],
+                traitSelectedItems: []
             })
         }
     }
@@ -274,6 +348,7 @@ class Races extends React.Component {
                                 <h5>Languages</h5>
                                 {this.state.languages}
                                 {this.state.languageOptions}
+                                {this.state.languagesSelectedItems}
                             </div>
                             <div className="race-stats col-lg-6 col-sm-12">
                                 <h5>Speed</h5>
@@ -285,8 +360,10 @@ class Races extends React.Component {
                                 {this.state.abilityOptions}
                                 {this.state.profs}
                                 {this.state.profOptions}
+                                {this.state.profSelectedItems}
                                 {this.state.traits}
                                 {this.state.trait_options}
+                                {this.state.traitSelectedItems}
                             </div>
                         </div>
                     </div>
