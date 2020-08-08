@@ -36,7 +36,8 @@ class Classes extends React.Component {
         this.classDataHandler(name);
     }
 
-    addSelection(item, type, url, eachLimit, index, max) {
+    addSelection(item, type, url, eachLimit, index) {
+
         url = url.replace('/api/', '');
         const choiceInfoRequest = async () => {
             if (type === "equip") {
@@ -52,102 +53,68 @@ class Classes extends React.Component {
                 })
             }
 
+            let typeName = type + 'SelectedItems';
             let selectionArray = [];
             let finalArray = [];
 
-            if (this.state.equipSelectedItems[index]) {
-                console.log('test');
-            } else {
-                finalArray = this.state.equipSelectedItems.slice();
+            if (!this.state[typeName][index]) {
+                finalArray = this.state[typeName].slice();
                 finalArray[index] = selectionArray;
-                this.setState({
-                    equipSelectedItems: finalArray
+                await this.setState({
+                    [typeName]: finalArray
                 })
             }
 
-            if (type === "equip") {
-                if (this.state.equipSelectedItems.length <= max) {
-                    if (this.state.equipSelectedItems[index].length < eachLimit) {
-                        finalArray = this.state.equipSelectedItems.slice();
-                        selectionArray = this.state.equipSelectedItems[index].slice();
-                        let i = selectionArray.length;
+            if (this.state[typeName][index].length < eachLimit) {
+                finalArray = this.state[typeName].slice();
+                selectionArray = this.state[typeName][index].slice();
+                let i = selectionArray.length;
 
-                        selectionArray[i] = <div key={item}>
-                            <button type="button" className="btn btn-light choice" data-toggle="collapse" data-target={'.desc' + item}>{item}</button>
-                            <button className="btn badge badge-dark" onClick={() => this.removeSelection(type, index, i)}>x</button>
-                            {this.state.equipChoiceDesc}
-                        </div>;
-
-                        finalArray[index] = selectionArray;
-
-                        this.setState({
-                            equipSelectedItems: finalArray
-                        });
-
-                    }
-
-                }
-
-            } else if (type === "prof") {
-                selectionArray = this.state.profSelectedItems.slice();
-                if (selectionArray.length < eachLimit) {
-                    let i = selectionArray.length;
+                if (type === "equip") {
+                    selectionArray[i] = <div key={item}>
+                        <button type="button" className="btn btn-light choice" data-toggle="collapse"
+                                data-target={'.desc' + item}>{item}</button>
+                        <button className="btn badge badge-dark"
+                                onClick={() => this.removeSelection(type, index, i)}>x
+                        </button>
+                        {this.state.equipChoiceDesc}
+                    </div>;
+                } else if (type === "prof") {
+                    console.log(i);
                     selectionArray[i] = <div key={item}>
                         <button type="button" className="btn btn-light choice">{item}</button>
-                        <button className="btn badge badge-dark" onClick={() => this.removeSelection(type, i)}>x</button>
+                        <button className="btn badge badge-dark" onClick={() => this.removeSelection(type, index, i)}>x</button>
                     </div>;
                 }
+
+                finalArray[index] = selectionArray;
+
                 this.setState({
-                    profSelectedItems: selectionArray
+                    [typeName]: finalArray
                 });
             }
         }
         choiceInfoRequest();
-
-
-        //
-        // if (item === this.state.equipSelectedItems) {
-        //     this.setState({
-        //         equipSelectedItem: []
-        //     });
-        // } else {
-        //     this.setState({
-        //         equipSelectedItems: selectionArray
-        //     });
-        // }
     }
 
     removeSelection(type, index, i) {
+        let typeName = type + 'SelectedItems';
         let selectionArray = [];
         let finalArray = [];
 
-        if (type === "equip") {
-            finalArray = this.state.equipSelectedItems.slice();
-            selectionArray = this.state.equipSelectedItems[index].slice();
-            console.log(selectionArray);
-            selectionArray.splice(i, 1);
-            finalArray[index] = selectionArray;
+        finalArray = this.state[typeName].slice();
+        selectionArray = this.state[typeName][index].slice();
+        console.log(i);
+        console.log(selectionArray);
+        selectionArray.splice(i, 1);
+        finalArray[index] = selectionArray;
+        console.log(finalArray);
 
-            this.setState({
-                equipSelectedItems: finalArray
-            });
-
-        } else if (type === "prof") {
-            selectionArray = this.state.profSelectedItems.slice();
-            if (this.state.profSelectedItems.length === 1) {
-                selectionArray.splice(0, 1);
-            } else {
-                selectionArray.splice(index, 1);
-            }
-            this.setState({
-                profSelectedItems: selectionArray
-            });
-        }
+        this.setState({
+            [typeName]: finalArray
+        });
     }
 
-    choiceData(type, url) {
-
-    }
 
     classDataHandler(name) {
         if (this.state.toggle === true) {
@@ -203,7 +170,9 @@ class Classes extends React.Component {
                     <div key={i} className="dropdown dropright">
                         <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose: {current.choose}</button>
                         <div className="dropdown-menu">{current.from.map((next, j) =>
-                            <button type="button" className="dropdown-item" key={j} onClick={() => this.addSelection(next.name.replace('Skill:', ''), "prof", next.url, current.choose, i, results.proficiency_choices.length)}>{next.name.replace('Skill:', '')}</button>)}
+                            <button type="button" className="dropdown-item" key={j} onClick={() => this.addSelection(next.name.replace('Skill:', ''), "prof", next.url, current.choose, i)}>
+                                {next.name.replace('Skill:', '')}
+                            </button>)}
                         </div>
                     </div>);
 
@@ -316,7 +285,9 @@ class Classes extends React.Component {
                                 <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose 1:</button>
                                 <div className="dropdown-menu">
                                     {equipResults[key].map(current => current.from.map((next, i) =>
-                                    <button type="button" className="dropdown-item" key={i} onClick={() => this.addSelection(next.item.name, "equip", next.item.url, current.choose, key.replace('choice_', '') - 1, equipResults.choices_to_make)}>{next.item.name}</button>))}
+                                    <button type="button" className="dropdown-item" key={i} onClick={() => this.addSelection(next.item.name, "equip", next.item.url, current.choose, key.replace('choice_', '') - 1)}>
+                                        {next.item.name}
+                                    </button>))}
                                 </div>
                             </div>
                         equipChoiceItems.push(equipItems);

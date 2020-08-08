@@ -253,15 +253,15 @@ class Races extends React.Component {
                     unmountOnExit
                 >
                     <div className="race-section">
-                        <div className="race-img">
+                        <div className="race-img col-lg-3">
                             <h4>{this.state.name}</h4>
                             <button className="race-section-btn" onClick={this.buttonClickEvent}>
                                 <img src={'./images/Race-Images/' + `${this.state.raceUrl}` + '.png'} alt={this.state.raceUrl} />
                             </button>
                             {this.state.subraces}
                         </div>
-                        <div className="race-info">
-                            <div className="race-specs">
+                        <div className="race-info col-lg-8">
+                            <div className="race-specs col-lg-6 col-sm-12">
                                 <h5>Size</h5>
                                 <p>{this.state.size}</p>
                                 <p>{this.state.size_desc}</p>
@@ -275,7 +275,7 @@ class Races extends React.Component {
                                 {this.state.languages}
                                 {this.state.languageOptions}
                             </div>
-                            <div className="race-stats">
+                            <div className="race-stats col-lg-6 col-sm-12">
                                 <h5>Speed</h5>
                                 <p>{this.state.speed}</p>
                                 <h5>Ability Bonuses</h5>
