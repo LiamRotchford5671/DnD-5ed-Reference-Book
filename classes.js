@@ -172,6 +172,9 @@ class Classes extends React.Component {
                     data: data,
                     backgroundColor: ['rgba(66,66,66,0.8)', 'rgba(146,99,255,0.8)', 'rgba(255,46,46,0.8)', 'rgba(105,220,255,0.8)' ]
                 }]
+            },
+            options: {
+                maintainAspectRatio: false
             }
         });
     }

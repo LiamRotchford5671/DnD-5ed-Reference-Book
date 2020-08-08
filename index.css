@@ -227,6 +227,7 @@ button:focus {
 .weapon-chart {
   margin-left: -10%;
   margin-bottom: 20px;
+  min-height: 300px;
 }
 
 .class-levels {
