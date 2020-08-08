@@ -117,6 +117,7 @@ class Equipment extends React.Component {
             document.getElementById(edata.index)
           );
         }
+        this.genGearOmits(edata);
         break;
 
       case "Armor":
@@ -203,6 +204,29 @@ class Equipment extends React.Component {
         },
       },
     });
+  }
+
+  genGearOmits(edata) {
+    if ("quantity" in edata) {
+      let quantityRef = document.getElementById("gearQuantity_" + edata.index);
+      let quanttitle = document.createElement("h5");
+      quanttitle.innerHTML = "Quantity:";
+      quantityRef.appendChild(quanttitle);
+
+      let quantity = document.createElement("p");
+      quantity.innerHTML = edata.quantity;
+      quantityRef.appendChild(quantity);
+    }
+    if ("desc" in edata) {
+      let descRef = document.getElementById("gearDescription_" + edata.index);
+      let desctitle = document.createElement("h5");
+      desctitle.innerHTML = "Description:";
+      descRef.appendChild(desctitle);
+
+      let desc = document.createElement("p");
+      desc.innerHTML = edata.desc;
+      descRef.appendChild(desc);
+    }
   }
 
   genItemTable(edata) {
@@ -342,22 +366,18 @@ class Gear extends React.Component {
             <p>{this.props.detailsObj.equipment_category.name}</p>
             <h5>Gear Category:</h5>
             <p>{this.props.detailsObj.gear_category}</p>
+            <div id={"gearQuantity_" + this.props.detailsObj.index}></div>
+            <h5>Weight:</h5>
+            <p>{this.props.detailsObj.weight}</p>
             <h5>Cost:</h5>
             <p>
               {this.props.detailsObj.cost.quantity + " "}{" "}
               {this.props.detailsObj.cost.unit}
             </p>
           </section>
-          <section id={"contentRight_" + this.props.detailsObj.index}>
-            <h5>Quantity</h5>
-            <p>{this.props.detailsObj.quantity}</p>
-            <h5>Weight:</h5>
-            <p>{this.props.detailsObj.weight}</p>
-          </section>
         </div>
         <section id={"contentBottom_" + this.props.detailsObj.index}>
-          <h5>Description:</h5>
-          <p>{this.props.detailsObj.desc}</p>
+          <div id={"gearDescription_" + this.props.detailsObj.index}></div>
         </section>
       </td>
     );
