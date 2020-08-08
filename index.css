@@ -224,6 +224,11 @@ button:focus {
   overflow: auto;
 }
 
+.weapon-chart {
+  margin-left: -10%;
+  margin-bottom: 20px;
+}
+
 .class-levels {
   margin-top: 50px;
   font-size: .75em;

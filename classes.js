@@ -24,6 +24,7 @@ class Classes extends React.Component {
         this.classDataHandler = this.classDataHandler.bind(this);
         this.addSelection = this.addSelection.bind(this);
         this.removeSelection = this.removeSelection.bind(this);
+        this.weaponChart = this.weaponChart.bind(this);
     }
 
     //On click, toggles between nav and info section.
@@ -37,17 +38,20 @@ class Classes extends React.Component {
     }
 
     addSelection(item, type, url, eachLimit, index) {
-        console.log(item);
         url = url.replace('/api/', '');
         const choiceInfoRequest = async () => {
 
             const results = await doAPIrequest(url);
             let idnum = results._id;
+            console.log(results);
 
             if (type === "equip") {
                 await this.setState({
                     equipChoiceDesc: <div className={"desc" + idnum + " collapse"}>
                         <p>Category: {results.equipment_category.name}</p>
+                        <div className={"weapon-chart collapse desc" + idnum + " container"}>
+                            <canvas id={"weaponChart2"} aria-label="polar chart" role="img"></canvas>
+                        </div>
                         <p>Weight: {results.weight}</p>
                         <p>Cost: {results.cost.quantity} {results.cost.unit}</p>
                     </div>
@@ -74,14 +78,13 @@ class Classes extends React.Component {
                 if (type === "equip") {
                     selectionArray[i] = <div key={item}>
                         <button type="button" className="btn btn-light choice" data-toggle="collapse"
-                                data-target={'.desc' + idnum}>{item}</button>
+                                data-target={'.desc' + idnum} onClick={() => this.weaponChart([1,2,3,4], 'weaponChart2')}>{item}</button>
                         <button className="btn badge badge-dark"
                                 onClick={() => this.removeSelection(type, index, i)}>x
                         </button>
                         {this.state.equipChoiceDesc}
                     </div>;
                 } else if (type === "prof") {
-                    console.log(i);
                     selectionArray[i] = <div key={item}>
                         <button type="button" className="btn btn-light choice">{item}</button>
                         <button className="btn badge badge-dark" onClick={() => this.removeSelection(type, index, i)}>x</button>
@@ -105,14 +108,25 @@ class Classes extends React.Component {
 
         finalArray = this.state[typeName].slice();
         selectionArray = this.state[typeName][index].slice();
-        console.log(i);
-        console.log(selectionArray);
         selectionArray.splice(i, 1);
         finalArray[index] = selectionArray;
-        console.log(finalArray);
 
         this.setState({
             [typeName]: finalArray
+        });
+    }
+
+    weaponChart(data, id) {
+        var ctx2 = document.querySelector('#' + id);
+        var myBarChart2 = new Chart(ctx2, {
+            type: 'polarArea',
+            data: {
+                labels: ['Normal', 'Long', 'Throw Normal', 'Throw Long'],
+                datasets: [{
+                    data: data,
+                    backgroundColor: ['rgba(66,66,66,0.8)', 'rgba(146,99,255,0.8)', 'rgba(255,46,46,0.8)', 'rgba(105,220,255,0.8)' ]
+                }]
+            }
         });
     }
 
@@ -181,7 +195,6 @@ class Classes extends React.Component {
                 let startingEquipUrl = results.starting_equipment.url.replace('/api/', '')
 
                 const equipResults = await doAPIrequest(startingEquipUrl);
-                console.log(equipResults);
 
                 let equipResultsUrls = equipResults.starting_equipment.map(current => current.item.url.replace('/api/', ''));
                 let startEquips = [];
@@ -189,7 +202,12 @@ class Classes extends React.Component {
 
                 for (let item in equips) {
                     const eachEquipResults = await doAPIrequest(equipResultsUrls[item]);
-                    // console.log(eachEquipResults);
+
+                    let weaponEquips = [];
+                    let armorEquips = [];
+                    let rangeLong = [];
+                    let throwRange = [];
+                    let rangeData = [];
 
                     function Contents() {
                         if (eachEquipResults.contents) {
@@ -198,62 +216,35 @@ class Classes extends React.Component {
                         }
                     }
 
-                    function WeaponEquips() {
-                        if (eachEquipResults.equipment_category.name === "Weapon") {
-                            let rangeLong = [];
-                            let throwRange = [];
-                            let rangeData = [eachEquipResults.range.normal, 0, 0, 0];
-
-                            if (eachEquipResults.range.long !== null) {
-                                rangeLong = ", Long - " + eachEquipResults.range.long;
-                                rangeData[1] = eachEquipResults.range.long
-                            } else if (eachEquipResults.throw_range) {
-                                throwRange = <p>Throw Range: Normal - {eachEquipResults.throw_range.normal}, Long - {eachEquipResults.throw_range.long}</p>;
-                                rangeData[2] = eachEquipResults.throw_range.normal;
-                                rangeData[3] = eachEquipResults.throw_range.long;
-                            }
-
-                            function weaponChart() {
-                                // var ctx2 = document.querySelector('#weaponChart');
-                                // var myBarChart2 = new Chart(ctx2, {
-                                //     type: 'polarArea',
-                                //     data: {
-                                //         datasets: [{
-                                //             label: ['Normal', 'Long'],
-                                //             data: [0,1,2,3],
-                                //             backgroundColor: 'rgba(255,46,46,0.8)'
-                                //         }]
-                                //     },
-                                //     options: {
-                                //         legend: {
-                                //             display: true
-                                //         }
-                                //     }
-                                // });
-                            }
-
-                            return <div>
-                                <p>{eachEquipResults.category_range}</p>
-                                <p>Properties: {eachEquipResults.properties.map(current => current.name + ', ')}</p>
-                                <p>Damage: {eachEquipResults.damage.damage_type.name} {eachEquipResults.damage.damage_dice}</p>
-                                <p>Range: Normal - {eachEquipResults.range.normal}{rangeLong}</p>
-                                {throwRange}
-                                <div className={"weapon-chart collapse equip-desc" + item + " container col-lg-4"}>
-                                    <canvas id="weaponChart" aria-label="polar chart" role="img"></canvas>
-                                </div>
-                                {weaponChart()}
-                            </div>;
+                    if (eachEquipResults.equipment_category.name === "Weapon") {
+                        rangeData[0] = eachEquipResults.range.normal;
+                        if (eachEquipResults.range.long !== null) {
+                            rangeLong = ", Long - " + eachEquipResults.range.long;
+                            rangeData[1] = eachEquipResults.range.long
+                        } else if (eachEquipResults.throw_range) {
+                            throwRange = <p>Throw Range: Normal - {eachEquipResults.throw_range.normal}, Long - {eachEquipResults.throw_range.long}</p>;
+                            rangeData[2] = eachEquipResults.throw_range.normal;
+                            rangeData[3] = eachEquipResults.throw_range.long;
                         }
+
+                        weaponEquips = <div>
+                            <p>{eachEquipResults.category_range}</p>
+                            <p>Properties: {eachEquipResults.properties.map(current => current.name + ', ')}</p>
+                            <p>Damage: {eachEquipResults.damage.damage_type.name} {eachEquipResults.damage.damage_dice}</p>
+                            <p>Range: Normal - {eachEquipResults.range.normal}{rangeLong}</p>
+                            {throwRange}
+                            <div className={"weapon-chart collapse equip-desc" + item + " container"}>
+                                <canvas id="weaponChart1" aria-label="polar chart" role="img"></canvas>
+                            </div>
+                        </div>;
                     }
 
-                    function ArmorEquips() {
-                        if (eachEquipResults.equipment_category.name === "Armor") {
-                            return <div>
-                                <p>Armor Category: {eachEquipResults.armor_category}</p>
-                                <p>Armor Class: Base - {eachEquipResults.armor_class.base}</p>
-                                <p>Strength Minimum: {eachEquipResults.str_minimum}</p>
-                            </div>;
-                        }
+                    if (eachEquipResults.equipment_category.name === "Armor") {
+                        armorEquips = <div>
+                            <p>Armor Category: {eachEquipResults.armor_category}</p>
+                            <p>Armor Class: Base - {eachEquipResults.armor_class.base}</p>
+                            <p>Strength Minimum: {eachEquipResults.str_minimum}</p>
+                        </div>;
                     }
 
                     let equipWeight = '';
@@ -263,11 +254,11 @@ class Classes extends React.Component {
 
                     startEquips.push(
                         <div className="startEquips" key={item}>
-                            <button className="btn btn-light " data-toggle="collapse" data-target={'.equip-desc' + item}>{equips[item].item.name}: {equips[item].quantity}</button>
+                            <button className="btn btn-light " data-toggle="collapse" data-target={'.equip-desc' + item} onClick={() => this.weaponChart(rangeData, 'weaponChart1')}>{equips[item].item.name}: {equips[item].quantity}</button>
                             <div className={"collapse equip-desc" + item}>
                                 <p>Category: {eachEquipResults.equipment_category.name}</p>
-                                {WeaponEquips()}
-                                {ArmorEquips()}
+                                {weaponEquips}
+                                {armorEquips}
                                 {Contents()}
                                 {equipWeight}
                                 <p>Cost: {eachEquipResults.cost.quantity} {eachEquipResults.cost.unit}</p>
