@@ -59,12 +59,12 @@ body > main > .container-fluid {
 
 body > footer {
   grid-area: foot;
-  height: 4em;  
-  color: #c7c7c7;
-  font-size: .75em;
+  height: 4em;
+  color: #e2e2e2;
+  background-color: rgb(46, 46, 46);
+  font-size: 0.75em;
   padding-left: 20px;
 }
-
 
 h1 {
   align-self: flex-end;
@@ -95,7 +95,6 @@ body > header > #logo {
 #logo:hover {
   text-decoration: none;
 }
-
 
 h1 {
   align-self: flex-end;
@@ -186,17 +185,19 @@ button:focus {
   height: 6em;
   width: 6em;
   filter: saturate(1);
-  transition: border .2s, filter .2s, transform .2s;
+  transition: border 0.2s, filter 0.2s, transform 0.2s;
   transition-timing-function: ease;
 }
 
-.class-btns:hover, .class-section-btns:hover {
+.class-btns:hover,
+.class-section-btns:hover {
   border: 5px solid transparent;
   filter: saturate(1.5);
   transform: scale(1.05, 1.05);
 }
 
-.class-btns:active, .class-section-btns:active {
+.class-btns:active,
+.class-section-btns:active {
   border: 5px solid rgb(63, 63, 63);
 }
 
@@ -224,11 +225,16 @@ button:focus {
   max-width: 100%;
 }
 
-.class-stats, .class-profs, .class-equips, .weapon-chart, .class-spells {
+.class-stats,
+.class-profs,
+.class-equips,
+.weapon-chart,
+.class-spells {
   margin-top: 20px;
 }
 
-.saveThrows, .startEquips {
+.saveThrows,
+.startEquips {
   margin-bottom: 20px;
 }
 
@@ -240,7 +246,7 @@ button:focus {
 
 .class-levels {
   margin-top: 50px;
-  font-size: .75em;
+  font-size: 0.75em;
 }
 
 .levelsChart {
@@ -286,7 +292,6 @@ button:focus {
   transition: opacity 500ms;
 }
 
-
 /* =================================================================================
 ====================================================================================
 [Inner Grid, Races Section] */
@@ -296,7 +301,7 @@ button:focus {
   height: 13em;
   width: 10em;
   margin: 10px;
-  transition: border .2s, filter .2s, transform .2s, background-color .2s;
+  transition: border 0.2s, filter 0.2s, transform 0.2s, background-color 0.2s;
   transition-timing-function: ease;
 }
 
@@ -314,7 +319,7 @@ button:focus {
 .race-section-btn {
   border: none;
   background-color: transparent;
-  transition: font-weight .2s, filter .2s, transform .2s;
+  transition: font-weight 0.2s, filter 0.2s, transform 0.2s;
   transition-timing-function: ease;
 }
 
@@ -324,7 +329,8 @@ button:focus {
   transform: scale(1.03, 1.03);
 }
 
-.race-section, .race-info {
+.race-section,
+.race-info {
   display: flex;
   flex-flow: row wrap;
 }
@@ -359,9 +365,9 @@ button:focus {
 }
 
 .race-stats {
-    padding: 20px 0 20px 20px;
-    max-width: 30vw;
-    min-width: 300px;
+  padding: 20px 0 20px 20px;
+  max-width: 30vw;
+  min-width: 300px;
 }
 
 canvas {
@@ -394,7 +400,7 @@ canvas {
 [Inner Grid, Monster Section] */
 
 .monster-title {
-  font-size: 2em;
+  font-size: 3em;
   text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
   color: #fff;
 }
@@ -426,7 +432,7 @@ canvas {
 [Inner Grid, Equipment Section] */
 
 .item-title {
-  font-size: 2em;
+  font-size: 3em;
   text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
   color: #fff;
 }
@@ -458,7 +464,7 @@ canvas {
 [Inner Grid, Spells Section] */
 
 .spell-title {
-  font-size: 2em;
+  font-size: 3em;
   text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
   color: #fff;
 }
@@ -635,7 +641,6 @@ canvas {
 [Media Queries] */
 
 @media (max-width: 414px) {
-
   h1 {
     font-size: 1.2em;
   }
@@ -665,7 +670,8 @@ canvas {
     width: 4em;
   }
 
-  .race-specs, .race-stats {
+  .race-specs,
+  .race-stats {
     margin: 20px 20px 20px 20px;
     padding: 0;
     max-width: 100%;
@@ -758,8 +764,9 @@ canvas {
 }
 
 @media (min-width: 415px) and (max-width: 768px) {
-  .class-subs, .class-profs, .class-equips {
-
+  .class-subs,
+  .class-profs,
+  .class-equips {
   }
 }
 
