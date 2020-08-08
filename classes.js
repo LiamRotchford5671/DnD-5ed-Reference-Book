@@ -40,11 +40,9 @@ class Classes extends React.Component {
     addSelection(item, type, url, eachLimit, index) {
         url = url.replace('/api/', '');
         const choiceInfoRequest = async () => {
-            console.log(type);
 
             const results = await doAPIrequest(url);
             let idnum = results._id;
-            console.log(results);
 
             let rangeLong = [];
             let throwRange = [];
@@ -188,7 +186,6 @@ class Classes extends React.Component {
 
                 //Initial Class API Fetch
                 const results = await doAPIrequest(`classes/` + this.state.classUrl + '/');
-                console.log(results);
 
                 //Saving Throws
                 let saveThrowNames = results.saving_throws.map(current => current.name);
@@ -243,7 +240,6 @@ class Classes extends React.Component {
                 let startingEquipUrl = results.starting_equipment.url.replace('/api/', '')
 
                 const equipResults = await doAPIrequest(startingEquipUrl);
-                console.log(equipResults);
 
                 let equipResultsUrls = equipResults.starting_equipment.map(current => current.item.url.replace('/api/', ''));
                 let startEquips = [];
@@ -267,7 +263,6 @@ class Classes extends React.Component {
                     }
 
                     if (eachEquipResults.equipment_category.name === "Weapon") {
-                        console.log('weapon');
                         equipButton = <button className="btn btn-light" data-toggle="collapse" data-target={'.equip-desc' + item} onClick={() => this.weaponChart(rangeData, 'weaponChart1')}>
                             {equips[item].item.name}: {equips[item].quantity}
                         </button>;
