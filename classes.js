@@ -43,6 +43,7 @@ class Classes extends React.Component {
 
             const results = await doAPIrequest(url);
             let idnum = results._id;
+            console.log(results);
 
             let rangeLong = [];
             let throwRange = [];
@@ -70,7 +71,7 @@ class Classes extends React.Component {
                             <p>Range: Normal - {results.range.normal}{rangeLong}</p>
                             {throwRange}
                             <div className={"weapon-chart collapse desc" + idnum + " container"}>
-                                <canvas id={"weaponChart2"} aria-label="polar chart" role="img"></canvas>
+                                <canvas id={"weaponChart" + idnum} aria-label="polar chart" role="img"></canvas>
                             </div>
                             <p>Weight: {results.weight}</p>
                             <p>Cost: {results.cost.quantity} {results.cost.unit}</p>
@@ -82,7 +83,7 @@ class Classes extends React.Component {
                         contents =
                             <p>Contents: {results.contents.map(current => current.item_url.replace('/api/equipment/', '') + ', ')}</p>;
                     }
-
+                    console.log(results);
                     await this.setState({
                         equipChoiceDesc: <div className={"desc" + idnum + " collapse"}>
                             <p>Category: {results.equipment_category.name}</p>
@@ -90,6 +91,10 @@ class Classes extends React.Component {
                             <p>{results.tool_category}</p>
                             <p>{results.desc}</p>
                             {contents}
+                            <p>{results.armor_category && ("Armor Category: " + results.armor_category)}</p>
+                            <p>{results.armor_class && ("Armor Class: Base - " + results.armor_class.base)}</p>
+                            <p>{results.str_minimum && ("Strength Minimum: " + results.str_minimum)}</p>
+                            <p>{results.weight && ("Weight: " + results.weight)}</p>
                             <p>Cost: {results.cost.quantity} {results.cost.unit}</p>
                         </div>
                     });
@@ -117,7 +122,7 @@ class Classes extends React.Component {
                     let equipButton = [];
                     if (results.equipment_category.name === "Weapon") {
                         equipButton = <button type="button" className="btn btn-light choice" data-toggle="collapse"
-                                              data-target={'.desc' + idnum} onClick={() => this.weaponChart(rangeData, 'weaponChart2')}>{item}</button>;
+                                              data-target={'.desc' + idnum} onClick={() => this.weaponChart(rangeData, 'weaponChart' + idnum)}>{item}</button>;
                     } else {
                         equipButton = <button type="button" className="btn btn-light choice" data-toggle="collapse"
                                               data-target={'.desc' + idnum}>{item}</button>;
@@ -163,6 +168,8 @@ class Classes extends React.Component {
     }
 
     weaponChart(data, id) {
+        console.log("test");
+        console.log(id);
         var ctx2 = document.querySelector('#' + id);
         var myBarChart2 = new Chart(ctx2, {
             type: 'polarArea',
@@ -189,6 +196,7 @@ class Classes extends React.Component {
 
                 //Initial Class API Fetch
                 const results = await doAPIrequest(`classes/` + this.state.classUrl + '/');
+                console.log(results);
 
                 //Saving Throws
                 let saveThrowNames = results.saving_throws.map(current => current.name);
@@ -243,12 +251,14 @@ class Classes extends React.Component {
                 let startingEquipUrl = results.starting_equipment.url.replace('/api/', '')
 
                 const equipResults = await doAPIrequest(startingEquipUrl);
+                // console.log(equipResults);
 
-                let equipResultsUrls = equipResults.starting_equipment.map(current => current.item.url.replace('/api/', ''));
+                let equipResultsUrls = equipResults.starting_equipment.map(current => current.equipment.url.replace('/api/', ''));
                 let startEquips = [];
                 let equips = equipResults.starting_equipment;
 
                 for (let item in equips) {
+                    console.log(item);
                     const eachEquipResults = await doAPIrequest(equipResultsUrls[item]);
 
                     let weaponEquips = [];
@@ -266,8 +276,8 @@ class Classes extends React.Component {
                     }
 
                     if (eachEquipResults.equipment_category.name === "Weapon") {
-                        equipButton = <button className="btn btn-light" data-toggle="collapse" data-target={'.equip-desc' + item} onClick={() => this.weaponChart(rangeData, 'weaponChart1')}>
-                            {equips[item].item.name}: {equips[item].quantity}
+                        equipButton = <button className="btn btn-light" data-toggle="collapse" data-target={'.equip-desc' + item} onClick={() => this.weaponChart(rangeData, 'weaponChart' + item)}>
+                            {equips[item].equipment.name}: {equips[item].quantity}
                         </button>;
 
                         rangeData[0] = eachEquipResults.range.normal;
@@ -287,12 +297,12 @@ class Classes extends React.Component {
                             <p>Range: Normal - {eachEquipResults.range.normal}{rangeLong}</p>
                             {throwRange}
                             <div className={"weapon-chart collapse equip-desc" + item + " container"}>
-                                <canvas id="weaponChart1" aria-label="polar chart" role="img"></canvas>
+                                <canvas id={"weaponChart" + item} aria-label="polar chart" role="img"></canvas>
                             </div>
                         </div>;
                     } else if (eachEquipResults.equipment_category.name === "Armor") {
                         equipButton = <button className="btn btn-light" data-toggle="collapse" data-target={'.equip-desc' + item}>
-                            {equips[item].item.name}: {equips[item].quantity}
+                            {equips[item].equipment.name}: {equips[item].quantity}
                         </button>;
 
                         armorEquips = <div>
@@ -302,7 +312,7 @@ class Classes extends React.Component {
                         </div>;
                     } else {
                         equipButton = <button className="btn btn-light" data-toggle="collapse" data-target={'.equip-desc' + item}>
-                            {equips[item].item.name}: {equips[item].quantity}
+                            {equips[item].equipment.name}: {equips[item].quantity}
                         </button>;
                     }
 
@@ -327,18 +337,20 @@ class Classes extends React.Component {
                 }
 
                 //Equipment Choices
+                let startEquipOptions = equipResults.starting_equipment_options;
                 let equipChoiceItems = [];
 
-                for (let key in equipResults) {
-                    if (equipResults.hasOwnProperty(key) && key.match("^choice_")) {
+                if (startEquipOptions) {
+                    for (let key in startEquipOptions) {
                         let equipItems =
                             <div className="dropdown dropright" key={key}>
-                                <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose 1:</button>
+                                <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose {startEquipOptions[key].choose}:</button>
                                 <div className="dropdown-menu">
-                                    {equipResults[key].map(current => current.from.map((next, i) =>
-                                    <button type="button" className="dropdown-item" key={i} onClick={() => this.addSelection(next.item.name, "equip", next.item.url, current.choose, key.replace('choice_', '') - 1)}>
-                                        {next.item.name}
-                                    </button>))}
+                                    {startEquipOptions[key].from.map((current, i) =>
+                                    <button type="button" className="dropdown-item" key={i} onClick={() => this.addSelection(current.equipment.name, "equip", current.equipment.url, startEquipOptions[key].choose, key)}>
+                                        {current.equipment && (current.equipment.name)}
+                                        {Array.isArray(current) && (current.map(next => next.equipment.name))}
+                                    </button>)}
                                 </div>
                             </div>
                         equipChoiceItems.push(equipItems);
