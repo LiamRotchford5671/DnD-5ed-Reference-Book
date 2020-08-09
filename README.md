@@ -2,6 +2,23 @@
 Final Project for Front End Web Tech 410/510 - Summer 2020
 Authors: Sarah Kim & Liam Rotchford
 
+-----------------------------
+Languages, Frameworks & Libraries Used
+-----------------------------
+Languages
+- HTML
+- CSS
+- Javascript
+- JSX
+
+Frameworks
+- Flexbox
+- Bootstrap
+
+Libraries
+- React, ReactDOM, React Transition Group
+- Chart.js
+- Popper.js
 
 -----------------------------
 External Resources Referenced
