@@ -2,7 +2,16 @@
 Final Project for Front End Web Tech 410/510 - Summer 2020
 Authors: Sarah Kim & Liam Rotchford
 
+Project Concept:
 -----------------------------
+Convert 5th edition Dungeons and Dragons data into a online reference guide. Allowing Dungeon masters to quickly locate information or to send to newer players for quickly accessible learning. Its our hope that this project organizes the data in a fluidly understandable format for our user and players.
+
+
+Deployment:
+-----------------------------
+http://web.pdx.edu/~ysarah/
+
+
 Languages, Frameworks & Libraries Used
 -----------------------------
 Languages
