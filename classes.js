@@ -83,7 +83,7 @@ class Classes extends React.Component {
                         contents =
                             <p>Contents: {results.contents.map(current => current.item_url.replace('/api/equipment/', '') + ', ')}</p>;
                     }
-                    console.log(results);
+
                     await this.setState({
                         equipChoiceDesc: <div className={"desc" + idnum + " collapse"}>
                             <p>Category: {results.equipment_category.name}</p>
@@ -168,8 +168,6 @@ class Classes extends React.Component {
     }
 
     weaponChart(data, id) {
-        console.log("test");
-        console.log(id);
         var ctx2 = document.querySelector('#' + id);
         var myBarChart2 = new Chart(ctx2, {
             type: 'polarArea',
