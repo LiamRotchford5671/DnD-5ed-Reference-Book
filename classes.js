@@ -43,7 +43,6 @@ class Classes extends React.Component {
 
             const results = await doAPIrequest(url);
             let idnum = results._id;
-            console.log(results);
 
             let rangeLong = [];
             let throwRange = [];
@@ -83,7 +82,7 @@ class Classes extends React.Component {
                         contents =
                             <p>Contents: {results.contents.map(current => current.item_url.replace('/api/equipment/', '') + ', ')}</p>;
                     }
-                    console.log(results);
+
                     await this.setState({
                         equipChoiceDesc: <div className={"desc" + idnum + " collapse"}>
                             <p>Category: {results.equipment_category.name}</p>
@@ -93,7 +92,7 @@ class Classes extends React.Component {
                             {contents}
                             <p>{results.armor_category && ("Armor Category: " + results.armor_category)}</p>
                             <p>{results.armor_class && ("Armor Class: Base - " + results.armor_class.base)}</p>
-                            <p>{results.str_minimum && ("Strength Minimum: " + results.str_minimum)}</p>
+                            <p>{results.str_minimum >= 0 && ("Strength Minimum: " + results.str_minimum)}</p>
                             <p>{results.weight && ("Weight: " + results.weight)}</p>
                             <p>Cost: {results.cost.quantity} {results.cost.unit}</p>
                         </div>
@@ -168,8 +167,6 @@ class Classes extends React.Component {
     }
 
     weaponChart(data, id) {
-        console.log("test");
-        console.log(id);
         var ctx2 = document.querySelector('#' + id);
         var myBarChart2 = new Chart(ctx2, {
             type: 'polarArea',
@@ -258,7 +255,6 @@ class Classes extends React.Component {
                 let equips = equipResults.starting_equipment;
 
                 for (let item in equips) {
-                    console.log(item);
                     const eachEquipResults = await doAPIrequest(equipResultsUrls[item]);
 
                     let weaponEquips = [];
@@ -349,7 +345,7 @@ class Classes extends React.Component {
                                     {startEquipOptions[key].from.map((current, i) =>
                                     <button type="button" className="dropdown-item" key={i} onClick={() => this.addSelection(current.equipment.name, "equip", current.equipment.url, startEquipOptions[key].choose, key)}>
                                         {current.equipment && (current.equipment.name)}
-                                        {Array.isArray(current) && (current.map(next => next.equipment.name))}
+                                        {Array.isArray(current) && (current[0].equipment.name)}
                                     </button>)}
                                 </div>
                             </div>
