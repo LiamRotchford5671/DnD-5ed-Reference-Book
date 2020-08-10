@@ -43,7 +43,6 @@ class Classes extends React.Component {
 
             const results = await doAPIrequest(url);
             let idnum = results._id;
-            console.log(results);
 
             let rangeLong = [];
             let throwRange = [];
@@ -256,7 +255,6 @@ class Classes extends React.Component {
                 let equips = equipResults.starting_equipment;
 
                 for (let item in equips) {
-                    console.log(item);
                     const eachEquipResults = await doAPIrequest(equipResultsUrls[item]);
 
                     let weaponEquips = [];
