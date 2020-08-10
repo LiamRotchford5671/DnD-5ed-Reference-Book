@@ -511,6 +511,10 @@ button:focus {
     width: 4em;
   }
 
+  .col-spacing {
+    margin: 0 0.5em 0 0.5em;
+  }
+
   .race-btns {
     height: 5em;
     width: 4em;
