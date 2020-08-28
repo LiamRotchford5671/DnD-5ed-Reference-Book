@@ -9,10 +9,11 @@ Convert 5th edition Dungeons and Dragons data into a online reference guide. All
 
 Deployment:
 -----------------------------
-http://web.pdx.edu/~ysarah/ 
+PDX Web Hosting:
+- http://web.pdx.edu/~ysarah/ 
 
-            or
-https://liamrotchford5671.github.io/DnD-ed5-FrontEndApplication-FinalProject/
+Github Pages:
+- https://liamrotchford5671.github.io/DnD-ed5-FrontEndApplication-FinalProject/
 
 
 Languages, Frameworks & Libraries Used
