@@ -13,7 +13,7 @@ PDX Web Hosting:
 - http://web.pdx.edu/~ysarah/ 
 
 Github Pages:
-- https://liamrotchford5671.github.io/DnD-ed5-FrontEndApplication-FinalProject/
+- https://liamrotchford5671.github.io/DnD-5ed-Reference-Book/
 
 
 Languages, Frameworks & Libraries Used
