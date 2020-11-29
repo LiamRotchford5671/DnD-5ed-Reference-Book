@@ -225,7 +225,7 @@ class Classes extends React.Component {
                             <p><b>- {current.name} -</b></p>
                             <p>Subclass Flavor: {subClassResults.subclass_flavor}</p>
                             <p>{subClassResults.desc}</p>
-                            <p>Features: {subClassResults.features.map((next, i) => next.name + ', ')}</p>
+                            {/*<p>Features: {subClassResults.features.map((next, i) => next.name + ', ')}</p>*/}
                         </div>
                     })
                 });
@@ -245,7 +245,7 @@ class Classes extends React.Component {
                     </div>);
 
                 //Starting Equipment Data
-                let startingEquipUrl = results.starting_equipment.url.replace('/api/', '')
+                let startingEquipUrl = results.starting_equipment.replace('/api/', '')
 
                 const equipResults = await doAPIrequest(startingEquipUrl);
                 // console.log(equipResults);
@@ -266,7 +266,7 @@ class Classes extends React.Component {
 
                     function Contents() {
                         if (eachEquipResults.contents) {
-                            let equipContents = eachEquipResults.contents.map(current => current.item_url.replace('/api/equipment/', '') + ', ');
+                            let equipContents = eachEquipResults.contents.map(current => current.item.url.replace('/api/equipment/', '') + ', ');
                             return <p>Contents: {equipContents}</p>
                         }
                     }
@@ -334,31 +334,37 @@ class Classes extends React.Component {
 
                 //Equipment Choices
                 let startEquipOptions = equipResults.starting_equipment_options;
+                console.log(startEquipOptions);
                 let equipChoiceItems = [];
 
                 if (startEquipOptions) {
                     for (let key in startEquipOptions) {
-                        let equipItems =
-                            <div className="dropdown dropright" key={key}>
-                                <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose {startEquipOptions[key].choose}:</button>
-                                <div className="dropdown-menu">
-                                    {startEquipOptions[key].from.map((current, i) =>
-                                    <button type="button" className="dropdown-item" key={i} onClick={() => this.addSelection(current.equipment.name, "equip", current.equipment.url, startEquipOptions[key].choose, key)}>
-                                        {current.equipment && (current.equipment.name)}
-                                        {Array.isArray(current) && (current[0].equipment.name)}
-                                    </button>)}
+                        console.log(startEquipOptions[key].from);
+                        if (key < 2) {
+                            let equipItems =
+                                <div className="dropdown dropright" key={key}>
+                                    <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown">Choose {startEquipOptions[key].choose}:</button>
+                                    <div className="dropdown-menu">
+                                        {startEquipOptions[key].from.map((current, i) =>
+                                            <button type="button" className="dropdown-item" key={i} onClick={() => this.addSelection(current.equipment.name, "equip", current.equipment.url, startEquipOptions[key].choose, key)}>
+                                                {current.equipment && (current.equipment.name)}
+                                                {Array.isArray(current) && (current[0].equipment.name)}
+                                            </button>)}
+                                    </div>
                                 </div>
-                            </div>
-                        equipChoiceItems.push(equipItems);
+                            equipChoiceItems.push(equipItems);
+                        }
+
+
                     }
                 }
 
                 //Spellcasting
                 if (results.spellcasting) {
 
-                    const spellResults = await doAPIrequest(`spellcasting/` + this.state.classUrl + '/');
+                    // const spellResults = await doAPIrequest(`spellcasting/` + this.state.classUrl + '/');
 
-                    let spells = spellResults.info.map((current, i) =>
+                    let spells = results.spellcasting.info.map((current, i) =>
                         <div key={i}>
                             <button type="button" className="btn btn-danger" data-toggle="collapse" data-target={'#spell-desc' + i}>
                                 {current.name}
@@ -370,7 +376,7 @@ class Classes extends React.Component {
                     this.setState({
                         spellCasting: <div className="class-spells col-lg-4 col-md-12">
                             <h5>Spellcasting</h5>
-                            <p>{spellResults.spellcasting_ability.name}</p>
+                            <p>{results.spellcasting.info.name}</p>
                             {spells}
                         </div>
                     })

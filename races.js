@@ -136,17 +136,17 @@ class Races extends React.Component {
         let abilityBonuses = ["", "", "", "", "", ""];
 
         results.ability_bonuses.map((current) => {
-          if (current.name === "STR") {
+          if (current.ability_score.name === "STR") {
             abilityBonuses[0] = current.bonus;
-          } else if (current.name === "DEX") {
+          } else if (current.ability_score.name === "DEX") {
             abilityBonuses[1] = current.bonus;
-          } else if (current.name === "CON") {
+          } else if (current.ability_score.name === "CON") {
             abilityBonuses[2] = current.bonus;
-          } else if (current.name === "CHA") {
+          } else if (current.ability_score.name === "CHA") {
             abilityBonuses[3] = current.bonus;
-          } else if (current.name === "INT") {
+          } else if (current.ability_score.name === "INT") {
             abilityBonuses[4] = current.bonus;
-          } else if (current.name === "WIS") {
+          } else if (current.ability_score.name === "WIS") {
             abilityBonuses[5] = current.bonus;
           }
         });
@@ -300,11 +300,12 @@ class Races extends React.Component {
           );
 
           const subRaceResults = await doAPIrequest(subraceUrl);
+          console.log(subRaceResults);
 
           let abilityBonus = subRaceResults.ability_bonuses.map(
             (current, i) => (
               <p key={i}>
-                {current.name} - {current.bonus}
+                {current.ability_score.name} - {current.bonus}
               </p>
             )
           );
